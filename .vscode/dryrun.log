@@ -1,6 +1,5 @@
-make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/siwolee/minirt'
-make: Leaving directory `/Users/siwolee/minirt'
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/haecho/42/miniRT'
+gcc -Lmlx -lmlx -framework OpenGL -framework AppKit test.c vec3.c -fsanitize=address -g3
+make: Leaving directory `/Users/haecho/42/miniRT'
  
-make: *** No targets specified and no makefile found.  Stop.
-

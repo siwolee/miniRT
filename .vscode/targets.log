@@ -7,7 +7,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
 
-# Make data base, printed on Thu Apr  6 21:35:50 2023
+# Make data base, printed on Sat Apr  8 14:24:26 2023
 
 # Variables
 
@@ -29,24 +29,22 @@ SHELL = /bin/sh
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
-# makefile
-MAKEFILE_LIST := 
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/siwolee/localBin
+PATH = /usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
 # environment
-LSCOLORS = Gxfxcxdxbxegedabagacad
-# environment
-LaunchInstanceID = 7DD5BB07-244C-4F28-9DD8-5A7BF4AC9814
+LaunchInstanceID = CA4736C4-E833-4666-AD99-C74A36567F6A
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# makefile (from `Makefile', line 1)
+LIBMLX = ./mlx/libmlx.a
 # environment
-LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
-# environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.RYymGcIoFU/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.SSgTecSgfe/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -82,9 +80,7 @@ MAKE_VERSION := 3.81
 # environment
 USER = siwolee
 # makefile
-.DEFAULT_GOAL := 
-# environment
-LESS = -R
+.DEFAULT_GOAL := all
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
@@ -106,7 +102,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000018.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -120,13 +116,9 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
-EDITOR = /usr/bin/vim
-# environment
-PAGER = less
-# environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a6
+SECURITYSESSIONID = 186e3
 # automatic
 ^F = $(notdir $^)
 # default
@@ -138,9 +130,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1427
+VSCODE_PID = 92099
 # variable set hash-table stats:
-# Load=64/1024=6%, Rehash=0, Collisions=2/85=2%
+# Load=60/1024=6%, Rehash=0, Collisions=1/88=1%
 
 # Pattern-specific Variable Values
 
@@ -148,9 +140,9 @@ VSCODE_PID = 1427
 
 # Directories
 
-# . (device 16777225, inode 1776659): 6 files, no impossibilities.
+# . (device 16777225, inode 1776659): 15 files, no impossibilities.
 
-# 6 files, no impossibilities in 1 directories.
+# 15 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -158,14 +150,17 @@ VSCODE_PID = 1427
 
 # Files
 
-# Not a target:
-all:
+all: mlx/libmlx.a
 #  Command-line target.
-#  Implicit rule search has been done.
+#  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Needs to be updated (-q is set).
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/2=0%
+#  commands to execute (from `Makefile', line 4):
+	gcc test.c -L./mlx -lmlx
+	
 
 # Not a target:
 .SUFFIXES:
@@ -175,21 +170,10 @@ all:
 
 # Not a target:
 Makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2023-04-06 22:39:47
 #  File has been updated.
-#  Failed to be updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-makefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
@@ -199,31 +183,47 @@ makefile:
 #  Modification time never checked.
 #  File has not been updated.
 
-# Not a target:
-GNUmakefile:
-#  A default, MAKEFILES, or -include/sinclude makefile.
-#  Implicit rule search has been done.
+mlx/libmlx.a:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
 #  File does not exist.
 #  File has been updated.
-#  Failed to be updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := mlx/libmlx.a
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+# Load=8/32=25%, Rehash=0, Collisions=1/10=10%
+#  commands to execute (from `Makefile', line 7):
+	@make -C ./mlx
+	
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/17=0%
+# Load=5/1024=0%, Rehash=0, Collisions=0/20=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
 
 # No general (`VPATH' variable) search path.
 
-# # of strings in strcache: 0
-# # of strcache buffers: 0
-# strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
-# strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Apr  6 21:35:50 2023
+# Finished Make data base on Sat Apr  8 14:24:26 2023
 
  
-make: *** No rule to make target `all'.  Stop.
-

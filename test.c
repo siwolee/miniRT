@@ -4,9 +4,9 @@
 
 typedef struct s_mlx
 {
-	void *mlx;
-	void *win; 
-	void *img;
+	void *mlx_ptr;
+	void *win_ptr; 
+	void *img_ptr;
 	int	*data;
 	int bpp;
 	int size_l;
@@ -21,10 +21,10 @@ int main(void)
 
 	t_mlx app;
 
-	app.mlx = mlx_init();
-	app.win = mlx_new_window(app.mlx, 700, 400, "rainbow");
-	app.img = mlx_new_image(app.mlx, image_width, image_height);
-	app.data = (int *)mlx_get_data_addr(app.img, &app.bpp, &app.size_l, &app.endian);
+	app.mlx_ptr = mlx_init();
+	app.win_ptr = mlx_new_window(app.mlx_ptr, 700, 400, "rainbow");
+	app.img_ptr = mlx_new_image(app.mlx_ptr, image_width, image_height);
+	app.data = (int *)mlx_get_data_addr(app.img_ptr, &app.bpp, &app.size_l, &app.endian);
 
 	int j = 0;
 	while (j < image_height)
@@ -42,15 +42,15 @@ int main(void)
 
 			app.color[0]= ir * 256 * 256;
 			app.color[1]= ig *256;
-			app.color[2]= ib *256;
+			app.color[2]= ib;
 
 			int color= app.color[0]+ app.color[1]+app.color[2];
-			app.data[j * 256 * i] = mlx_get_color_value(app.mlx, color);
+			app.data[j * 256 * i] = mlx_get_color_value(app.mlx_ptr, color);
 			i++;
 
 		}
 		j++;
 	}
-	mlx_put_image_to_window(app.mlx, app.win, app.img, 0, 0);
-	mlx_loop(app.mlx);
+	mlx_put_image_to_window(app.mlx_ptr, app.win_ptr, app.img_ptr, 0, 0);
+	mlx_loop(app.mlx_ptr);
 }

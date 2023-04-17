@@ -8,7 +8,7 @@
 
 # define PIXEL_RGB(x, y, z) (x * 256 * 256 + y * 256 + z)
 
-int	pixel_color(double x, double y, double z)
+int	pixel_color_xyz(double x, double y, double z)
 {
 	int ir = 255.999 * x;
 	int ig = 255.999 * y;
@@ -16,6 +16,16 @@ int	pixel_color(double x, double y, double z)
 
 	return (PIXEL_RGB(ir, ig, ib));
 }
+
+int	pixel_color(t_vec *v)
+{
+	int ir = 255.999 * v->x;
+	int ig = 255.999 * v->y;
+	int ib = 255.999 * v->z;
+
+	return (PIXEL_RGB(ir, ig, ib));
+}
+
 typedef struct s_mlx
 {
 	void *mlx;

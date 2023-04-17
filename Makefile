@@ -4,7 +4,7 @@ MFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 CPP_SRCS = cpp/*.cpp
 CPP_INCS = cpp/*.hpp
-CPP = g++
+CPP = clang++
 CPPFLAGS = -std=c++11
 CPPTEST = ./tt
 

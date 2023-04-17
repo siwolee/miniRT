@@ -1,10 +1,10 @@
 #include <stdio.h>
-#include "mlx/mlx.h"
 #include <stdlib.h>
 #include <unistd.h>
+#include "mlx/mlx.h"
 #include "vec3.h"
+#include "ray.h"
 
-// basic 1 : code making rainbow
 
 # define PIXEL_RGB(x, y, z) (x * 256 * 256 + y * 256 + z)
 
@@ -13,7 +13,6 @@ int	pixel_color(double x, double y, double z)
 	int ir = 255.999 * x;
 	int ig = 255.999 * y;
 	int ib = 255.999 * z;
-
 	return (PIXEL_RGB(ir, ig, ib));
 }
 typedef struct s_mlx
@@ -28,54 +27,68 @@ typedef struct s_mlx
 	int color[3];
 }t_mlx;
 
-// int main(void)
-// {
-// 	const int image_width = 1000;
-// 	const int image_height = 1000;
-
-// 	t_mlx app;
-
-// 	app.mlx = mlx_init();
-// 	app.win = mlx_new_window(app.mlx, 1000, 1000, "rainbow");
-// 	app.img = mlx_new_image(app.mlx, image_width, image_height);
-// 	app.data = (int *)mlx_get_data_addr(app.img, &app.bpp, &app.size_l, &app.endian);
-
-// 	write(2, "Scanlines remaining: ", 22);
-// 	int j = 0;
-// 	while (j < image_height)
-// 	{
-// 		int i = 0;
-// 		while (i < image_width)
-// 		{
-// 			int color = pixel_color((double)i / (image_width - 1), (double)j/ (image_height - 1), 0.25);
-// 			app.data[j * 1000 + i] = mlx_get_color_value(app.mlx, color);
-// 			i++;
-
-// 		}
-// 		j++;
-// 			write(2, "#", 1);
-// 	}
-// 	mlx_put_image_to_window(app.mlx, app.win, app.img, 0, 0);
-// 			write(2, "\n", 1);
-// 	mlx_loop(app.mlx);
+// bool hit_sphere(const point3& center, double radius, const ray& r) {
+//     vec3 oc = r.origin() - center;
+//     auto a = dot(r.direction(), r.direction());
+//     auto b = 2.0 * dot(oc, r.direction());
+//     auto c = dot(oc, oc) - radius*radius;
+//     auto discriminant = b*b - 4*a*c;
+//     return (discriminant > 0);
 // }
 
-#include "vec3.h"
-
-void write_color() 
+int	hit_sphere(const t_point *center, double radius, const t_ray *r)
 {
+	t_vec	*oc;
+	double	a;
+	double	b;
+	double	c;
+	double	discriminant;
 
+	oc = vec_vec_min(r->origin, center);
+	a = vec_dot(r->direction, r->direction);
+	b = 2.0 * vec_dot(oc, r->direction);
+	c = vec_dot(oc, oc) - radius * radius;
+	discriminant = b*b - 4*a*c;
+	return (discriminant > 0);
 }
 
-color ray_color(const ray& r) {
-    vec3 unit_direction = unit_vector(r.direction());
-    auto t = 0.5*(unit_direction.y() + 1.0);
-    return ((1.0-t)*color(1.0, 1.0, 1.0) + t*color(0.5, 0.7, 1.0));
+t_color	*ray_color(const t_ray *r)
+{
+	t_point	temp;
+	t_color	res;
+	t_vec	unit_direction;
+	float	t;
+
+	init_vec(&temp, 0, 0, 1);
+	init_vec(&res, 1, 0, 0);
+	if (hit_sphere(&temp, 0.5, r))
+		return (res);
+	unit_direction = unit_vector(r->direction);
+	t = 0.5 * (unit_direction.y + 1.0);
+	init_vec(&res, 1.0, 1.0, 1.0);
+	init_temp(&res, 0.5, 0.7, 1.0);
+	vec_mul(&res, 1.0 - t);
+	vec_mul(&temp, t);
+	return ();
 }
+
+// color ray_color(const ray& r) {
+//     if (hit_sphere(point3(0,0,-1), 0.5, r))
+//         return color(1, 0, 0);
+//     vec3 unit_direction = unit_vector(r.direction());
+//     auto t = 0.5*(unit_direction.y() + 1.0);
+//     return (1.0-t)*color(1.0, 1.0, 1.0) + t*color(0.5, 0.7, 1.0);
+// }
+
+// color ray_color(const ray& r) {
+//     vec3 unit_direction = unit_vector(r.direction());
+//     auto t = 0.5*(unit_direction.y() + 1.0);
+//     return ((1.0-t)*color(1.0, 1.0, 1.0) + t*color(0.5, 0.7, 1.0));
+// }
 
 int main() {
 
-    // Image
+       // Image
     const auto aspect_ratio = 16.0 / 9.0;
     const int image_width = 400;
     const int image_height = static_cast<int>(image_width / aspect_ratio);
@@ -107,4 +120,5 @@ int main() {
     }
 
     std::cerr << "\nDone.\n";
+
 }

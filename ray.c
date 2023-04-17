@@ -4,6 +4,7 @@ void 	*ray_init(void *u, void *v)
 {
 	t_vec *ori;
 	t_vec *dir;
+	
 }
 
 t_vec	*ray_at(t_ray *ray, double t)

@@ -1,10 +1,16 @@
 #include "vec3.h"
 
-void 	*ray_init(void *u, void *v)
+void 	*ray_init_vec(t_ray *r, void *origin, void *direction)
 {
-	t_vec *ori;
-	t_vec *dir;
-	
+	r->origin = (t_point *)origin;
+	r->direction = (t_vec *)direction;
+}
+
+void 	*ray_init_zero(t_ray *r)
+{
+
+	r->origin = (t_point *)origin;
+	r->direction = (t_vec *)direction;
 }
 
 t_vec	*ray_at(t_ray *ray, double t)

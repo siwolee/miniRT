@@ -84,25 +84,56 @@ int main()
 	app.win = mlx_new_window(app.mlx, 2000, 2000, "rainbow");
 	app.img = mlx_new_image(app.mlx, image_width, image_height);
 	app.data = (int *)mlx_get_data_addr(app.img, &app.bpp, &app.size_l, &app.endian);
+	t_vec	*origin = vec_init_new(0,0,0);
+	t_vec	*horizontal = vec_init_new(viewport_width, 0, 0);
+	t_vec	*vertical = vec_init_new(viewport_height, 0, 0);
+
+	t_vec *u, *v, *temp;
+	temp = vec_div_new(horizontal, 2);
+	t_vec	*lower_left_corner;
+	u = vec_min_new(origin, temp);
+	free(temp);
+	temp = vec_min_new(vertical, 2);
+	v = vec_min_new(u, temp);
+	free(u);
+	free(temp);
+	temp = vec_init_new(0, 0, focal_length);
+	lower_left_corner = vec_min_new(v, temp);
+	free(temp);
+	// auto lower_left_corner = origin - horizontal/2 - vertical/2 - vec3(0, 0, focal_length);
 
 	int j = 0;
+	t_ray	r;
 	while (j < image_height)
 	{
 		int i = 0;
 		while (i < image_width)
 		{
-			t_ray *r;
+			//ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
+			u = vec_mul_new(horizontal , double(i) / (image_width-1));
+			v = vec_mul_new(vertical , double(i) / (image_height-1));
+			temp = vec_add_new(u, v);
+			free(u);
+			free(v);
+			u = vec_add_new(lower_left_corner, temp);
+			free(temp);
+			temp = vec_min_new(u, origin);
+			r = ray_init_vec(origin, temp);
 
 			int color = ray_color(r);
 			//pixel_color((double)i / (image_width - 1), (double)j/ (image_height - 1), 0.25);
 			app.data[j * IMAGE_WIDTH + i] = mlx_get_color_value(app.mlx, color);
 			i++;
-
+			free(temp);
 		}
 		j++;
 	}
 	mlx_put_image_to_window(app.mlx, app.win, app.img, 0, 0);
 	mlx_loop(app.mlx);
+	free(origin);
+	free(horizontal);
+	free(vertical);
+	free(lower_left_corner);
     //    // Image
     // const auto aspect_ratio = 16.0 / 9.0;
     // const int image_width = 400;

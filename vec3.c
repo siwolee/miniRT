@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/17 21:15:12 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/21 19:53:31 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ void	vec_init(void *v, double a, double b, double c)
 	vec->x = a;
 	vec->y = b;
 	vec->z = c;
+}
+
+void	*vec_init_new(double a, double b, double c)
+{	
+	t_vec	*vec;
+
+	vec = malloc(sizeof(t_vec));
+	vec->x = a;
+	vec->y = b;
+	vec->z = c;
+	return ((void *)vec);
 }
 
 t_vec *vec_vec_add(void *u, void *v)

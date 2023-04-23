@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/21 19:53:31 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/23 21:27:11 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	*vec_init_new(double a, double b, double c)
 	return ((void *)vec);
 }
 
-t_vec *vec_vec_add(void *u, void *v)
+void	*vec_vec_add(void *u, void *v)
 {
 	t_vec	*a;
 	t_vec	*b;
@@ -46,7 +46,7 @@ t_vec *vec_vec_add(void *u, void *v)
 	return (a);
 }
 
-t_vec *vec_vec_mul(void *u, void *v)
+void	*vec_vec_mul(void *u, void *v)
 {
 	t_vec	*a;
 	t_vec	*b;
@@ -59,7 +59,7 @@ t_vec *vec_vec_mul(void *u, void *v)
 	return (a);
 }
 
-t_vec *vec_vec_min(void *u, void *v)
+void	*vec_vec_min(void *u, void *v)
 {
 	t_vec	*a;
 	t_vec	*b;
@@ -72,7 +72,7 @@ t_vec *vec_vec_min(void *u, void *v)
 	return (a);
 }
 
-t_vec *vec_vec_div(void *u, void *v)
+void	*vec_vec_div(void *u, void *v)
 {
 	t_vec	*a;
 	t_vec	*b;
@@ -85,7 +85,7 @@ t_vec *vec_vec_div(void *u, void *v)
 	return (a);
 }
 
-t_vec *vec_mul(void *u, int b)
+void	*vec_mul(void *u, double b)
 {
 	t_vec	*a;
 
@@ -96,7 +96,7 @@ t_vec *vec_mul(void *u, int b)
 	return (a);
 }
 
-t_vec *vec_div(void *u, int b)
+void	*vec_div(void *u, double b)
 {
 	t_vec	*a;
 
@@ -107,7 +107,7 @@ t_vec *vec_div(void *u, int b)
 	return (a);
 }
 
-t_vec *vec_min(void *u, int b)
+void	*vec_min(void *u, double b)
 {
 	t_vec	*a;
 
@@ -118,7 +118,7 @@ t_vec *vec_min(void *u, int b)
 	return (a);
 }
 
-t_vec *vec_add(void *u, int b)
+void	*vec_add(void *u, double b)
 {
 	t_vec	*a;
 
@@ -130,7 +130,7 @@ t_vec *vec_add(void *u, int b)
 }
 
 
-t_vec *vec_vec_add_new(void *u, void *v)
+void	*vec_vec_add_new(void *u, void *v)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -139,14 +139,14 @@ t_vec *vec_vec_add_new(void *u, void *v)
 	a = (t_vec *)u;
 	b = (t_vec *)v;
 	temp = malloc(sizeof(t_vec));
-	vec_init(temp, a->x, a->y, a->z);
 	temp->x += b->x;
+	vec_init(temp, a->x, a->y, a->z);
 	temp->y += b->y;
 	temp->z += b->z;
 	return (temp);
 }
 
-t_vec *vec_vec_mul_new(void *u, void *v)
+void	*vec_vec_mul_new(void *u, void *v)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -162,7 +162,7 @@ t_vec *vec_vec_mul_new(void *u, void *v)
 	return (temp);
 }
 
-t_vec *vec_vec_min_new(void *u, void *v)
+void	*vec_vec_min_new(void *u, void *v)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -178,7 +178,7 @@ t_vec *vec_vec_min_new(void *u, void *v)
 	return (temp);
 }
 
-t_vec *vec_vec_div_new(void *u, void *v)
+void	*vec_vec_div_new(void *u, void *v)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -194,7 +194,7 @@ t_vec *vec_vec_div_new(void *u, void *v)
 	return (temp);
 }
 
-t_vec *vec_mul_new(void *u, int b)
+void	*vec_mul_new(void *u, double b)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -208,7 +208,7 @@ t_vec *vec_mul_new(void *u, int b)
 	return (temp);
 }
 
-t_vec *vec_div_new(void *u, int b)
+void	*vec_div_new(void *u, double b)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -222,7 +222,7 @@ t_vec *vec_div_new(void *u, int b)
 	return (temp);
 }
 
-t_vec *vec_min_new(void *u, int b)
+void	*vec_min_new(void *u, double b)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -236,7 +236,7 @@ t_vec *vec_min_new(void *u, int b)
 	return (temp);
 }
 
-t_vec *vec_add_new(void *u, int b)
+void	*vec_add_new(void *u, double b)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -250,14 +250,6 @@ t_vec *vec_add_new(void *u, int b)
 	return (temp);
 }
 
-double vec_length_squared(void *u)
-{
-	t_vec	*v;
-
-	v = (t_vec *)u;
-	return (pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2));
-}
-
 double vec_dot(void *a, void *b)
 {
 	t_vec	*u;
@@ -268,6 +260,14 @@ double vec_dot(void *a, void *b)
 	return ((u->x * v->x) + (u->y * v->y) + (u->z * v->z));
 }
 
+double vec_length_squared(void *u)
+{
+	t_vec	*v;
+
+	v = (t_vec *)u;
+	return (pow(v->x, 2) + pow(v->y, 2) + pow(v->z, 2));
+}
+
 double	vec_length(void *a)
 {
 	t_vec	*v;
@@ -276,19 +276,19 @@ double	vec_length(void *a)
 	return (sqrt(vec_length_squared(v)));
 }
 
-t_vec	*vec_unit_vector(void *a)
+void	*vec_unit_vector(void *a)
 {
 	t_vec	*v;
 	t_vec	*temp;
+	double	length;
 
 	v = (t_vec *)a;
-	temp = malloc(sizeof(t_vec));
-	if (!temp)
-		return (0);
-	return (vec_div(v, vec_length(v)));
+	length = vec_length(v);
+	temp = vec_div_new(v, length);
+	return (temp);
 }
 
-t_vec *vec_cross(void *a, void *b)
+void	*vec_cross(void *a, void *b)
 {
 	t_vec	*temp;
 	t_vec	*u;

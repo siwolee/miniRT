@@ -1,7 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/haecho/42/miniRT'
+make: Entering directory `/Users/siwolee/minirt'
 make -C ./mlx
- 
-gcc -Lmlx -lmlx -framework OpenGL -framework AppKit test.c vec3.c -fsanitize=address -g3 -o aa
-make: Leaving directory `/Users/haecho/42/miniRT'
+gcc -Lmlx -lmlx -framework OpenGL -framework AppKit test.c vec3.c ray.c -fsanitize=address -g3 -o aa
+make: Leaving directory `/Users/siwolee/minirt'
  

@@ -8,21 +8,15 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-<<<<<<< HEAD
-# Make data base, printed on Fri Apr 21 19:24:13 2023
-=======
-# Make data base, printed on Sun Apr 23 11:48:55 2023
->>>>>>> e830bb7 (HOME)
+# Make data base, printed on Sun Apr 23 19:16:59 2023
 
 # Variables
 
-# automatic
  
+# automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# environment
-VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # makefile (from `Makefile', line 8)
@@ -32,36 +26,28 @@ CPPFLAGS = -std=c++11
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/haecho/42/miniRT
+CURDIR := /Users/siwolee/minirt
 # makefile
 SHELL = /bin/sh
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","osLocale":"en-kr","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 3)
 MFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
-# environment
-__CFBundleIdentifier = com.microsoft.VSCode
-# environment
-INFOPATH = /opt/homebrew/share/info:
 # makefile (from `Makefile', line 7)
 CPP = clang++
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /Users/haecho/.brew:/Library/Frameworks/Python.framework/Versions/3.6/bin:/opt/.brew/bin:/opt/.brew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/opt/.brew/bin:/opt/.brew/sbin
+PATH = /Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/siwolee/localBin
 # environment
- 
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-<<<<<<< HEAD
-LaunchInstanceID = D2043EF3-EC07-46AA-B6F1-376F3E6A8526
+LaunchInstanceID = 419C01A0-F35D-457F-85F5-EE720A758D2A
 # environment
-=======
->>>>>>> e830bb7 (HOME)
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
@@ -70,37 +56,27 @@ LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:
 # makefile (from `Makefile', line 1)
 LIBMLX = ./mlx/libmlx.a
 # environment
-<<<<<<< HEAD
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.k9BafAdf5b/Listeners
-=======
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wWJLnvy1DR/Listeners
->>>>>>> e830bb7 (HOME)
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.VwKetkhZ8b/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
-PWD = /Users/haecho/42/miniRT
-# environment
-HOMEBREW_CELLAR = /opt/homebrew/Cellar
+PWD = /Users/siwolee/minirt
 # makefile (from `Makefile', line 5)
 CPP_SRCS = cpp/*.cpp
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-MANPATH = /opt/homebrew/share/man::
-# environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /Users/haecho
+HOME = /Users/siwolee
 # default
-MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/haecho/Library/Application Support/Code/CachedData/704ed70d4fd1c6bd6342c436f1ede30d1cff4710
+VSCODE_CODE_CACHE_PATH = /Users/siwolee/Library/Application Support/Code/CachedData/97dec172d3256f8ca4bfb2143f3f76b503ca0534
 # environment
-LOGNAME = haecho
+LOGNAME = siwolee
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-ZSH = /Users/haecho/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -111,30 +87,32 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
+# makefile (from `Makefile', line 11)
+SRCS = test.c vec3.c ray.c
 # environment
 SHLVL = 1
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = haecho
+USER = siwolee
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 11)
+# makefile (from `Makefile', line 13)
 NAME = aa
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/rn/1746g3wj6js2bmmc25t5fqm40000gn/T/
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cv240036rj/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/haecho/Library/Application Support/Code/1.77-main.sock
+VSCODE_IPC_HOOK = /Users/siwolee/Library/Application Support/Code/1.74.3-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -144,17 +122,13 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.15962047.15962053
-# environment
-HOMEBREW_PREFIX = /opt/homebrew
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
-HOMEBREW_REPOSITORY = /opt/homebrew
-# environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0x0:0x0
+__CF_USER_TEXT_ENCODING = 0x19B11:0x0:0x0
 # environment
 COMMAND_MODE = unix2003
 # default
@@ -162,11 +136,16 @@ MAKEFILES :=
 # automatic
 <F = $(notdir $<)
 # environment
+EDITOR = /usr/bin/vim
+# environment
 PAGER = less
 # environment
 LC_ALL = C
 # makefile (from `Makefile', line 6)
 CPP_INCS = cpp/*.hpp
+ 
+# environment
+SECURITYSESSIONID = 186a6
 # automatic
 ^F = $(notdir $^)
 # default
@@ -180,13 +159,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-<<<<<<< HEAD
-VSCODE_PID = 18589
-=======
-VSCODE_PID = 4553
->>>>>>> e830bb7 (HOME)
+VSCODE_PID = 1106
 # variable set hash-table stats:
-# Load=77/1024=8%, Rehash=0, Collisions=1/107=1%
+# Load=73/1024=7%, Rehash=0, Collisions=2/103=2%
 
 # Pattern-specific Variable Values
 
@@ -194,7 +169,7 @@ VSCODE_PID = 4553
 
 # Directories
 
-# . (device 16777229, inode 15354900): 23 files, no impossibilities.
+# . (device 16777225, inode 1776659): 23 files, no impossibilities.
 
 # 23 files, no impossibilities in 1 directories.
 
@@ -226,7 +201,7 @@ all: aa
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-04-19 10:12:42
+#  Last modified 2023-04-23 18:08:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -234,11 +209,11 @@ Makefile:
 
 aa: mlx/libmlx.a
 #  Implicit rule search has not been done.
-#  Last modified 2023-04-19 10:16:04
+#  Last modified 2023-04-23 18:30:19
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 16):
-	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit test.c vec3.c -fsanitize=address -g3 -o $(NAME)
+#  commands to execute (from `Makefile', line 18):
+	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit $(SRCS) -fsanitize=address -g3 -o $(NAME)
 	
 
 cpp: tt
@@ -252,8 +227,8 @@ fclean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 25):
-	rm $(NAME) $(CPPTEST)
+#  commands to execute (from `Makefile', line 27):
+	rm $(NAME)
 	
 
 # Not a target:
@@ -264,10 +239,10 @@ fclean:
 
 mlx/libmlx.a:
 #  Implicit rule search has not been done.
-#  Last modified 2023-04-19 10:15:31
+#  Last modified 2023-04-23 15:56:12
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 30):
+#  commands to execute (from `Makefile', line 32):
 	@make -C ./mlx
 	
 
@@ -276,14 +251,14 @@ re: fclean all
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 28):
+#  commands to execute (from `Makefile', line 30):
 	
 
 tt:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 21):
+#  commands to execute (from `Makefile', line 23):
 	$(CPP) $(CPP_SRCS) $(CPPFLAGS) -o $(CPPTEST)
 	
 
@@ -300,10 +275,6 @@ tt:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-<<<<<<< HEAD
-# Finished Make data base on Fri Apr 21 19:24:13 2023
-=======
-# Finished Make data base on Sun Apr 23 11:48:55 2023
->>>>>>> e830bb7 (HOME)
+# Finished Make data base on Sun Apr 23 19:16:59 2023
 
  

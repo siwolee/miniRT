@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:35:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/21 19:53:40 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/23 20:59:28 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,37 +51,37 @@ typedef struct s_color
 	double g;
 }t_color;
 
-t_vec *vec_vec_add(void *u, void *v);
-t_vec *vec_vec_mul(void *u, void *v);
-t_vec *vec_vec_min(void *u, void *v);
-t_vec *vec_vec_div(void *u, void *v);
+void	*vec_vec_add(void *u, void *v);
+void	*vec_vec_mul(void *u, void *v);
+void	*vec_vec_min(void *u, void *v);
+void	*vec_vec_div(void *u, void *v);
 
-t_vec *vec_mul(void *u, int b);
-t_vec *vec_div(void *u, int b);
-t_vec *vec_min(void *u, int b);
-t_vec *vec_add(void *u, int b);
+void	*vec_mul(void *u, double b);
+void	*vec_div(void *u, double b);
+void	*vec_min(void *u, double b);
+void	*vec_add(void *u, double b);
 
-t_vec *vec_vec_add_new(void *u, void *v);
-t_vec *vec_vec_mul_new(void *u, void *v);
-t_vec *vec_vec_min_new(void *u, void *v);
-t_vec *vec_vec_div_new(void *u, void *v);
+void	*vec_vec_add_new(void *u, void *v);
+void	*vec_vec_mul_new(void *u, void *v);
+void	*vec_vec_min_new(void *u, void *v);
+void	*vec_vec_div_new(void *u, void *v);
 
-t_vec *vec_mul_new(void *u, int b);
-t_vec *vec_div_new(void *u, int b);
-t_vec *vec_min_new(void *u, int b);
-t_vec *vec_add_new(void *u, int b);
+void	*vec_mul_new(void *u, double b);
+void	*vec_div_new(void *u, double b);
+void	*vec_min_new(void *u, double b);
+void	*vec_add_new(void *u, double b);
 
 void	vec_init(void *v, double a, double b, double c);
 void	*vec_init_new(double a, double b, double c);
 
 double	vec_length_squared(void *a);
 double	vec_dot(void *a, void *b);
-t_vec	*vec_cross(void *a, void *b);
+void	*vec_cross(void *a, void *b);
 void	vec_print(void *a);
 int		pixel_color_xyz(double x, double y, double z);
 int		pixel_color(void *a);
 
-t_vec	*vec_unit_vector(void *a);
+void	*vec_unit_vector(void *a);
 
 
 #endif

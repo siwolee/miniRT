@@ -8,12 +8,14 @@ CPP = clang++
 CPPFLAGS = -std=c++11
 CPPTEST = ./tt
 
+SRCS = test.c vec3.c ray.c
+
 NAME = aa
 
 all : $(NAME)
 
 $(NAME) : $(LIBMLX)
-	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit test.c vec3.c -fsanitize=address -g3 -o $(NAME)
+	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit $(SRCS) -fsanitize=address -g3 -o $(NAME)
 
 cpp : $(CPPTEST)
 
@@ -22,7 +24,7 @@ $(CPPTEST) :
 
 
 fclean :
-	rm $(NAME) $(CPPTEST)
+	rm $(NAME)
 
 re : fclean all
 	

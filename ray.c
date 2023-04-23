@@ -1,4 +1,5 @@
 #include "vec3.h"
+#include "ray.h"
 
 void 	*ray_init_vec(t_ray *r, void *origin, void *direction)
 {

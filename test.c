@@ -102,6 +102,9 @@ int main()
 	free(temp);
 	// auto lower_left_corner = origin - horizontal/2 - vertical/2 - vec3(0, 0, focal_length);
 
+	t_ray r;
+	t_point origin;
+	t_vec direction;
 	int j = 0;
 	t_ray	r;
 	while (j < image_height)
@@ -120,6 +123,7 @@ int main()
 			temp = vec_min_new(u, origin);
 			r = ray_init_vec(origin, temp);
 
+			ray_init_vec()
 			int color = ray_color(r);
 			//pixel_color((double)i / (image_width - 1), (double)j/ (image_height - 1), 0.25);
 			app.data[j * IMAGE_WIDTH + i] = mlx_get_color_value(app.mlx, color);

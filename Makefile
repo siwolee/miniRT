@@ -1,6 +1,6 @@
 LIBMLX = ./mlx/libmlx.a
 
-MFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MFLAG = -L. -lmlx -framework OpenGL -framework AppKit
 
 CPP_SRCS = cpp/*.cpp
 CPP_INCS = cpp/*.hpp
@@ -15,10 +15,10 @@ NAME = aa
 all : $(NAME)
 
 $(NAME) : $(LIBMLX) $(SRCS)
-	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit $(SRCS) -fsanitize=address -g3 -o $(NAME)
+	$(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
 
 ex : $(LIBMLX)
-	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit ex.c -fsanitize=address -g3 -o $(NAME)
+	$(MFLAG) ex.c -fsanitize=address -g3 -o $(NAME)
 
 
 cpp : $(CPPTEST)
@@ -34,5 +34,6 @@ re : fclean all
 	
 $(LIBMLX) :
 	@make -C ./mlx
+	cp mlx/libmlx.a ./
 
 .PHONY : all re cpp fclean

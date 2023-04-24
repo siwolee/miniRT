@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:35:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/24 17:19:17 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/24 19:49:06 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 
 typedef struct s_mlx
 {

@@ -26,6 +26,9 @@ double	hit_sphere(t_point *center, double radius, t_ray *r)
 		return ((- hb - sqrt(discriminant)) / a);
 }
 
+// ray 쏴서 컬러값 int형으로 반환하는 함수
+// 구에 부딫히면 판별식 값에 따라 색 그라데이션으로 변함
+// 아닐 경우 배경 반환
 int ray_color(t_ray *r)
 {
 	t_point	temp;
@@ -33,13 +36,13 @@ int ray_color(t_ray *r)
 	t_color	res;
 	t_vec	*unit_direction;
 
-	vec_init(&temp, 0, 0, -1); // 구의 위치
+	vec_init(&temp, 0.5, 0, -1); // 구의 위치
 	double t = hit_sphere(&temp, 0.5, r);
 	if (t > 0.0)
 	{
 		N = vec_vec_min_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
 		vec_print(N);
-		vec_init(&res, N->x + 1, N->y + 1, N->z + 1); 
+		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5); 
 		// color //why + 1?? 아 -1 부터 시작해서...
 		// color 4분할 -> 1을 더했을 경우. 
 		// color 0.5를 더해야 함.

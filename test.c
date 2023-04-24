@@ -4,6 +4,7 @@
 #include "mlx/mlx.h"
 #include "vec3.h"
 #include "ray.h"
+#include "type.h"
 
 double	hit_sphere(t_point *center, double radius, t_ray *r)
 {
@@ -14,7 +15,7 @@ double	hit_sphere(t_point *center, double radius, t_ray *r)
 	double	c;
 	double	discriminant;
 
-	oc = vec_vec_min_new(r->origin, center);
+	oc = vec_vec_sub_new(r->origin, center);
 	a = vec_dot(r->direction, r->direction);
 	hb = vec_dot(oc, r->direction); // half b in discriminant
 	c = (vec_dot(oc, oc) - radius * radius);
@@ -33,19 +34,19 @@ int ray_color(t_ray *r)
 	t_color	res;
 	t_vec	*unit_direction;
 
-	vec_init(&temp, 0, 0, -1); // 구의 위치
+	vec_init(&temp, 0.2, 0.2, -1.2); // 구의 위치
 	double t = hit_sphere(&temp, 0.5, r);
 	if (t > 0.0)
 	{
-		N = vec_vec_min_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
-		vec_print(N);
-		vec_init(&res, N->x + 1, N->y + 1, N->z + 1); 
+		N = vec_vec_sub_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
+		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5); 
 		// color //why + 1?? 아 -1 부터 시작해서...
 		// color 4분할 -> 1을 더했을 경우. 
 		// color 0.5를 더해야 함.
 		free(N);
 		return (pixel_color(&res));
 	} // 가운데 값 반지름
+
 	unit_direction = vec_unit_vector_new(r->direction);
 	t = 0.5 * (unit_direction->y + 1.0);
 	free(unit_direction);
@@ -61,7 +62,7 @@ int main()
 {
 	//image
 	const float	aspect_ratio = 16.0 / 9.0;
-	const int image_height = 400;
+	const int image_height = 800;
 	const int image_width = image_height * aspect_ratio;
 
 	//mlx
@@ -96,7 +97,7 @@ int main()
 			h = (vertical.y * (double)j) / (image_height - 1);
 			temp = vec_init_new(w, h, 0);
 			vec_vec_add(temp, &lower_left_corner);
-			vec_vec_min(temp, &origin);
+			vec_vec_sub(temp, &origin);
 			ray_init_vec(&r, &origin, temp);
 
 			int color = ray_color(&r);

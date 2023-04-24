@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:35:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/23 20:59:28 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/24 17:19:17 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ int		pixel_color_xyz(double x, double y, double z);
 int		pixel_color(void *a);
 
 void	*vec_unit_vector(void *a);
+void	*vec_unit_vector_new(void *a);
 
 
 #endif

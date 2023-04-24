@@ -22,7 +22,7 @@ void	*ray_at(t_ray *ray, double t)
 {
 	t_point	*temp;
 
-	temp = malloc(sizeof(t_ray));
+	temp = malloc(sizeof(t_vec));
 	if (!temp)
 		return (0);
 	temp->x = ray->direction->x * t + ray->origin->x;

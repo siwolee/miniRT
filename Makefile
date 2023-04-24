@@ -1,6 +1,6 @@
 LIBMLX = ./mlx/libmlx.a
 
-MFLAG = -L. -lmlx -framework OpenGL -framework AppKit
+MFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
 CPP_SRCS = cpp/*.cpp
 CPP_INCS = cpp/*.hpp
@@ -15,10 +15,10 @@ NAME = aa
 all : $(NAME)
 
 $(NAME) : $(LIBMLX) $(SRCS)
-	$(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
+	$(CC) $(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
 
 ex : $(LIBMLX)
-	$(MFLAG) ex.c -fsanitize=address -g3 -o $(NAME)
+	$(CC) $(MFLAG) ex.c -fsanitize=address -g3 -o $(NAME)
 
 
 cpp : $(CPPTEST)

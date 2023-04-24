@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/24 15:44:05 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/24 17:15:09 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,18 @@ double	vec_length(void *a)
 }
 
 void	*vec_unit_vector(void *a)
+{
+	t_vec	*v;
+	t_vec	*temp;
+	double	length;
+
+	v = (t_vec *)a;
+	length = vec_length(v);
+	temp = vec_div(v, length);
+	return (temp);
+}
+
+void	*vec_unit_vector_new(void *a)
 {
 	t_vec	*v;
 	t_vec	*temp;

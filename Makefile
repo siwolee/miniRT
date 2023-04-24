@@ -14,8 +14,12 @@ NAME = aa
 
 all : $(NAME)
 
-$(NAME) : $(LIBMLX)
+$(NAME) : $(LIBMLX) $(SRCS)
 	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit $(SRCS) -fsanitize=address -g3 -o $(NAME)
+
+ex : $(LIBMLX)
+	gcc -Lmlx -lmlx -framework OpenGL -framework AppKit ex.c -fsanitize=address -g3 -o $(NAME)
+
 
 cpp : $(CPPTEST)
 

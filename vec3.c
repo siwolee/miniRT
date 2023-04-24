@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/23 21:27:11 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/24 15:44:05 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,8 +139,8 @@ void	*vec_vec_add_new(void *u, void *v)
 	a = (t_vec *)u;
 	b = (t_vec *)v;
 	temp = malloc(sizeof(t_vec));
-	temp->x += b->x;
 	vec_init(temp, a->x, a->y, a->z);
+	temp->x += b->x;
 	temp->y += b->y;
 	temp->z += b->z;
 	return (temp);
@@ -172,9 +172,9 @@ void	*vec_vec_min_new(void *u, void *v)
 	b = (t_vec *)v;
 	temp = malloc(sizeof(t_vec));
 	vec_init(temp, a->x, a->y, a->z);
-	temp->x -= b->x;
-	temp->y -= b->y;
-	temp->z -= b->z;
+	temp->x = a->x - b->x;
+	temp->y = a->y - b->y;
+	temp->z = a->z - b->z;
 	return (temp);
 }
 

@@ -8,7 +8,8 @@ CPP = clang++
 CPPFLAGS = -std=c++11
 CPPTEST = ./tt
 
-SRCS = test.c vec3.c ray.c
+# SRCS = test.c vec3.c ray.c
+SRCS = srcs/*.c
 
 NAME = aa
 

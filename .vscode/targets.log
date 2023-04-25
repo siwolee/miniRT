@@ -8,10 +8,11 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Tue Apr 25 13:52:23 2023
+# Make data base, printed on Tue Apr 25 17:18:18 2023
 
 # Variables
 
+ 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -84,8 +85,8 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 11)
-SRCS = test.c vec3.c ray.c
+# makefile (from `Makefile', line 12)
+SRCS = srcs/*.c
 # environment
 SHLVL = 1
 # default
@@ -94,7 +95,7 @@ MAKE_VERSION := 3.81
 USER = siwolee
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 13)
+# makefile (from `Makefile', line 14)
 NAME = aa
 # environment
 LESS = -R
@@ -153,18 +154,19 @@ LANG = C
 # environment
 VSCODE_PID = 80437
 # variable set hash-table stats:
- 
 # Load=70/1024=7%, Rehash=0, Collisions=2/108=2%
 
 # Pattern-specific Variable Values
 
 # No pattern-specific variable values.
 
+ 
 # Directories
 
-# . (device 16777225, inode 1776659): 26 files, no impossibilities.
+# . (device 16777225, inode 1776659): 19 files, no impossibilities.
+# srcs (device 16777225, inode 1895946): 11 files, no impossibilities.
 
-# 26 files, no impossibilities in 1 directories.
+# 30 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -188,15 +190,6 @@ all: aa
 #  File has not been updated.
 
 # Not a target:
-ray.c:
-#  Implicit rule search has been done.
-#  Last modified 2023-04-24 17:20:24
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -205,16 +198,16 @@ ray.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-04-24 17:00:30
+#  Last modified 2023-04-25 17:17:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-aa: mlx/libmlx.a test.c vec3.c ray.c
+aa: mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c
 #  Implicit rule search has not been done.
 #  Implicit/static pattern stem: `'
-#  Last modified 2023-04-24 20:13:27
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # automatic
@@ -224,18 +217,18 @@ aa: mlx/libmlx.a test.c vec3.c ray.c
 # automatic
 # * := 
 # automatic
-# + := mlx/libmlx.a test.c vec3.c ray.c
+# + := mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c
 # automatic
 # | := 
 # automatic
 # < := mlx/libmlx.a
 # automatic
-# ^ := mlx/libmlx.a test.c vec3.c ray.c
+# ^ := mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c
 # automatic
-# ? := test.c vec3.c
+# ? := mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=3/14=21%
-#  commands to execute (from `Makefile', line 18):
+#  commands to execute (from `Makefile', line 19):
 	$(CC) $(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
 	
 
@@ -249,18 +242,36 @@ ex: mlx/libmlx.a
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 21):
+#  commands to execute (from `Makefile', line 22):
 	$(CC) $(MFLAG) ex.c -fsanitize=address -g3 -o $(NAME)
 	
+
+# Not a target:
+srcs/ray.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-04-25 17:16:28
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 fclean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
+#  commands to execute (from `Makefile', line 32):
 	rm $(NAME)
 	
+
+# Not a target:
+srcs/test.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-04-25 16:45:09
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -273,7 +284,7 @@ mlx/libmlx.a:
 #  Last modified 2023-04-24 16:57:38
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 36):
+#  commands to execute (from `Makefile', line 37):
 	@make -C ./mlx
 	cp mlx/libmlx.a ./
 	
@@ -283,22 +294,22 @@ re: fclean all
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 34):
+#  commands to execute (from `Makefile', line 35):
 	
 
 # Not a target:
-test.c:
+srcs/vec3.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-04-24 21:19:51
+#  Last modified 2023-04-24 21:19:26
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-vec3.c:
+srcs/type.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-04-24 21:19:26
+#  Last modified 2023-04-25 13:58:03
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -308,12 +319,21 @@ tt:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 27):
+#  commands to execute (from `Makefile', line 28):
 	$(CPP) $(CPP_SRCS) $(CPPFLAGS) -o $(CPPTEST)
 	
 
+# Not a target:
+srcs/hitable.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-04-25 16:19:12
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 # files hash-table stats:
-# Load=15/1024=1%, Rehash=0, Collisions=0/42=0%
+# Load=17/1024=2%, Rehash=0, Collisions=0/46=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -325,6 +345,6 @@ tt:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Tue Apr 25 13:52:23 2023
+# Finished Make data base on Tue Apr 25 17:18:18 2023
 
  

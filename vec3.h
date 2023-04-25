@@ -6,49 +6,17 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:35:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/24 19:49:06 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/25 14:00:11 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC3_H
 # define VEC3_H
 
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-
-typedef struct s_mlx
-{
-	void *mlx;
-	void *win; 
-	void *img;
-	int	*data;
-	int bpp;
-	int size_l;
-	int endian;
-	int color[3];
-}t_mlx;
-
-typedef struct s_vec
-{
-	double x;
-	double y;
-	double z;
-}t_vec;
-
-typedef struct s_point
-{
-	double x;
-	double y;
-	double z;
-}t_point;
-
-typedef struct s_color
-{
-	double r;
-	double b;
-	double g;
-}t_color;
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "type.h"
 
 void	*vec_vec_add(void *u, void *v);
 void	*vec_vec_mul(void *u, void *v);

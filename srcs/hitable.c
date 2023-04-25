@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/25 21:32:00 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/25 22:19:18 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ t_bool		hit_sphere(t_ray *r, t_hit_record *rec, t_sphere *sphere)
 {
 	t_vec	oc =  {r->origin->x, r->origin->y, r->origin->z};
 	float	a;
-	float	b; // half_b in b*b - 4a*c -> so discriminant is b*b - a*c
+	float	b; // half_b in 2*b*b - 4a*c -> so discriminant is b*b - a*c
 	float	c;
 	float	discriminant;
 	float	temp;

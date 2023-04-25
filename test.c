@@ -1,61 +1,95 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "mlx/mlx.h"
+#include "./mlx/mlx.h"
 #include "vec3.h"
 #include "ray.h"
-#include "type.h"
+#include "hitable.h"
 
-double	hit_sphere(t_point *center, double radius, t_ray *r)
+// double	hit_sphere(t_point *center, double radius, t_ray *r)
+// {
+
+// 	t_vec	*oc; //origin to center, ray's vector pointing to sphere
+// 	double	a;
+// 	double	hb; // if hb : half_b in b^2 - 4ac 
+// 	double	c;
+// 	double	discriminant;
+
+// 	oc = vec_vec_sub_new(r->origin, center);
+// 	a = vec_dot(r->direction, r->direction);
+// 	hb = vec_dot(oc, r->direction); // half b in discriminant
+// 	c = (vec_dot(oc, oc) - radius * radius);
+// 	free(oc);
+// 	discriminant = hb * hb - a * c; //ㅍㅏㄴ벼ㄹ식
+// 	if (discriminant < 0)
+// 		return (-1.0);
+// 	else
+// 		return ((- hb - sqrt(discriminant)) / a);
+// }
+
+// int ray_color(t_ray *r)
+// {
+// 	t_point	temp;
+// 	t_point	*N;
+// 	t_color	res;
+// 	t_vec	*unit_direction;
+
+// 	vec_init(&temp, 0.2, 0.2, -1.2); // 구의 위치
+// 	double t = hit_sphere(&temp, 0.5, r);
+// 	if (t > 0.0)
+// 	{
+// 		N = vec_vec_sub_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
+// 		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5); 
+// 		// color //why + 1?? 아 -1 부터 시작해서...
+// 		// color 4분할 -> 1을 더했을 경우. 
+// 		// color 0.5를 더해야 함.
+// 		free(N);
+// 		return (pixel_color(&res));
+// 	} // 가운데 값 반지름
+
+// 	unit_direction = vec_unit_vector_new(r->direction);
+// 	t = 0.5 * (unit_direction->y + 1.0);
+// 	free(unit_direction);
+// 	vec_init(&res, 1.0, 1.0, 1.0);
+// 	vec_init(&temp, 0.5, 0.7, 1.0);
+// 	vec_mul(&res, 1.0 - t);
+// 	vec_mul(&temp, t);
+// 	vec_vec_add(&res, &temp);
+// 	return (pixel_color(&res));
+// }
+
+
+
+#define COLOR_CORRECTION_VAL 0.5
+
+//t_minmax 0.0/MAXFLOAT
+//현재 1. 1-1
+int color(const t_ray *r, t_hitable **world)
 {
-
-	t_vec	*oc; //origin to center, ray's vector pointing to sphere
-	double	a;
-	double	hb; // if hb : half_b in b^2 - 4ac 
-	double	c;
-	double	discriminant;
-
-	oc = vec_vec_sub_new(r->origin, center);
-	a = vec_dot(r->direction, r->direction);
-	hb = vec_dot(oc, r->direction); // half b in discriminant
-	c = (vec_dot(oc, oc) - radius * radius);
-	free(oc);
-	discriminant = hb * hb - a * c; //ㅍㅏㄴ벼ㄹ식
-	if (discriminant < 0)
-		return (-1.0);
-	else
-		return ((- hb - sqrt(discriminant)) / a);
-}
-
-int ray_color(t_ray *r)
-{
-	t_point	temp;
-	t_point	*N;
-	t_color	res;
-	t_vec	*unit_direction;
-
-	vec_init(&temp, 0.2, 0.2, -1.2); // 구의 위치
-	double t = hit_sphere(&temp, 0.5, r);
-	if (t > 0.0)
+	t_hit_record	rec;
+	t_color			res;
+	t_vec			*unit_direction;
+	t_vec			temp;
+	double 			t;
+	
+	if (hit(*world, r, &rec) == TRUE)
 	{
-		N = vec_vec_sub_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
-		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5); 
-		// color //why + 1?? 아 -1 부터 시작해서...
-		// color 4분할 -> 1을 더했을 경우. 
-		// color 0.5를 더해야 함.
-		free(N);
+		vec_init(&res, rec.normal.x + COLOR_CORRECTION_VAL, rec.normal.y \
+			+ COLOR_CORRECTION_VAL, rec.normal.z + COLOR_CORRECTION_VAL); 
 		return (pixel_color(&res));
-	} // 가운데 값 반지름
-
-	unit_direction = vec_unit_vector_new(r->direction);
-	t = 0.5 * (unit_direction->y + 1.0);
-	free(unit_direction);
-	vec_init(&res, 1.0, 1.0, 1.0);
-	vec_init(&temp, 0.5, 0.7, 1.0);
-	vec_mul(&res, 1.0 - t);
-	vec_mul(&temp, t);
-	vec_vec_add(&res, &temp);
-	return (pixel_color(&res));
+	}
+	else //background
+	{
+		unit_direction = vec_unit_vector_new(r->direction);
+		t = 0.5 * (unit_direction->y + 1.0);
+		free(unit_direction);
+		vec_init(&res, 1.0, 1.0, 1.0);
+		vec_init(&temp, 0.5, 0.7, 1.0);
+		vec_mul(&res, 1.0 - t);
+		vec_mul(&temp, t);
+		vec_vec_add(&res, &temp);
+		return (pixel_color(&res));
+	}
 }
 
 int main() 
@@ -82,6 +116,20 @@ int main()
 	t_point		vertical = {0, viewport_height, 0};
 	t_vec		lower_left_corner = {viewport_width * (-0.5), viewport_height * (-0.5), focal_length * (-1.0)};
 
+	//figure
+	t_sphere	sp0;
+	t_sphere	sp1;
+
+	//hittable list - temporary test
+	t_hitable	**world;
+	world = sizeof(t_hitable * 2);
+	world[0]->data = &sp0;
+	world[0]->type = SPHERE;
+	world[0]->next = world[1];
+	world[1]->data = &sp1;
+	world[1]->type = SPHERE;
+	world[1]->next = NULL;
+
 	//render
 	int j = 0;
 	t_ray	r;
@@ -100,7 +148,7 @@ int main()
 			vec_vec_sub(temp, &origin);
 			ray_init_vec(&r, &origin, temp);
 
-			int color = ray_color(&r);
+			int color = color(&r);
 			free(temp);
 			app.data[j * image_width + i] = mlx_get_color_value(app.mlx, color);
 			i++;

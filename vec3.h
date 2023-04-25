@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:35:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/25 14:00:11 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/25 14:04:15 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,5 @@ int		pixel_color(void *a);
 
 void	*vec_unit_vector(void *a);
 void	*vec_unit_vector_new(void *a);
-
 
 #endif

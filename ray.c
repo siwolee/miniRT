@@ -5,6 +5,8 @@ void 	ray_init_vec(t_ray *r, void *origin, void *direction)
 {
 	r->origin = (t_point *)origin;
 	r->direction = (t_vec *)direction;
+	r->t_min = T_MIN;
+	r->t_max = T_MAX;
 }
 
 void 	ray_init_zero(t_ray *r)
@@ -16,6 +18,8 @@ void 	ray_init_zero(t_ray *r)
 	direction = vec_init_new(0, 0, 0);
 	r->origin = (t_point *)origin;
 	r->direction = (t_vec *)direction;
+	r->t_min = T_MIN;
+	r->t_max = T_MAX;
 }
 
 void	*ray_at(t_ray *ray, double t)

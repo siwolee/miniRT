@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/04/25 13:57:45 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:04:43 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,25 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
-# include "../mlx/mlx.h"
-# include <fcntl.h>
-# include <stdio.h>
-# include "libft.h"
+// # include "../mlx/mlx.h"
+// # include <fcntl.h>
+// # include <stdio.h>
+// # include "libft.h"
+
+# define TRUE 0
+# define FALSE 1
+
+typedef int t_bool;
+
+enum 
+{
+	AMBIENT,
+	CAMERA,
+	LIGHT,
+	PLANE,
+	SPHERE,
+	CYLINDER
+};
 
 typedef struct s_vec
 {

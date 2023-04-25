@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 20:34:51 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/24 22:16:07 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/25 16:04:58 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,64 +15,45 @@
 
 # include "ray.h"
 # include "vec3.h"
+# include "type.h"
 
+/*
+	아직 뭐가뭔지 모름
+*/
 typedef struct s_hit_record
 {
 	float	t;
 	t_vec	p;
 	t_vec	normal;
-}	t_hit_record
+}	t_hit_record;
 
-typedef struct s_list {
-	void			*data; // list 이면 쓰면 되는거 아님?
 
+//물체들을 통합해서 가지고 있는 리스트.
+//data는 각 물체의 포인터를 가지고
+//type은 무슨 물체인지 알려줌
+typedef struct s_hitable
+{
+	void			*data;
+	int 			type;
 	struct s_list	*next;
 	struct s_list	*prev;
 
-}t_list;
+}	t_hitable;
 
-typedef	struct	s_figure_list
-{
-	void *data;
-	
+//물체들을 돌면서 맞았는지 아닌지 판별하는 함수. 결과값은 rec에 저장
+t_bool	hit(t_hitable *node, const t_ray *r, t_hit_record *rec);
 
-}
+//hit record 복사 함수 
+void	hit_record_dup(t_hit_record *temp, t_hit_record *rec);
 
-int init_hit_record(t_hit_record *rec, t_ray *r, float temp, float radius)
-{
-	rec->t = temp;
-	rec->p = r->point_at_parameter(rec->t);
-	rec->normal = (rec->p - center) / radius;
-	return (0);
-}
+// type별로 광선 맞았는지 아닌지 판별하게 분류하는 함수. 리턴값은 동일하게 t_bool
+t_bool	hit_whatever(t_hitable *node, t_hit_record *rec, t_ray *r, float t_min, float t_max);
 
-int		hit_sphere(const t_ray *r, float t_min, float t_max, hit_record *rec)
-{
-	t_vec	*oc;
-	float	a;
-	float	b; // half_b in b*b - 4a*c -> so discriminant is b*b - a*c
-	float	c;
-	float	discirminant;
-	float	temp;
-	float	radius;
+// 구에서 만약에 맞았을 경우, 결과값을 hit_record에 저장해주는 함수
+t_bool	hit_record_init_sphere(t_hit_record *rec, t_ray *r, float temp, float radius);
 
-	radius = (float)(sphere->radius * (0.5));
-	oc = vec_vec_sub_new(r->origin, center);
-	a = vec_dot(r->direction, r->direction);
-	b = vec_dot(oc, r->direction);
-	c = vec_dot(oc, oc) - radius * radius;
-	discriminant = b * b - a * c;
-	if (discriminant < 0)
-		return (1);
-	temp = (- b - sqrt(b * b - a * c)) / a;
-	if (temp < t_max && temp > t_min)
-		return (init_hit_record(rec, temp, radius));
-	temp = (- b + sqrt(b * b - a * c)) / a;
-	if (temp < t_max && temp > t_min)
-		return (init_hit_record(rec, temp, radius));
-	return (1);
-}
+//구에 맞는지 판별하는 함수 - 정리필요
+t_bool	hit_sphere(const t_ray *r, t_hit_record *rec, t_sphere *sphere);
 
-struct	hita
 
 #endif

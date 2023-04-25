@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "mlx/mlx.h"
+#include "../../mlx/mlx.h"
 #include "vec3.h"
 #include "ray.h"
 
@@ -14,7 +14,7 @@ double	hit_sphere(t_point *center, double radius, t_ray *r)
 	double	c;
 	double	discriminant;
 
-	oc = vec_vec_min_new(r->origin, center);
+	oc = vec_vec_sub_new(r->origin, center);
 	a = vec_dot(r->direction, r->direction);
 	hb = vec_dot(oc, r->direction); // half b in discriminant
 	c = (vec_dot(oc, oc) - radius * radius);
@@ -40,7 +40,7 @@ int ray_color(t_ray *r)
 	double t = hit_sphere(&temp, 0.5, r);
 	if (t > 0.0)
 	{
-		N = vec_vec_min_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
+		N = vec_vec_sub_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
 		vec_print(N);
 		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5); 
 		// color //why + 1?? 아 -1 부터 시작해서...
@@ -49,7 +49,7 @@ int ray_color(t_ray *r)
 		free(N);
 		return (pixel_color(&res));
 	} // 가운데 값 반지름
-	unit_direction = vec_unit_vector_new(r->direction);
+	unit_direction = vec_unit_vector(r->direction);
 	t = 0.5 * (unit_direction->y + 1.0);
 	free(unit_direction);
 	vec_init(&res, 1.0, 1.0, 1.0);
@@ -99,7 +99,7 @@ int main()
 			h = (vertical.y * (double)j) / (image_height - 1);
 			temp = vec_init_new(w, h, 0);
 			vec_vec_add(temp, &lower_left_corner);
-			vec_vec_min(temp, &origin);
+			vec_vec_sub(temp, &origin);
 			ray_init_vec(&r, &origin, temp);
 
 			int color = ray_color(&r);

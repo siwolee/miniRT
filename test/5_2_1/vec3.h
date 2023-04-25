@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vec3.h                                             :+:      :+:    :+:   */
+/*   vec3 copy.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:35:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/24 21:19:22 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/25 21:45:53 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VEC3_H
 # define VEC3_H
 
-#include <math.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include "type.h"
+# include <math.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include "type.h"
 
 void	*vec_vec_add(void *u, void *v);
 void	*vec_vec_mul(void *u, void *v);
@@ -49,6 +49,6 @@ int		pixel_color_xyz(double x, double y, double z);
 int		pixel_color(void *a);
 
 void	*vec_unit_vector(void *a);
-
+void	*vec_unit_vector_new(void *a);
 
 #endif

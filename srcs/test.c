@@ -22,7 +22,11 @@ int ray_color(t_ray *r, t_hitable **world)
 	if (hit(*world, r, &rec) == TRUE)
 	{
 		vec_init(&res, rec.normal.x + COLOR_CORRECTION_VAL, rec.normal.y \
-			+ COLOR_CORRECTION_VAL, rec.normal.z + COLOR_CORRECTION_VAL); 
+			+ COLOR_CORRECTION_VAL, rec.normal.z + COLOR_CORRECTION_VAL);
+		// vec_print(&res);
+		// printf("\n");
+
+		// vec_init(&res, 1, 0, 0);
 		return (pixel_color(&res));
 	}
 	//background
@@ -60,27 +64,26 @@ int main()
 	t_point		horizontal = {viewport_width, 0, 0};
 	t_point		vertical = {0, viewport_height, 0};
 	t_vec		lower_left_corner = {viewport_width * (-0.5), viewport_height * (-0.5), focal_length * (-1.0)};
-
 	//figure
 	t_sphere	sp0;
-	vec_init(&(sp0.point), 0, 0, -1);
-	sp0.dia = 1;
-	t_sphere	sp1;
-	vec_init(&(sp1.point), 3, 3, -5);
-	sp1.dia = 1;
+	vec_init(&(sp0.point), 1, 1, -1.2);
+	sp0.dia = 2;
+	// t_sphere	sp1;
+	// vec_init(&(sp1.point), 1, 1, -5);
+	// sp1.dia = 0.4;
 
 	//hittable list - temporary test
 	t_hitable	**world;
 	t_hitable	a;
 	t_hitable	b;
 	world = malloc(sizeof(t_hitable *));
-	*world = &a;
+	*world = NULL;
 	a.data = &sp0;
 	a.type = SPHERE;
-	a.next = &b;
-	b.data = &sp1;
-	b.type = SPHERE;
-	b.next = NULL;
+	a.next = NULL;
+	// b.data = &sp1;
+	// b.type = SPHERE;
+	// b.next = NULL;
 
 	//render
 	int j = 0;
@@ -102,7 +105,8 @@ int main()
 
 			int color = ray_color(&r, world);
 			free(temp);
-			app.data[j * image_width + i] = mlx_get_color_value(app.mlx, color);
+			// app.data[j * image_width + i] = mlx_get_color_value(app.mlx, color);
+			app.data[j * image_width + i] = color;
 			i++;
 		}
 		j++;

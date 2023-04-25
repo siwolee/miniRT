@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/24 15:44:05 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/24 21:19:26 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	*vec_vec_mul(void *u, void *v)
 	return (a);
 }
 
-void	*vec_vec_min(void *u, void *v)
+void	*vec_vec_sub(void *u, void *v)
 {
 	t_vec	*a;
 	t_vec	*b;
@@ -107,7 +107,7 @@ void	*vec_div(void *u, double b)
 	return (a);
 }
 
-void	*vec_min(void *u, double b)
+void	*vec_sub(void *u, double b)
 {
 	t_vec	*a;
 
@@ -162,7 +162,7 @@ void	*vec_vec_mul_new(void *u, void *v)
 	return (temp);
 }
 
-void	*vec_vec_min_new(void *u, void *v)
+void	*vec_vec_sub_new(void *u, void *v)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -222,7 +222,7 @@ void	*vec_div_new(void *u, double b)
 	return (temp);
 }
 
-void	*vec_min_new(void *u, double b)
+void	*vec_sub_new(void *u, double b)
 {
 	t_vec *temp;
 	t_vec	*a;
@@ -277,6 +277,18 @@ double	vec_length(void *a)
 }
 
 void	*vec_unit_vector(void *a)
+{
+	t_vec	*v;
+	t_vec	*temp;
+	double	length;
+
+	v = (t_vec *)a;
+	length = vec_length(v);
+	temp = vec_div(v, length);
+	return (temp);
+}
+
+void	*vec_unit_vector_new(void *a)
 {
 	t_vec	*v;
 	t_vec	*temp;

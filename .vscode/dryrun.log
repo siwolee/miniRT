@@ -1,6 +1,6 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/siwolee/minirt'
-cc -Lmlx -lmlx -framework OpenGL -framework AppKit srcs/*.c -fsanitize=address -g3 -o aa
+make: Nothing to be done for `all'.
  
 make: Leaving directory `/Users/siwolee/minirt'
  

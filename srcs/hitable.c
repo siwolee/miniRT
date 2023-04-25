@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/25 18:20:17 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/25 21:32:00 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_bool	hit(t_hitable *node, t_ray *r, t_hit_record *rec)
 	while (node)
 	{
 		// 순서대로 넣기 때문에 아직 비교는 안하고 있음
-		if (hit_whatever(node->data, &temp_rec, r))
+		if (hit_whatever(node, &temp_rec, r) == TRUE)
 		{
 			hit_anything = TRUE;
 			closest_so_far = temp_rec.t;
@@ -53,7 +53,8 @@ t_bool	hit_whatever(t_hitable *node, t_hit_record *rec, t_ray *r)
 	// }
 	if (node->type == SPHERE)
 	{
-		return (hit_sphere(r, rec, node->data));
+		hit_sphere(r, rec, node->data);
+		return (TRUE);
 	}
 // 	else if (node->type == CYLINDER)
 // 	{
@@ -68,6 +69,7 @@ t_bool	hit_record_init_sphere(t_hit_record *rec, t_ray *r, float temp, float rad
 	rec->t = temp;
 	ray_at(r, rec->t, &(rec->p));
 	// rec->normal =(rec->p - r->origin) / radius;
+	// printf("aa");
 	vec_init(&rec->normal, rec->p.x, rec->p.y, rec->p.z);
 	vec_vec_sub(&rec->normal, r->origin);
 	vec_div(&rec->normal, radius);
@@ -78,7 +80,7 @@ t_bool	hit_record_init_sphere(t_hit_record *rec, t_ray *r, float temp, float rad
 //oc  init 애매함...
 t_bool		hit_sphere(t_ray *r, t_hit_record *rec, t_sphere *sphere)
 {
-	t_vec	*oc;
+	t_vec	oc =  {r->origin->x, r->origin->y, r->origin->z};
 	float	a;
 	float	b; // half_b in b*b - 4a*c -> so discriminant is b*b - a*c
 	float	c;
@@ -88,19 +90,21 @@ t_bool		hit_sphere(t_ray *r, t_hit_record *rec, t_sphere *sphere)
 
 	radius = (float)(sphere->dia * (0.5));
 	// oc = vec_vec_sub_new(r->origin, center);
-	oc = vec_init_new(r->origin->x, r->origin->y, r->origin->z);
+	// oc = vec_init_new(r->origin->x, r->origin->y, r->origin->z);
+	// oc = {r->origin->x, r->origin->y, r->origin->z};
 	a = vec_dot(r->direction, r->direction);
-	b = vec_dot(oc, r->direction);
-	c = vec_dot(oc, oc) - radius * radius;
-	free(oc);
+	b = vec_dot(&oc, r->direction);
+	c = vec_dot(&oc, &oc) - radius * radius;
 	discriminant = b * b - a * c;
 	if (discriminant < 0)
 		return (FALSE);
 	temp = (- b - sqrt(b * b - a * c)) / a;
-	if (temp < r->t_max && temp > r->t_min)
+	// printf("%f\n", temp);
+	// printf("%f , %f \n", r->t_max, r->t_min);
+	if (temp > r->t_min && temp < r->t_max)
 		return (hit_record_init_sphere(rec, r, temp, radius));
 	temp = (- b + sqrt(b * b - a * c)) / a;
-	if (temp < r->t_max && temp > r->t_min)
+	if (temp > r->t_min && temp < r->t_max)
 		return (hit_record_init_sphere(rec, r, temp, radius));
 	return (FALSE);
 }

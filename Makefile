@@ -1,6 +1,7 @@
 LIBMLX = ./mlx/libmlx.a
+LIBFT = ./libft/libft.a
 
-MFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
+MFLAG = -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit
 
 CPP_SRCS = cpp/*.cpp
 CPP_INCS = cpp/*.hpp
@@ -15,7 +16,7 @@ NAME = aa
 
 all : $(NAME)
 
-$(NAME) : $(LIBMLX) $(SRCS)
+$(NAME) : $(LIBMLX) $(SRCS) $(LIBFT)
 	$(CC) $(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
 
 ex : $(LIBMLX)
@@ -36,5 +37,9 @@ re : fclean all
 $(LIBMLX) :
 	@make -C ./mlx
 	cp mlx/libmlx.a ./
+
+$(LIBFT) :
+	@make -C ./libft
+	
 
 .PHONY : all re cpp fclean

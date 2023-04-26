@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/04/25 13:58:03 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/26 19:42:34 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -384,14 +384,14 @@ void	printmap(t_main *main)
 	// printf("%f\n",main->
 }
 
-int main(int ac, char **av)
-{
-	t_main main;
+// int main(int ac, char **av)
+// {
+// 	t_main main;
 
-	if (ac != 2)
-		return (0);
-	//.rt 확장자 체크하는 함수
-	readmap(&main, av);
+// 	if (ac != 2)
+// 		return (0);
+// 	//.rt 확장자 체크하는 함수
+// 	readmap(&main, av);
 
-	return (0);
-}
+// 	return (0);
+// }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/04/25 17:19:45 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/27 00:19:16 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 # include <math.h>
 # include <stdlib.h>
 # include <unistd.h>
-// # include "../mlx/mlx.h"
-// # include <fcntl.h>
-// # include <stdio.h>
-// # include "libft.h"
+# include "mlx.h"
+# include <fcntl.h>
+# include <stdio.h>
+# include "libft.h"
 
 # define TRUE 0
 # define FALSE 1

@@ -7,11 +7,11 @@
 #include "hitable.h"
 
 
-#define COLOR_CORRECTION_VAL 0.5
+#define COLOR_VAL 0.5
 
 //t_minmax 0.0/MAXFLOAT
 //현재 1. 1-1
-int ray_color(t_ray *r, t_hitable **world)
+int ray_color(t_ray *r, t_hitable **world, int w, int h)
 {
 	t_hit_record	rec;
 	t_color			res;
@@ -19,14 +19,18 @@ int ray_color(t_ray *r, t_hitable **world)
 	t_vec			temp;
 	double 			t;
 	
+	// return (-1);
+	// printf("%d %d \n", w, h);
 	if (hit(*world, r, &rec) == TRUE)
 	{
-		vec_init(&res, rec.normal.x + COLOR_CORRECTION_VAL, rec.normal.y \
-			+ COLOR_CORRECTION_VAL, rec.normal.z + COLOR_CORRECTION_VAL);
 		// vec_print(&res);
-		// printf("\n");
-
-		// vec_init(&res, 1, 0, 0);
+		// printf("%f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
+		// vec_print(&res);
+		vec_init(&res, rec.normal.x + COLOR_VAL, rec.normal.y \
+			+ COLOR_VAL, rec.normal.z + COLOR_VAL);
+		// vec_print(&res);
+		// exit(1);
+		// vec_print(&res);
 		return (pixel_color(&res));
 	}
 	//background
@@ -41,8 +45,17 @@ int ray_color(t_ray *r, t_hitable **world)
 		return (pixel_color(&res));
 }
 
-int main() 
+void readmap(t_main *main, char **av);
+
+int main(int ac, char **av) 
 {
+	// t_main main;
+
+	// if (ac != 2)
+	// 	return (0);
+	// //.rt 확장자 체크하는 함수
+	// readmap(&main, av);
+
 	//image
 	const float	aspect_ratio = 16.0 / 9.0;
 	const int image_height = 800;
@@ -66,7 +79,7 @@ int main()
 	t_vec		lower_left_corner = {viewport_width * (-0.5), viewport_height * (-0.5), focal_length * (-1.0)};
 	//figure
 	t_sphere	sp0;
-	vec_init(&(sp0.point), 1, 1, -1.2);
+	vec_init(&(sp0.point), 0.5, 0, -1);
 	sp0.dia = 2;
 	// t_sphere	sp1;
 	// vec_init(&(sp1.point), 1, 1, -5);
@@ -77,7 +90,7 @@ int main()
 	t_hitable	a;
 	t_hitable	b;
 	world = malloc(sizeof(t_hitable *));
-	*world = NULL;
+	*world = &a;
 	a.data = &sp0;
 	a.type = SPHERE;
 	a.next = NULL;
@@ -102,9 +115,9 @@ int main()
 			vec_vec_add(temp, &lower_left_corner);
 			vec_vec_sub(temp, &origin);
 			ray_init_vec(&r, &origin, temp);
-
-			int color = ray_color(&r, world);
+			int color = ray_color(&r, world, i, j);
 			free(temp);
+			temp = NULL;
 			// app.data[j * image_width + i] = mlx_get_color_value(app.mlx, color);
 			app.data[j * image_width + i] = color;
 			i++;
@@ -138,7 +151,7 @@ int main()
 // }
 
 // int ray_color(t_ray *r)
-// {
+// {5
 // 	t_point	temp;
 // 	t_point	*N;
 // 	t_color	res;

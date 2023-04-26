@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hitable.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/25 22:19:18 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/27 02:00:42 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,25 @@
 //물체들을 돌면서 맞았는지 아닌지 판별하는 함수. 결과값은 rec에 저장
 t_bool	hit(t_hitable *node, t_ray *r, t_hit_record *rec)
 {
+	// const t_hit_record test = {0, 0, 0};
 	t_hit_record	temp_rec;
 	t_bool			hit_anything = FALSE;
 	double			closest_so_far;
 
 	while (node)
 	{
+
 		// 순서대로 넣기 때문에 아직 비교는 안하고 있음
 		if (hit_whatever(node, &temp_rec, r) == TRUE)
 		{
 			hit_anything = TRUE;
 			closest_so_far = temp_rec.t;
+			if (closest_so_far > 1) {
+				printf("%f\n", closest_so_far);
+				continue ;
+			}
 			hit_record_dup(&temp_rec, rec);
+			// temp_rec = test;
 		}
 		node = node->next;
 	}
@@ -40,7 +47,7 @@ void	hit_record_dup(t_hit_record *temp, t_hit_record *rec)
 	if (!temp || !rec)
 		return ;
 	rec->t = temp->t;
-	vec_init(&rec->p, temp->p.x, temp->p.y, temp->p.z);
+	vec_init(&(rec->p), temp->p.x, temp->p.y, temp->p.z);
 	rec->normal = temp->normal;
 }
 
@@ -53,8 +60,7 @@ t_bool	hit_whatever(t_hitable *node, t_hit_record *rec, t_ray *r)
 	// }
 	if (node->type == SPHERE)
 	{
-		hit_sphere(r, rec, node->data);
-		return (TRUE);
+		return (hit_sphere(r, rec, node->data));
 	}
 // 	else if (node->type == CYLINDER)
 // 	{
@@ -67,10 +73,20 @@ t_bool	hit_whatever(t_hitable *node, t_hit_record *rec, t_ray *r)
 t_bool	hit_record_init_sphere(t_hit_record *rec, t_ray *r, float temp, float radius)
 {
 	rec->t = temp;
+	// printf("%f\n", rec->t);
 	ray_at(r, rec->t, &(rec->p));
+	// vec_print(&rec->p);
 	// rec->normal =(rec->p - r->origin) / radius;
 	// printf("aa");
-	vec_init(&rec->normal, rec->p.x, rec->p.y, rec->p.z);
+	// vec_print(&(rec->normal));
+	vec_init(&(rec->normal), rec->p.x, rec->p.y, rec->p.z);
+	// vec_print(&(rec->normal));
+	// exit(1);
+	// printf("rec->normal: \n");
+	// vec_print(&(rec->normal));
+	// printf("rec->origin: \n");
+	// vec_print(&r->origin);
+	// printf("\n");
 	vec_vec_sub(&rec->normal, r->origin);
 	vec_div(&rec->normal, radius);
 	return (TRUE);
@@ -88,23 +104,24 @@ t_bool		hit_sphere(t_ray *r, t_hit_record *rec, t_sphere *sphere)
 	float	temp;
 	float	radius;
 
-	radius = (float)(sphere->dia * (0.5));
-	// oc = vec_vec_sub_new(r->origin, center);
+	// printf("%f %f %f\n", sphere->point.x, sphere->point.y, sphere->point.z);
+	// radius = (float)(sphere->dia * (0.5));
+	radius = 1;
+	vec_vec_sub(&oc, &sphere->point);
 	// oc = vec_init_new(r->origin->x, r->origin->y, r->origin->z);
 	// oc = {r->origin->x, r->origin->y, r->origin->z};
 	a = vec_dot(r->direction, r->direction);
 	b = vec_dot(&oc, r->direction);
 	c = vec_dot(&oc, &oc) - radius * radius;
 	discriminant = b * b - a * c;
-	if (discriminant < 0)
+	if (discriminant + 0.005 < 0 || discriminant - 0.005< 0)
 		return (FALSE);
-	temp = (- b - sqrt(b * b - a * c)) / a;
-	// printf("%f\n", temp);
+	temp = (- b - sqrt(discriminant)) / a;
 	// printf("%f , %f \n", r->t_max, r->t_min);
-	if (temp > r->t_min && temp < r->t_max)
+	if (r->t_min < temp && temp < r->t_max)
 		return (hit_record_init_sphere(rec, r, temp, radius));
-	temp = (- b + sqrt(b * b - a * c)) / a;
-	if (temp > r->t_min && temp < r->t_max)
-		return (hit_record_init_sphere(rec, r, temp, radius));
+	// temp = (- b + sqrt(discriminant)) / a;
+	// if (temp > r->t_min && temp < r->t_max)
+	// 	return (hit_record_init_sphere(rec, r, temp, radius));~
 	return (FALSE);
 }

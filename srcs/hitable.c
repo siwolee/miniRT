@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hitable.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/27 21:31:25 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/27 22:02:30 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,23 +18,29 @@ t_bool	hit(t_hitable *node, t_ray *r, t_hit_record *rec)
 {
 	t_hit_record	temp_rec;
 	t_bool			hit_anything = FALSE;
-	double			closest_so_far;
+	double			closest_so_far = 0;
+	int				i;
 
+	i = 0;
 	while (node)
 	{
 		// 순서대로 넣기 때문에 아직 비교는 안하고 있음
 		if (hit_whatever(node, &temp_rec, r) == TRUE)
 		{
 			hit_anything = TRUE;
+			if (closest_so_far != 0)
+				printf("t is %f\n", temp_rec.t);
 			closest_so_far = temp_rec.t;
 			hit_record_dup(&temp_rec, rec);
 		}
 		node = node->next;
+		i++;
+		// printf("%d\n", i);
 	}
 	return (hit_anything);
 }
 
-//hit record 복사 함수 
+//hit record 복사 함수
 void	hit_record_dup(t_hit_record *temp, t_hit_record *rec)
 {
 	if (!temp || !rec)

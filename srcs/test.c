@@ -9,14 +9,22 @@
 
 #define COLOR_VAL 1
 
-int key_hook(int keycode, t_mlx *mlx)
+int	key_press(int keycode, t_mlx *mlx)
 {
-    if(keycode == 53)
-    {
-        mlx_destroy_window(mlx->mlx, mlx->win);
-        exit(0);
-    }
-    return (0);
+	if (keycode == 13)
+		printf("W\n");
+	else if (keycode == 1)
+		printf("S\n");
+	else if (keycode == 0)
+		printf("A\n");
+	else if (keycode == 2)
+		printf("D\n");
+	else if (keycode == 53)
+	{
+		mlx_destroy_window(mlx->mlx, mlx->win);
+		exit(0);
+	}
+	return (0);
 }
 
 //t_minmax 0.0/MAXFLOAT
@@ -28,7 +36,7 @@ int ray_color(t_ray *r, t_hitable **world, int w, int h)
 	t_vec			*unit_direction;
 	t_vec			temp;
 	double 			t;
-	
+
 	// return (-1);
 	// printf("%d %d \n", w, h);
 	if (hit(*world, r, &rec) == TRUE)
@@ -57,7 +65,7 @@ int ray_color(t_ray *r, t_hitable **world, int w, int h)
 
 void readmap(t_main *main, char **av);
 
-int main(int ac, char **av) 
+int main(int ac, char **av)
 {
 	// t_main main;
 
@@ -77,7 +85,7 @@ int main(int ac, char **av)
 	app.win = mlx_new_window(app.mlx, image_width, image_height, "5.2.1");
 	app.img = mlx_new_image(app.mlx, image_width, image_height);
 	app.data = (int *)mlx_get_data_addr(app.img, &app.bpp, &app.size_l, &app.endian);
-	
+
 	//camera
 	float viewport_height = 2.0; // 뷰포트의 높이
 	float viewport_width = aspect_ratio * viewport_height; //size
@@ -86,18 +94,32 @@ int main(int ac, char **av)
 	t_point		origin = {0, 0, 0}; //camera's origin
 	t_point		horizontal = {viewport_width, 0, 0}; //y = 2 * 16 / 9 >> 비율 안 지키면 카메라 모양 깨짐
 	t_point		vertical = {0, viewport_height, 0}; //x = 2.0
-	t_vec		lower_left_corner = {viewport_width * (-0.5), viewport_height * (-0.5), focal_length * (-1.0)}; 
-	
+	// t_vec		lower_left_corner = {0 - viewport_width * (0.5), 0 - viewport_height * (0.5), 0 - focal_length};
+	t_vec		lower_left_corner = {0,0,0};//origin으로 init
+	t_vec		temp;
+
+	vec_init(&temp, horizontal.x * 0.5, horizontal.y * 0.5, horizontal.z * 0.5);
+	vec_vec_sub(&lower_left_corner, &temp);
+	vec_init(&temp, vertical.x * 0.5, vertical.y * 0.5, vertical.z * 0.5);
+	vec_vec_sub(&lower_left_corner, &temp);
+	vec_init(&temp, 0, 0, focal_length);
+	vec_vec_sub(&lower_left_corner, &temp);
+	// vec_print(&lower_left_corner);
+
+
+
+
+
 	//figure
 	t_sphere	sp0;
-	vec_init(&(sp0.point), 0.2, 0.2, -1.7);
+	vec_init(&(sp0.point), 0, 0, -2);
 	sp0.dia = 1; //0.5 이하로 안 보임
 
 	//디아랑 z축에 문제 있음
 
-	t_sphere	sp1;
-	vec_init(&(sp1.point), 0, 0, -1.2);
-	sp1.dia = 5;
+	// t_sphere	sp1;
+	// vec_init(&(sp1.point), 0, 0, -1.2);
+	// sp1.dia = 1;
 
 	//hittable list - temporary test
 	t_hitable	**world;
@@ -107,10 +129,10 @@ int main(int ac, char **av)
 	*world = &a;
 	a.data = &sp0;
 	a.type = SPHERE;
-	a.next = &b;
-	b.data = &sp1;
-	b.type = SPHERE;
-	b.next = NULL;
+	a.next = NULL;
+	// b.data = &sp1;
+	// b.type = SPHERE;
+	// b.next = NULL;
 
 	//render
 	int j = 0;
@@ -122,7 +144,7 @@ int main(int ac, char **av)
 		{
 			// ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
 			double w, h;
-			t_vec direction;
+			t_vec direction; //카메라 바라보는 방향
 			w = (horizontal.x  * (double)i) / (image_width - 1);
 			h = (vertical.y * (double)j) / (image_height - 1);
 			vec_init(&direction, w, h, 0);
@@ -137,7 +159,7 @@ int main(int ac, char **av)
 		j++;
 	}
 	mlx_put_image_to_window(app.mlx, app.win, app.img, 0, 0);
-	mlx_key_hook(app.win, key_hook, &app);
+	mlx_key_hook(app.win, &key_press, &app);
 	mlx_loop(app.mlx);
 }
 
@@ -147,7 +169,7 @@ int main(int ac, char **av)
 
 // 	t_vec	*oc; //origin to center, ray's vector pointing to sphere
 // 	double	a;
-// 	double	hb; // if hb : half_b in b^2 - 4ac 
+// 	double	hb; // if hb : half_b in b^2 - 4ac
 // 	double	c;
 // 	double	discriminant;
 
@@ -175,9 +197,9 @@ int main(int ac, char **av)
 // 	if (t > 0.0)
 // 	{
 // 		N = vec_vec_sub_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
-// 		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5); 
+// 		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5);
 // 		// color //why + 1?? 아 -1 부터 시작해서...
-// 		// color 4분할 -> 1을 더했을 경우. 
+// 		// color 4분할 -> 1을 더했을 경우.
 // 		// color 0.5를 더해야 함.
 // 		free(N);
 // 		return (pixel_color(&res));

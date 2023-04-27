@@ -79,11 +79,11 @@ int main(int ac, char **av)
 	t_vec		lower_left_corner = {viewport_width * (-0.5), viewport_height * (-0.5), focal_length * (-1.0)};
 	//figure
 	t_sphere	sp0;
-	vec_init(&(sp0.point), 0.5, 0, -1);
-	sp0.dia = 2;
+	vec_init(&(sp0.point), 0, 0, -1);
+	sp0.dia = 1;
 	// t_sphere	sp1;
-	// vec_init(&(sp1.point), 1, 1, -5);
-	// sp1.dia = 0.4;
+	// vec_init(&(sp1.point), -0.5, 0, -1.2);
+	// sp1.dia = 1;
 
 	//hittable list - temporary test
 	t_hitable	**world;

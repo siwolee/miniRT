@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/27 02:00:42 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/27 02:12:02 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ t_bool		hit_sphere(t_ray *r, t_hit_record *rec, t_sphere *sphere)
 	float	radius;
 
 	// printf("%f %f %f\n", sphere->point.x, sphere->point.y, sphere->point.z);
-	// radius = (float)(sphere->dia * (0.5));
-	radius = 1;
+	radius = (float)(sphere->dia * (0.5));
+	// radius = 1;
 	vec_vec_sub(&oc, &sphere->point);
 	// oc = vec_init_new(r->origin->x, r->origin->y, r->origin->z);
 	// oc = {r->origin->x, r->origin->y, r->origin->z};

@@ -41,7 +41,6 @@ int ray_color(t_ray *r)
 	if (t > 0.0)
 	{
 		N = vec_vec_sub_new(ray_at(r, t), &temp); // 단위 길이 벡터, 구성 요소는 -1~1 사이
-		vec_print(N);
 		vec_init(&res, N->x + 0.5, N->y + 0.5, N->z + 0.5); 
 		// color //why + 1?? 아 -1 부터 시작해서...
 		// color 4분할 -> 1을 더했을 경우. 

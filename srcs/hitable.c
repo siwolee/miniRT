@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/27 21:09:06 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/27 21:31:25 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,8 @@ t_bool		hit_sphere(t_ray *r, t_hit_record *rec, t_sphere *sphere)
 	temp = (- b - sqrt(discriminant)) / a;
 	if (r->t_min < temp && temp < r->t_max)
 		return (hit_record_init_sphere(rec, r, temp, radius));
-	temp = (- b + sqrt(discriminant)) / a;
-	if (temp > r->t_min && temp < r->t_max)
-		return (hit_record_init_sphere(rec, r, temp, radius));
+	// temp = (- b + sqrt(discriminant)) / a;
+	// if (temp > r->t_min && temp < r->t_max)
+	// 	return (hit_record_init_sphere(rec, r, temp, radius));
 	return (FALSE);
 }

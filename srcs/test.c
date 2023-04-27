@@ -9,6 +9,16 @@
 
 #define COLOR_VAL 1
 
+int key_hook(int keycode, t_mlx *mlx)
+{
+    if(keycode == 53)
+    {
+        mlx_destroy_window(mlx->mlx, mlx->win);
+        exit(0);
+    }
+    return (0);
+}
+
 //t_minmax 0.0/MAXFLOAT
 //현재 1. 1-1
 int ray_color(t_ray *r, t_hitable **world, int w, int h)
@@ -80,11 +90,14 @@ int main(int ac, char **av)
 	
 	//figure
 	t_sphere	sp0;
-	vec_init(&(sp0.point), 0, 0, -1.5);
-	sp0.dia = 1;
-	// t_sphere	sp1;
-	// vec_init(&(sp1.point), -0.5, 0, -1.2);
-	// sp1.dia = 1;
+	vec_init(&(sp0.point), 0.2, 0.2, -1.7);
+	sp0.dia = 1; //0.5 이하로 안 보임
+
+	//디아랑 z축에 문제 있음
+
+	t_sphere	sp1;
+	vec_init(&(sp1.point), 0, 0, -1.2);
+	sp1.dia = 5;
 
 	//hittable list - temporary test
 	t_hitable	**world;
@@ -94,10 +107,10 @@ int main(int ac, char **av)
 	*world = &a;
 	a.data = &sp0;
 	a.type = SPHERE;
-	a.next = NULL;
-	// b.data = &sp1;
-	// b.type = SPHERE;
-	// b.next = NULL;
+	a.next = &b;
+	b.data = &sp1;
+	b.type = SPHERE;
+	b.next = NULL;
 
 	//render
 	int j = 0;
@@ -124,6 +137,7 @@ int main(int ac, char **av)
 		j++;
 	}
 	mlx_put_image_to_window(app.mlx, app.win, app.img, 0, 0);
+	mlx_key_hook(app.win, key_hook, &app);
 	mlx_loop(app.mlx);
 }
 

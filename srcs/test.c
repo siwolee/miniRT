@@ -7,7 +7,7 @@
 #include "hitable.h"
 
 
-#define COLOR_VAL 0.5
+#define COLOR_VAL 1
 
 //t_minmax 0.0/MAXFLOAT
 //현재 1. 1-1
@@ -26,8 +26,8 @@ int ray_color(t_ray *r, t_hitable **world, int w, int h)
 		// vec_print(&res);
 		// printf("%f %f %f\n", rec.normal.x, rec.normal.y, rec.normal.z);
 		// vec_print(&res);
-		vec_init(&res, rec.normal.x + COLOR_VAL, rec.normal.y \
-			+ COLOR_VAL, rec.normal.z + COLOR_VAL);
+		vec_init(&res, (rec.normal.x + COLOR_VAL) * 0.5, (rec.normal.y \
+			+ COLOR_VAL) * 0.5, (rec.normal.z + COLOR_VAL) * 0.5);
 		// vec_print(&res);
 		// exit(1);
 		// vec_print(&res);
@@ -64,22 +64,23 @@ int main(int ac, char **av)
 	//mlx
 	t_mlx		app;
 	app.mlx = mlx_init();
-	app.win = mlx_new_window(app.mlx, 800, 600, "5.2.1");
+	app.win = mlx_new_window(app.mlx, image_width, image_height, "5.2.1");
 	app.img = mlx_new_image(app.mlx, image_width, image_height);
 	app.data = (int *)mlx_get_data_addr(app.img, &app.bpp, &app.size_l, &app.endian);
 	
 	//camera
-	float viewport_height = 2.0;
+	float viewport_height = 2.0; // 뷰포트의 높이
 	float viewport_width = aspect_ratio * viewport_height; //size
-	double focal_length = 1.0;
+	double focal_length = 1.0; // 뷰포트에서 직각으로 카메라까지의 거리
 
-	t_point		origin = {0, 0, 0};
-	t_point		horizontal = {viewport_width, 0, 0};
-	t_point		vertical = {0, viewport_height, 0};
-	t_vec		lower_left_corner = {viewport_width * (-0.5), viewport_height * (-0.5), focal_length * (-1.0)};
+	t_point		origin = {0, 0, 0}; //camera's origin
+	t_point		horizontal = {viewport_width, 0, 0}; //y = 2 * 16 / 9 >> 비율 안 지키면 카메라 모양 깨짐
+	t_point		vertical = {0, viewport_height, 0}; //x = 2.0
+	t_vec		lower_left_corner = {viewport_width * (-0.5), viewport_height * (-0.5), focal_length * (-1.0)}; 
+	
 	//figure
 	t_sphere	sp0;
-	vec_init(&(sp0.point), 0, 0, -1);
+	vec_init(&(sp0.point), 0, 0, -1.5);
 	sp0.dia = 1;
 	// t_sphere	sp1;
 	// vec_init(&(sp1.point), -0.5, 0, -1.2);
@@ -108,16 +109,14 @@ int main(int ac, char **av)
 		{
 			// ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
 			double w, h;
-			t_vec *temp;
+			t_vec direction;
 			w = (horizontal.x  * (double)i) / (image_width - 1);
 			h = (vertical.y * (double)j) / (image_height - 1);
-			temp = vec_init_new(w, h, 0);
-			vec_vec_add(temp, &lower_left_corner);
-			vec_vec_sub(temp, &origin);
-			ray_init_vec(&r, &origin, temp);
+			vec_init(&direction, w, h, 0);
+			vec_vec_add(&direction, &lower_left_corner);
+			vec_vec_sub(&direction, &origin);
+			ray_init_vec(&r, &origin, &direction);
 			int color = ray_color(&r, world, i, j);
-			free(temp);
-			temp = NULL;
 			// app.data[j * image_width + i] = mlx_get_color_value(app.mlx, color);
 			app.data[j * image_width + i] = color;
 			i++;

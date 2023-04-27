@@ -1,5 +1,9 @@
-make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/haecho/42/miniRT'
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/siwolee/minirt'
+make -C ./mlx
+cp mlx/libmlx.a ./
+ 
+make -C ./libft
 cc -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit srcs/*.c -fsanitize=address -g3 -o aa
-make: Leaving directory `/Users/haecho/42/miniRT'
+make: Leaving directory `/Users/siwolee/minirt'
  

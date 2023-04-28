@@ -288,10 +288,6 @@ double vec_dot(void *a, void *b)
 	return ((u->x * v->x) + (u->y * v->y) + (u->z * v->z));
 }
 
-<<<<<<< HEAD
-=======
-//벡터 좌표값 각각 제곱해서 더한 값
->>>>>>> 86bb8ae5666f1fed89cfd270da31a23a37bb95d8
 double vec_power(void *u)
 {
 	t_vec	*v;

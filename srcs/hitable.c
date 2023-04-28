@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/28 21:13:54 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/04/28 21:21:31 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,15 @@ int	cy_boundary(t_cylinder *cy, t_vec at_point)
 	return (1);
 }
 
-t_vec	get_cylinder_normal(t_cylinder *cy, t_vec at_point, double hit_height)
+t_vec	*get_cylinder_normal(t_cylinder *cy, t_vec at_point, double hit_height)
 {
-    t_point hit_center;
-    t_vec normal;
+    t_vec	*hit_center;
+    t_vec	 *normal;
 
-    hit_center = vec_add(&(cy->point), vec_mul(&(cy->vec), hit_height));
-    normal = vminus(at_point, hit_center);
+    hit_center = vec_vec_add(&(cy->point), vec_mul(&(cy->vec), hit_height));
+    normal = vec_vec_sub(&at_point, &hit_center);
 
-    return (vunit(normal));
+    return (vec_unit_vector(normal));
 }
 
 t_bool	hit_cylinder(t_ray *r, t_hit_record *rec, t_cylinder *cylinder)
@@ -164,7 +164,7 @@ t_bool	hit_cylinder(t_ray *r, t_hit_record *rec, t_cylinder *cylinder)
 			if (root < r->t_min || r->t_max < root)
 				return (FALSE);
 	}
-	if (!(hit_height = cy_boundary(cy, ray_at(r, root))))
+	if (!(hit_height = cy_boundary(cylinder, ray_at(r, root))))
 		return (FALSE);
 	rec->t = root; // 광선의 원점과 교점까지의 거리
 	rec->p = ray_at(r, root); //교점의 좌표
@@ -173,18 +173,29 @@ t_bool	hit_cylinder(t_ray *r, t_hit_record *rec, t_cylinder *cylinder)
 	return (TRUE);
 }
 
-int	hit_cylinder_cap(t_ray *ray, t_hit_record *rec, double height, t_cylinder *cy)
-{
-	double	rad = cy->dia / 2;
-	t_vec	circle_center = vec_add(cy->point, vec_mul(cy->dia, height));
-	float	root = vec_dot(vec_sub(circle_center, ray->origin), cy->dir) \
-	/ vec_dot(ray->direction, cy->vec);
-	float	diameter = vec_length(vec_sub(circle_center, ray_at(ray, root)));
-	if (fabs(r) < fabs(diameter))
-		return (0);
-	if (root < ray->t_min || ray->t_max < root)
-		return (0);
-	rec->t = root;
-	rec->p = ray_at(ray, root);
-	return (1);
-}
+// int	hit_cylinder_cap(t_ray *ray, t_hit_record *rec, double height, t_cylinder *cy)
+// {
+// 	double	rad = cy->dia / 2;
+// 	t_vec	circle_center = vec_add(cy->point, vec_mul(cy->dia, height));
+// 	float	root = vec_dot(vec_sub(circle_center, ray->origin), cy->dir) \
+// 	/ vec_dot(ray->direction, cy->vec);
+// 	float	diameter = vec_length(vec_sub(circle_center, ray_at(ray, root)));
+// 	if (fabs(r) < fabs(diameter))
+// 		return (0);
+// 	if (root < ray->t_min || ray->t_max < root)
+// 		return (0);
+// 	rec->t = root;
+// 	rec->p = ray_at(ray, root);
+// 	return (1);
+// }
+// t_bool      hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
+// {
+//     const t_cylinder *cy = cy_obj->element;
+//     int result;
+
+//     result = 0;
+//     result += hit_cylinder_cap(cy_obj, ray, rec, cy->height / 2);
+//     result += hit_cylinder_cap(cy_obj, ray, rec, -(cy->height / 2));
+//     result += hit_cylinder_side(cy_obj, ray, rec);
+//     return (result);
+// }

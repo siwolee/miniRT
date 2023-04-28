@@ -111,9 +111,14 @@ int main(int ac, char **av)
 
 
 	//figure
-	t_sphere	sp0;
-	vec_init(&(sp0.point), 0, 0, -2);
-	sp0.dia = 1; //0.5 이하로 안 보임
+	// t_sphere	sp0;
+	// vec_init(&(sp0.point), 0, 0, -2);
+	// sp0.dia = 1; //0.5 이하로 안 보임
+
+	t_cylinder	sp1;
+	vec_init(&(sp1.point), 0, 0, -2);
+	sp1.dia = 2;
+	vec_init(&(sp1.vec), 0, 0, -2);
 
 	//디아랑 z축에 문제 있음
 
@@ -124,12 +129,16 @@ int main(int ac, char **av)
 	//hittable list - temporary test
 	t_hitable	**world;
 	t_hitable	a;
-	t_hitable	b;
+	//t_hitable	b;
 	world = malloc(sizeof(t_hitable *));
 	*world = &a;
-	a.data = &sp0;
-	a.type = SPHERE;
+	a.data = &sp1;
+	a.type = CYLINDER;
 	a.next = NULL;
+	// *world = &a;
+	// a.data = &sp0;
+	// a.type = SPHERE;
+	// a.next = NULL;
 	// b.data = &sp1;
 	// b.type = SPHERE;
 	// b.next = NULL;

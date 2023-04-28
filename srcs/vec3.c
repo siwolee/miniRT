@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/24 21:19:26 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/04/28 20:33:26 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "vec3.h"
 
 void	vec_init(void *v, double a, double b, double c)
-{	
+{
 	t_vec	*vec;
 
 	vec = (t_vec *)v;
@@ -23,7 +23,7 @@ void	vec_init(void *v, double a, double b, double c)
 }
 
 void	*vec_init_new(double a, double b, double c)
-{	
+{
 	t_vec	*vec;
 
 	vec = malloc(sizeof(t_vec));
@@ -260,7 +260,7 @@ double vec_dot(void *a, void *b)
 	return ((u->x * v->x) + (u->y * v->y) + (u->z * v->z));
 }
 
-double vec_length_squared(void *u)
+double vec_power(void *u)
 {
 	t_vec	*v;
 
@@ -273,7 +273,7 @@ double	vec_length(void *a)
 	t_vec	*v;
 
 	v = (t_vec *)a;
-	return (sqrt(vec_length_squared(v)));
+	return (sqrt(vec_power(v)));
 }
 
 void	*vec_unit_vector(void *a)

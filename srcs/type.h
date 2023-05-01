@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/04/27 00:19:16 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/01 21:15:54 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 typedef int t_bool;
 
-enum 
+enum
 {
 	AMBIENT,
 	CAMERA,
@@ -43,24 +43,13 @@ typedef struct s_vec
 	double	z;
 }t_vec;
 
-typedef struct s_point
-{
-	double	x;
-	double	y;
-	double	z;
-}t_point;
-
-typedef struct s_color
-{
-	double	x;
-	double	y;
-	double	z;
-}t_color;
+typedef t_vec	t_point;
+typedef t_vec	t_color;
 
 typedef struct s_mlx
 {
 	void *mlx;
-	void *win; 
+	void *win;
 	void *img;
 	int	*data;
 	int bpp;

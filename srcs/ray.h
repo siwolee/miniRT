@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/17 13:00:01 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/25 17:31:19 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/01 21:28:16 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@
 # define T_MIN (-1.0)
 # define T_MAX (1.0)
 
-// t_min및 t_max는 -1 ~ 1 사이에 있다고 가정. 
+// t_min및 t_max는 -1 ~ 1 사이에 있다고 가정.
 // rgb값으로 변환시에 필요..
-typedef struct s_ray 
+typedef struct s_ray
 {
-	t_point	*origin;
-	t_vec	*direction;
+	t_point	origin;
+	t_vec	direction;
 	float	t_min;
 	float	t_max;
 }	t_ray;

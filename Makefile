@@ -12,7 +12,7 @@ CPPTEST = ./tt
 # SRCS = test.c vec3.c ray.c
 SRCS = srcs/*.c
 
-NAME = aa
+NAME = minirt
 
 all : $(NAME)
 
@@ -33,13 +33,13 @@ fclean :
 	rm $(NAME)
 
 re : fclean all
-	
+
 $(LIBMLX) :
 	@make -C ./mlx
 	cp mlx/libmlx.a ./
 
 $(LIBFT) :
 	@make -C ./libft
-	
+
 
 .PHONY : all re cpp fclean

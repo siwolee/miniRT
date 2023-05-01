@@ -3,17 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-<<<<<<< HEAD
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/28 20:33:26 by juhyulee         ###   ########.fr       */
-=======
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 16:04:35 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/28 21:12:57 by siwolee          ###   ########.fr       */
->>>>>>> 86bb8ae5666f1fed89cfd270da31a23a37bb95d8
+/*   Updated: 2023/05/01 14:59:57 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -305,7 +298,7 @@ double	vec_length(void *a)
 	return (sqrt(vec_power(v)));
 }
 
-//이건사실나도몰루 하래서 함...
+//이건사실나도몰루 하래서 함... <-단위벡터구하는거임
 void	*vec_unit_vector(void *a)
 {
 	t_vec	*v;

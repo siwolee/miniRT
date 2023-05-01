@@ -6,12 +6,14 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:42:44 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/28 21:21:31 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:07:13 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "hitable.h"
 #include "vec3.h"
+
+t_bool	hit_cylinder(t_ray *r, t_hit_record *rec, t_cylinder *cylinder);
 
 //물체들을 돌면서 맞았는지 아닌지 판별하는 함수. 결과값은 rec에 저장
 t_bool	hit(t_hitable *node, t_ray *r, t_hit_record *rec)
@@ -61,10 +63,10 @@ t_bool	hit_whatever(t_hitable *node, t_hit_record *rec, t_ray *r)
 	{
 		return (hit_sphere(r, rec, node->data));
 	}
-// 	else if (node->type == CYLINDER)
-// 	{
-// 		return (hit_cylinder(r, t_min, t_max, rec, node->data));
-// 	}
+	else if (node->type == CYLINDER)
+	{
+		return (hit_cylinder(r, rec, node->data));
+	}
 	return (FALSE);
 }
 
@@ -113,7 +115,7 @@ int	cy_boundary(t_cylinder *cy, t_vec at_point)
 	double	hit_height;
 	double	max_height;
 
-	hit_height = vdot(vminus(at_point, cy->point), cy->vec);
+	hit_height = vec_dot(vec_vec_sub(&at_point, &cy->point), &cy->vec);
 	max_height = cy->height / 2;
 	if (fabs(hit_height) > max_height)
 		return (0);
@@ -164,12 +166,6 @@ t_bool	hit_cylinder(t_ray *r, t_hit_record *rec, t_cylinder *cylinder)
 			if (root < r->t_min || r->t_max < root)
 				return (FALSE);
 	}
-	if (!(hit_height = cy_boundary(cylinder, ray_at(r, root))))
-		return (FALSE);
-	rec->t = root; // 광선의 원점과 교점까지의 거리
-	rec->p = ray_at(r, root); //교점의 좌표
-	rec->normal = get_cylinder_normal(cylinder, rec->p, hit_height);
-	set_face_normal(r, rec);
 	return (TRUE);
 }
 

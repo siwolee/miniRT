@@ -91,11 +91,11 @@ int main(int ac, char **av)
 	float viewport_width = aspect_ratio * viewport_height; //size
 	double focal_length = 1.0; // 뷰포트에서 직각으로 카메라까지의 거리
 
-	t_point		origin = {0, 0, 0}; //camera's origin
+	t_point		origin = {2, 2, 2}; //camera's origin
 	t_point		horizontal = {viewport_width, 0, 0}; //y = 2 * 16 / 9 >> 비율 안 지키면 카메라 모양 깨짐
 	t_point		vertical = {0, viewport_height, 0}; //x = 2.0
 	// t_vec		lower_left_corner = {0 - viewport_width * (0.5), 0 - viewport_height * (0.5), 0 - focal_length};
-	t_vec		lower_left_corner = {0,0,0};//origin으로 init
+	t_vec		lower_left_corner = {1, 1, 1};//origin으로 init
 	t_vec		temp;
 
 	vec_init(&temp, horizontal.x * 0.5, horizontal.y * 0.5, horizontal.z * 0.5);

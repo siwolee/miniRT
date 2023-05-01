@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vec3.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:35:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/04/25 16:44:46 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/01 15:08:13 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	*vec_add_new(void *u, double b);
 void	vec_init(void *v, double a, double b, double c);
 void	*vec_init_new(double a, double b, double c);
 
+double	vec_length(void *a);
 double	vec_length_squared(void *a);
 double	vec_dot(void *a, void *b);
 void	*vec_cross(void *a, void *b);

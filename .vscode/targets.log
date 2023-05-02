@@ -6,9 +6,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # PARTICULAR PURPOSE.
 
 # This program built for i386-apple-darwin11.3.0
- 
 
-# Make data base, printed on Mon May  1 21:00:38 2023
+# Make data base, printed on Tue May  2 18:07:32 2023
 
 # Variables
 
@@ -16,9 +15,6 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# environment
-VSCODE_LOG_NATIVE = false
- 
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # makefile (from `Makefile', line 9)
@@ -39,10 +35,6 @@ _ = /usr/bin/make
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 4)
 MFLAG = -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit
-# environment
-VSCODE_VERBOSE_LOGGING = true
-# environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cv240036rj/T/vscode-ipc-0ed4a0dc-31bb-4900-9584-9625f72ba031.sock
 # makefile (from `Makefile', line 8)
 CPP = clang++
 # environment
@@ -52,7 +44,7 @@ PATH = /Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bi
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-VSCODE_LOG_STACK = false
+LaunchInstanceID = D8C18367-817F-4FC6-9C07-FE88A1E92EA0
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
@@ -62,11 +54,9 @@ LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:
 # makefile (from `Makefile', line 1)
 LIBMLX = ./mlx/libmlx.a
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.iBs3a6b1uo/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.HDRRlkVaOw/Listeners
 # automatic
 %F = $(notdir $%)
-# environment
-VSCODE_PIPE_LOGGING = true
 # environment
 PWD = /Users/siwolee/minirt
 # makefile (from `Makefile', line 6)
@@ -80,7 +70,7 @@ HOME = /Users/siwolee
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/siwolee/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = /Users/siwolee/Library/Application Support/Code/CachedData/97dec172d3256f8ca4bfb2143f3f76b503ca0534
 # environment
 LOGNAME = siwolee
 # environment
@@ -108,7 +98,7 @@ USER = siwolee
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 15)
-NAME = aa
+NAME = minirt
 # environment
 LESS = -R
 # automatic
@@ -122,7 +112,9 @@ TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cv240036rj/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/siwolee/Library/Application Support/Code/1.67.2-main.sock
+VSCODE_IPC_HOOK = /Users/siwolee/Library/Application Support/Code/1.74.3-main.sock
+# environment
+MallocNanoZone = 0
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -130,13 +122,15 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.1140
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
 __CF_USER_TEXT_ENCODING = 0x19B11:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
@@ -144,12 +138,13 @@ MAKEFILES :=
 # environment
 EDITOR = /usr/bin/vim
 # environment
- 
 PAGER = less
 # environment
 LC_ALL = C
 # makefile (from `Makefile', line 7)
 CPP_INCS = cpp/*.hpp
+# environment
+SECURITYSESSIONID = 186a6
 # automatic
 ^F = $(notdir $^)
 # default
@@ -163,9 +158,9 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 17213
+VSCODE_PID = 1062
 # variable set hash-table stats:
-# Load=75/1024=7%, Rehash=0, Collisions=2/115=2%
+# Load=74/1024=7%, Rehash=0, Collisions=2/114=2%
 
 # Pattern-specific Variable Values
 
@@ -173,10 +168,10 @@ VSCODE_PID = 17213
 
 # Directories
 
-# . (device 16777225, inode 1776659): 18 files, no impossibilities.
-# srcs (device 16777225, inode 1895946): 13 files, no impossibilities.
+# . (device 16777225, inode 1776659): 21 files, no impossibilities.
+# srcs (device 16777225, inode 1895946): 12 files, no impossibilities.
 
-# 31 files, no impossibilities in 2 directories.
+# 33 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
@@ -184,7 +179,7 @@ VSCODE_PID = 17213
 
 # Files
 
-all: aa
+all: minirt
 #  Phony target (prerequisite of .PHONY).
 #  Command-line target.
 #  Implicit rule search has not been done.
@@ -193,6 +188,15 @@ all: aa
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+
+# Not a target:
+srcs/file_error.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-02 13:14:12
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 .PHONY: all re cpp fclean
 #  Implicit rule search has not been done.
@@ -208,39 +212,20 @@ all: aa
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-04-27 17:09:02
+#  Last modified 2023-05-01 21:16:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-aa: mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c libft/libft.a
-#  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
-#  File does not exist.
+# Not a target:
+srcs/main.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-02 16:48:32
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := aa
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c libft/libft.a
-# automatic
-# | := 
-# automatic
-# < := mlx/libmlx.a
-# automatic
-# ^ := mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c libft/libft.a
-# automatic
-# ? := mlx/libmlx.a srcs/hitable.c srcs/ray.c srcs/test.c srcs/type.c srcs/vec3.c libft/libft.a
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=3/14=21%
-#  commands to execute (from `Makefile', line 20):
-	$(CC) $(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
-	
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 cpp: tt
 #  Phony target (prerequisite of .PHONY).
@@ -265,15 +250,6 @@ libft/libft.a:
 	@make -C ./libft
 	
 
-# Not a target:
-srcs/ray.c:
-#  Implicit rule search has been done.
-#  Last modified 2023-04-25 17:30:31
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
 fclean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
@@ -282,15 +258,6 @@ fclean:
 #  commands to execute (from `Makefile', line 33):
 	rm $(NAME)
 	
-
-# Not a target:
-srcs/test.c:
-#  Implicit rule search has been done.
-#  Last modified 2023-04-27 21:38:39
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -313,22 +280,49 @@ re: fclean all
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 36):
-	
 
 # Not a target:
-srcs/vec3.c:
+srcs/parse.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-04-24 21:19:26
+#  Last modified 2023-05-01 21:24:40
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+minirt: mlx/libmlx.a srcs/file_error.c srcs/main.c srcs/parse.c srcs/vec3_new.c libft/libft.a
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  Last modified 2023-05-01 21:16:19
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := minirt
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := mlx/libmlx.a srcs/file_error.c srcs/main.c srcs/parse.c srcs/vec3_new.c libft/libft.a
+# automatic
+# | := 
+# automatic
+# < := mlx/libmlx.a
+# automatic
+# ^ := mlx/libmlx.a srcs/file_error.c srcs/main.c srcs/parse.c srcs/vec3_new.c libft/libft.a
+# automatic
+ 
+# ? := srcs/file_error.c srcs/main.c srcs/parse.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=3/14=21%
+#  commands to execute (from `Makefile', line 20):
+	$(CC) $(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
+	
+
 # Not a target:
-srcs/type.c:
+srcs/vec3_new.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-04-27 17:09:02
+#  Last modified 2023-05-01 21:16:19
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -342,17 +336,8 @@ tt:
 	$(CPP) $(CPP_SRCS) $(CPPFLAGS) -o $(CPPTEST)
 	
 
-# Not a target:
-srcs/hitable.c:
-#  Implicit rule search has been done.
-#  Last modified 2023-04-27 21:31:25
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
 # files hash-table stats:
-# Load=18/1024=2%, Rehash=0, Collisions=0/48=0%
+# Load=17/1024=2%, Rehash=0, Collisions=0/46=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -364,6 +349,6 @@ srcs/hitable.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon May  1 21:00:38 2023
+# Finished Make data base on Tue May  2 18:07:32 2023
 
  

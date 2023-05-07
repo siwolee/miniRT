@@ -4,6 +4,6 @@ make -C ./mlx
 cp mlx/libmlx.a ./
  
 make -C ./libft
-cc -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit srcs/*.c -fsanitize=address -g3 -o aa
+cc -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit srcs/*.c -fsanitize=address -g3 -o minirt
 make: Leaving directory `/Users/siwolee/minirt'
  

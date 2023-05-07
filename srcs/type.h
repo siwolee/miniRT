@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   type.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/01 21:15:54 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:22:42 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_mlx
 	int bpp;
 	int size_l;
 	int endian;
-	// int color[3];
 }	t_mlx;
 
 typedef struct s_ambient

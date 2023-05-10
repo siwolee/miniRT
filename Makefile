@@ -1,45 +1,54 @@
-LIBMLX = ./mlx/libmlx.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
+#    Updated: 2023/05/08 19:47:42 by juhyulee         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+SRCS = ./srcs/main.c \
+		./srcs/vecter.c \
+		./srcs/camera.c \
+		./srcs/ray.c \
+		./srcs/sphere.c \
+		./srcs/object.c \
+		./srcs/phong.c \
+		./srcs/plane.c \
+		./srcs/cylinder.c
+OBJS = $(SRCS:.c=.o)
+LMLX = -L./mlx -lmlx -framework OpenGL -framework Appkit
+
 LIBFT = ./libft/libft.a
+HEADER = -I./header
+NAME = miniRT
+CC = cc
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
+RM = rm -f
 
-MFLAG = -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit
+all : 		$(NAME)
 
-CPP_SRCS = cpp/*.cpp
-CPP_INCS = cpp/*.hpp
-CPP = clang++
-CPPFLAGS = -std=c++11
-CPPTEST = ./tt
+$(NAME) :	$(OBJS) $(LIBFT)
+			$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX) \
+			$(SRCS) -o $(NAME)
 
-# SRCS = test.c vec3.c ray.c
-SRCS = srcs/*.c
-
-NAME = minirt
-
-all : $(NAME)
-
-$(NAME) : $(LIBMLX) $(SRCS) $(LIBFT)
-	$(CC) $(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
-
-ex : $(LIBMLX)
-	$(CC) $(MFLAG) ex.c -fsanitize=address -g3 -o $(NAME)
-
-
-cpp : $(CPPTEST)
-
-$(CPPTEST) :
-	$(CPP) $(CPP_SRCS) $(CPPFLAGS) -o $(CPPTEST)
-
-
-fclean :
-	rm $(NAME)
-
-re : fclean all
-
-$(LIBMLX) :
-	@make -C ./mlx
-	cp mlx/libmlx.a ./
+%.o : %.c
+			$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 
 $(LIBFT) :
-	@make -C ./libft
+			make -C ./libft
 
+clean :
+			make -C ./libft fclean
+			$(RM) $(OBJS)
 
-.PHONY : all re cpp fclean
+fclean :	clean
+			rm -rf miniRT.dSYM
+			$(RM) $(NAME)
+
+re :		fclean all
+
+.PHONY : all clean fclean re bonus

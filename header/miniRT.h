@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/08 19:44:58 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/13 19:58:29 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # define FALSE 0
 
 typedef int	t_object_type;
+
 # define SP 0
 # define LIGHT_POINT 1
 # define PL 2
@@ -44,6 +45,18 @@ typedef struct s_vec
 
 typedef t_vec	t_point;
 typedef t_vec	t_color;
+
+typedef struct s_mlx
+{
+	void	*mlx;
+	void	*win;
+	void	*img;
+	int		*data;
+	int		line_length;
+	int 	size_l;
+	int 	endian;
+}	t_mlx;
+
 
 typedef struct s_ambient
 {
@@ -136,6 +149,8 @@ typedef struct	s_scene
 	t_color		ambient;
 	t_ray		ray;
 	t_hit_record	rec;
+	int			canvas_height;//추가 05.10
+	int			canvas_width;//추가 05.10 by sw
 }		t_scene;
 
 //vecter

@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Wed May 10 16:53:45 2023
+# Make data base, printed on Sat May 13 19:32:10 2023
 
 # Variables
 
@@ -17,9 +17,8 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 ?F = $(notdir $?)
 # automatic
+ 
 ?D = $(patsubst %/,%,$(dir $?))
-# makefile (from `Makefile', line 9)
-CPPFLAGS = -std=c++11
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
@@ -28,17 +27,20 @@ CPPFLAGS = -std=c++11
 CURDIR := /Users/siwolee/minirt
 # makefile
 SHELL = /bin/sh
+# makefile (from `Makefile', line 30)
+RM = rm -f
 # environment
- 
 VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from `Makefile', line 23)
+LMLX = -L./mlx -lmlx -framework OpenGL -framework Appkit
 # environment
 _ = /usr/bin/make
+# makefile (from `Makefile', line 29)
+CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 4)
-MFLAG = -Lmlx -lmlx -Llibft -lft -framework OpenGL -framework AppKit
-# makefile (from `Makefile', line 8)
-CPP = clang++
+# makefile (from `Makefile', line 22)
+OBJS = $(SRCS:.c=.o)
 # environment
 VSCODE_CWD = /
 # environment
@@ -46,23 +48,19 @@ PATH = /Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bi
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-LaunchInstanceID = 22420BC1-EF43-4A9C-B3BD-BDC970836480
+LaunchInstanceID = CC9399A1-3940-4D3F-8EFB-CA795B5BAD96
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
 LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
-# makefile (from `Makefile', line 1)
-LIBMLX = ./mlx/libmlx.a
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.0pTqZQjJFq/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.ft0OR4aKWD/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 PWD = /Users/siwolee/minirt
-# makefile (from `Makefile', line 6)
-CPP_SRCS = cpp/*.cpp
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
@@ -88,19 +86,21 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from `Makefile', line 13)
-SRCS = srcs/*.c
+SRCS = ./srcs/main.c ./srcs/vecter.c ./srcs/camera.c ./srcs/ray.c ./srcs/sphere.c ./srcs/object.c ./srcs/phong.c ./srcs/plane.c ./srcs/cylinder.c
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 2)
+# makefile (from `Makefile', line 25)
 LIBFT = ./libft/libft.a
+# makefile (from `Makefile', line 28)
+CC = cc
 # default
 MAKE_VERSION := 3.81
 # environment
 USER = siwolee
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 15)
-NAME = minirt
+# makefile (from `Makefile', line 27)
+NAME = miniRT
 # environment
 LESS = -R
 # automatic
@@ -124,7 +124,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -143,8 +143,8 @@ EDITOR = /usr/bin/vim
 PAGER = less
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 7)
-CPP_INCS = cpp/*.hpp
+# makefile (from `Makefile', line 26)
+HEADER = -I./header
 # environment
 SECURITYSESSIONID = 186a6
 # automatic
@@ -153,16 +153,14 @@ SECURITYSESSIONID = 186a6
 SUFFIXES := 
 # default
 .INCLUDE_DIRS = /usr/local/include
-# makefile (from `Makefile', line 10)
-CPPTEST = ./tt
 # environment
 MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 1272
+VSCODE_PID = 5691
 # variable set hash-table stats:
-# Load=74/1024=7%, Rehash=0, Collisions=2/114=2%
+# Load=73/1024=7%, Rehash=0, Collisions=4/103=4%
 
 # Pattern-specific Variable Values
 
@@ -170,40 +168,90 @@ VSCODE_PID = 1272
 
 # Directories
 
-# . (device 16777225, inode 1776659): 23 files, no impossibilities.
-# srcs (device 16777225, inode 1895946): 14 files, no impossibilities.
+# . (device 16777225, inode 1776659): 13 files, no impossibilities.
+# srcs (device 16777225, inode 1949580): 19 files, no impossibilities so far.
 
-# 37 files, no impossibilities in 2 directories.
+# 32 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
-# No implicit rules.
+%.o: %.c
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
 
-all: minirt
+srcs/phong.o: srcs/phong.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/phong'
+#  Last modified 2023-05-13 17:07:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+all: miniRT
 #  Phony target (prerequisite of .PHONY).
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/6=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+srcs/ray.o: srcs/ray.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/ray'
+#  Last modified 2023-05-13 17:07:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+.PHONY: all clean fclean re bonus
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
-srcs/file_error.c:
+srcs/camera.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-07 18:12:34
+#  Last modified 2023-05-10 17:37:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-.PHONY: all re cpp fclean
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+srcs/vecter.o: srcs/vecter.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/vecter'
+#  Last modified 2023-05-13 17:07:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+# Not a target:
+srcs/sphere.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-10 17:37:38
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .SUFFIXES:
@@ -214,16 +262,28 @@ srcs/file_error.c:
 # Not a target:
 srcs/plane.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-07 18:12:38
+#  Last modified 2023-05-10 17:37:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
+miniRT: srcs/main.o srcs/vecter.o srcs/camera.o srcs/ray.o srcs/sphere.o srcs/object.o srcs/phong.o srcs/plane.o srcs/cylinder.o libft/libft.a
+#  Implicit rule search has not been done.
+#  Last modified 2023-05-13 17:40:07
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 35):
+	$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX) \
+	$(SRCS) -o $(NAME)
+	
+
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-01 21:16:19
+#  Last modified 2023-05-13 17:07:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -232,44 +292,88 @@ Makefile:
 # Not a target:
 srcs/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-07 18:12:34
+#  Last modified 2023-05-13 17:40:05
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-cpp: tt
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-
-ex: mlx/libmlx.a
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 23):
-	$(CC) $(MFLAG) ex.c -fsanitize=address -g3 -o $(NAME)
+srcs/object.o: srcs/object.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/object'
+#  Last modified 2023-05-13 17:07:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
+
+srcs/cylinder.o: srcs/cylinder.c
  
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/cylinder'
+#  Last modified 2023-05-13 17:07:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+# Not a target:
+srcs/phong.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-10 17:37:38
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Last modified 2023-04-27 17:56:35
+#  Last modified 2023-05-13 17:07:44
 #  File has been updated.
 #  Successfully updated.
 #  commands to execute (from `Makefile', line 42):
-	@make -C ./libft
+	make -C ./libft
 	
 
-fclean:
+bonus:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 33):
-	rm $(NAME)
+
+# Not a target:
+srcs/ray.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-10 17:37:38
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 49):
+	rm -rf miniRT.dSYM
+	$(RM) $(NAME)
 	
+
+# Not a target:
+srcs/vecter.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-10 17:37:38
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .DEFAULT:
@@ -277,15 +381,14 @@ fclean:
 #  Modification time never checked.
 #  File has not been updated.
 
-mlx/libmlx.a:
-#  Implicit rule search has not been done.
-#  Last modified 2023-04-27 17:56:43
+# Not a target:
+srcs/object.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-10 17:37:38
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 38):
-	@make -C ./mlx
-	cp mlx/libmlx.a ./
-	
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -296,68 +399,72 @@ re: fclean all
 # Not a target:
 srcs/cylinder.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-07 18:12:38
+#  Last modified 2023-05-10 17:37:38
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-srcs/parse.c:
-#  Implicit rule search has been done.
-#  Last modified 2023-05-07 18:12:34
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-minirt: mlx/libmlx.a srcs/cylinder.c srcs/file_error.c srcs/main.c srcs/parse.c srcs/plane.c srcs/vec3_new.c libft/libft.a
+clean:
+#  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
-#  Implicit/static pattern stem: `'
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := minirt
-# automatic
-# % := 
-# automatic
-# * := 
-# automatic
-# + := mlx/libmlx.a srcs/cylinder.c srcs/file_error.c srcs/main.c srcs/parse.c srcs/plane.c srcs/vec3_new.c libft/libft.a
-# automatic
-# | := 
-# automatic
-# < := mlx/libmlx.a
-# automatic
-# ^ := mlx/libmlx.a srcs/cylinder.c srcs/file_error.c srcs/main.c srcs/parse.c srcs/plane.c srcs/vec3_new.c libft/libft.a
-# automatic
-# ? := mlx/libmlx.a srcs/cylinder.c srcs/file_error.c srcs/main.c srcs/parse.c srcs/plane.c srcs/vec3_new.c libft/libft.a
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=3/14=21%
-#  commands to execute (from `Makefile', line 20):
-	$(CC) $(MFLAG) $(SRCS) -fsanitize=address -g3 -o $(NAME)
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 45):
+	make -C ./libft fclean
+	$(RM) $(OBJS)
 	
 
-# Not a target:
-srcs/vec3_new.c:
+srcs/camera.o: srcs/camera.c
 #  Implicit rule search has been done.
-#  Last modified 2023-05-10 16:05:59
+#  Implicit/static pattern stem: `srcs/camera'
+#  Last modified 2023-05-13 17:07:42
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
 
-tt:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 29):
-	$(CPP) $(CPP_SRCS) $(CPPFLAGS) -o $(CPPTEST)
+srcs/sphere.o: srcs/sphere.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/sphere'
+#  Last modified 2023-05-13 17:07:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+srcs/plane.o: srcs/plane.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/plane'
+#  Last modified 2023-05-13 17:07:42
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+srcs/main.o: srcs/main.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/main'
+#  Last modified 2023-05-13 17:40:07
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 39):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # files hash-table stats:
-# Load=19/1024=2%, Rehash=0, Collisions=0/50=0%
+# Load=29/1024=3%, Rehash=0, Collisions=0/88=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -369,6 +476,6 @@ tt:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed May 10 16:53:45 2023
+# Finished Make data base on Sat May 13 19:32:10 2023
 
  

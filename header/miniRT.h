@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: haecho <haecho@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/13 19:58:29 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/14 15:04:20 by haecho           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,15 @@
 
 # define TRUE 1
 # define FALSE 0
+
+enum error_code
+{
+	ERROR_NO_INPUT,
+	ERROR_CANNOT_OPEN_FILE,
+	ERROR_FILE_TYPE,
+	ERROR_PARSE,
+	ERROR_NO_ELEMENT
+};
 
 typedef int	t_object_type;
 

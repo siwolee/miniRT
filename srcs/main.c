@@ -6,7 +6,7 @@
 /*   By: haecho <haecho@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/14 12:59:09 by haecho           ###   ########.fr       */
+/*   Updated: 2023/05/14 14:46:13 by haecho           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_vars
 	void	*mlx;
 	void	*win;
 	t_data	image;
-}t_vars;
+}	t_vars;
 
 int	create_trgb(int t, int r, int g, int b)
 {
@@ -117,75 +117,76 @@ void	ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image)
 	&image->line_length, &image->endian);
 }
 
-// void	exit_error(int code)
-// {
-// 	if (code == 1)
-// 	{
-// 		printf("no file input\n");
-// 	}
-// 	else if (code == 2)
-// 		printf("too many arguments\n");
-// 	else if (code == 3)
-// 		printf("cannot open file\n");
+void	exit_error(int code)
+{
+	if (code == 1)
+	{
+		printf("no file input\n");
+	}
+	else if (code == 2)
+		printf("too many arguments\n");
+	else if (code == 3)
+		printf("cannot open file\n");
 
-// 	exit(1);
-// }
+	exit(1);
+}
 
-// int file_check(int ac, char **av)
-// {
-// 	// int 	fd;
-// 	// if (ac != 2)
-// 	// {
-// 	// 	exit_error(1);
-// 	// }
-// 	// fd = open(av[1], O_RDONLY);
-// 	// if (fd == -1)
-// 	// {
-// 	// 	exit_error(2);
-// 	// }
-// 	// return (fd);
+int file_check(int ac, char **av)
+{
+	// int 	fd;
+	// if (ac != 2)
+	// {
+	// 	exit_error(NO_INPUT);
+	// }
+	// fd = open(av[1], O_RDONLY);
+	// if (fd == -1)
+	// {
+	// 	exit_error(2);
+	// }
+	// return (fd);
 	
-// 	av[ac - 1] = 0;
-// 	printf("not doing input file right now\n");
-// 	return (1);
-// }
+	av[ac - 1] = 0;
+	printf("not doing input file right now\n");
+	return (1);
+}
 
-//controling key in keyboard
-// int	key_press(int keycode, t_mlx *mlx)
-// {
-// 	if (keycode == 13)
-// 		printf("W\n");
-// 	else if (keycode == 1)
-// 		printf("S\n");
-// 	else if (keycode == 0)
-// 		printf("A\n");
-// 	else if (keycode == 2)
-// 		printf("D\n");
-// 	else if (keycode == 53)
-// 	{
-// 		mlx_destroy_window(mlx->mlx, mlx->win);
-// 		exit(0);
-// 	}
-// 	return (0);
-// }
-
-
-
+// controling key in keyboard
+int	key_press(int keycode, t_mlx *mlx)
+{
+	if (keycode == 13)
+		printf("W\n");
+	else if (keycode == 1)
+		printf("S\n");
+	else if (keycode == 0)
+		printf("A\n");
+	else if (keycode == 2)
+		printf("D\n");
+	else if (keycode == 53)
+	{
+		mlx_destroy_window(mlx->mlx, mlx->win);
+		exit(0);
+	}
+	return (0);
+}
 
 // //norminated version
-// int	main(int ac, char **av)
-int	main(void)
+int	main(int ac, char **av)
+// int	main(void)
 {
 	t_vars		vars;
 	t_data		image;
 	t_scene		scene;
+	int			fd;
 
+
+	fd = file_check(ac, av);
+	printf("%d\n", fd);
 	scene = temp_init();
 
 	ft_init_mlx(&vars, &scene, &image);
 	ft_draw(&scene, &image);
 	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
-	mlx_key_hook(vars.win, key_hook, &vars);
+	mlx_key_hook(vars.win, key_press, &vars);
 	mlx_loop(vars.mlx);
     return (0);
 }

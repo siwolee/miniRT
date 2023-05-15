@@ -1,7 +1,18 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/siwolee/minirt'
-cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/parse.c -o srcs/parse.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/main.c -o srcs/main.o
  
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/vecter.c -o srcs/vecter.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/camera.c -o srcs/camera.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/ray.c -o srcs/ray.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/sphere.c -o srcs/sphere.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/object.c -o srcs/object.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/phong.c -o srcs/phong.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/plane.c -o srcs/plane.o
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/cylinder.c -o srcs/cylinder.o
+ 
+cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address -c srcs/parse.c -o srcs/parse.o
+make -C ./libft
 cc -I./header -Wall -Wextra -Werror -g3 -fsanitize=address ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework Appkit \
 			./srcs/main.c ./srcs/vecter.c ./srcs/camera.c ./srcs/ray.c ./srcs/sphere.c ./srcs/object.c ./srcs/phong.c ./srcs/plane.c ./srcs/cylinder.c ./srcs/parse.c  -o miniRT
 make: Leaving directory `/Users/siwolee/minirt'

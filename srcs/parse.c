@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/15 17:51:27 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/15 20:19:58 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,9 @@ t_vec	parse_vec(char **split)
 
 	if (!split[0] || !split[1] || !split[2] || split[3])
 		exit_error(ERROR_PARSE);
-	temp.x = ft_atod(split[0]);
-	temp.y = ft_atod(split[1]);
-	temp.z = ft_atod(split[2]);
+	temp.x = db_atoi(split[0]);
+	temp.y = db_atoi(split[1]);
+	temp.z = db_atoi(split[2]);
 	return (temp);
 }
 
@@ -153,7 +153,10 @@ char *valid_parse_vec(char *str)
 		temp++;
 	}
 	if (cnt != 2)
+	{
+		printf("error on %s \n",str);
 		exit_error(ERROR_PARSE);
+	}
 	return (str);
 }
 
@@ -171,29 +174,53 @@ void	free_split(char **split)
 	free(split);
 }
 
-void	input_camera(t_scene *scene, char *str)
+void	input_sphere(t_scene *scene, char *str)
 {
-	t_camera	*temp;
-	char		**split;
-	char		**split2;
-	char		**split3;
+	char	**split;
+	char	**temp_center;
+	double	temp_dia;
+	char	**temp_color;
 
 	split = ft_split(str, ' ');
-	split2 = ft_split(split[1], ',');
-	split3 = ft_split(split[2], ',');
-	if (!(scene->cam))
-	{
-		scene->cam = (t_camera *)malloc(sizeof(t_camera));
-		scene->cam->point.x = db_atoi(split2[0]);
-		scene->cam->point.y = db_atoi(split2[1]);
-		scene->cam->point.z = db_atoi(split2[2]);
-		scene->cam->vec.x = db_atoi(split3[0]);
-		scene->cam->vec.y = db_atoi(split3[1]);
-		scene->cam->vec.z = db_atoi(split3[2]);
-		scene->cam->fov = ft_atod(split[3]);
-		scene->cam->next = NULL;
-	}
+	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
+		exit_error(ERROR_PARSE);
+	temp_center = ft_split(valid_parse_vec(split[1]), ',');
+	temp_dia = db_atoi(split[2]);
+	temp_color = ft_split(valid_parse_vec(split[3]), ',');
+	if (!scene->world)
+		scene->world = object(SP, sphere(parse_vec(temp_center), \
+		temp_dia), parse_vec_normalize_color(temp_color));
+	else
+		oadd(&scene->world, object(SP, sphere(parse_vec(temp_center), \
+		temp_dia), parse_vec_normalize_color(temp_color)));
+	free_split(temp_center);
+	free_split(temp_color);
+	free_split(split);
 }
+
+// void	input_camera(t_scene *scene, char *str)
+// {
+// 	t_camera	*temp;
+// 	char		**split;
+// 	char		**split2;
+// 	char		**split3;
+
+// 	split = ft_split(str, ' ');
+// 	split2 = ft_split(split[1], ',');
+// 	split3 = ft_split(split[2], ',');
+// 	if (!(scene->cam))
+// 	{
+// 		scene->cam = (t_camera *)malloc(sizeof(t_camera));
+// 		scene->cam->point.x = db_atoi(split2[0]);
+// 		scene->cam->point.y = db_atoi(split2[1]);
+// 		scene->cam->point.z = db_atoi(split2[2]);
+// 		scene->cam->vec.x = db_atoi(split3[0]);
+// 		scene->cam->vec.y = db_atoi(split3[1]);
+// 		scene->cam->vec.z = db_atoi(split3[2]);
+// 		scene->cam->fov = ft_atod(split[3]);
+// 		scene->cam->next = NULL;
+// 	}
+// }
 
 //진행중 _ 왜 xyz에서 db atoi쓰는지? 모르겠는데 일단 parse_vec(ft_atoi사용)으로 처리
 //만약 따로 이유 있을 경우 parse_vec에 함수포인터 받아서 바꾸면 될듯
@@ -235,10 +262,10 @@ void	input_plane(t_scene *scene, char *str)
 	else
 		oadd(&scene->world, object(PL, plane(parse_vec(temp_center), \
 		parse_vec(temp_dir)), parse_vec(temp_color)));
-	free_split(split);
 	free_split(temp_center);
 	free_split(temp_dir);
 	free_split(temp_color);
+	free_split(split);
 }
 
 //check id in front of string, and get code
@@ -252,8 +279,8 @@ void	id_check(t_scene *scene, char *str)
 	// 	input_light(scene, str);
 	if (ft_strncmp(str, "pl", 2) == 0)
 		input_plane(scene, str);
-	// else if (ft_strncmp(str, "sp", 2) == 0)
-	// 	input_sphere(scene, str);
+	else if (ft_strncmp(str, "sp", 2) == 0)
+		input_sphere(scene, str);
 	// else if (ft_strncmp(str, "cy", 2) == 0)
 	// 	input_cylinder(scene, str);
 	else

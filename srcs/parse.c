@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haecho <haecho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/14 15:07:57 by haecho           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:51:27 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,90 +118,6 @@ void	convert_space(char *c)
 	}
 }
 
-void	input_cylinder(t_scene *scene, char *str)
-{
-	t_cylinder	*temp;
-	char		**split;
-	char		**split2;
-	char		**split3;
-	char		**split4;
-
-	split = ft_split(str, ' ');
-	split2 = ft_split(split[1], ',');
-	split3 = ft_split(split[2], ',');
-	split4 = ft_split(split[5], ',');
-	if (!(scene->cylinder))
-	{
-		scene->cylinder = (t_cylinder *)malloc(sizeof(t_cylinder));
-		scene->cylinder->point.x = ft_atod(split2[0]);
-		scene->cylinder->point.y = ft_atod(split2[1]);
-		scene->cylinder->point.z = ft_atod(split2[2]);
-		scene->cylinder->vec.x = ft_atod(split3[0]);
-		scene->cylinder->vec.y = ft_atod(split3[1]);
-		scene->cylinder->vec.z = ft_atod(split3[2]);
-		scene->cylinder->dia = ft_atod(split[3]);
-		scene->cylinder->height = ft_atod(split[4]);
-		scene->cylinder->color.x = ft_atod(split4[0]);
-		scene->cylinder->color.y = ft_atod(split4[1]);
-		scene->cylinder->color.z = ft_atod(split4[2]);
-	}
-	else
-	{
-		while (scene->cylinder->next)
-			scene->cylinder = scene->cylinder->next;
-		temp = (t_cylinder *)malloc(sizeof(t_cylinder));
-		temp->point.x = ft_atod(split2[0]);
-		temp->point.y = ft_atod(split2[1]);
-		temp->point.z = ft_atod(split2[2]);
-		temp->vec.x = ft_atod(split3[0]);
-		temp->vec.y = ft_atod(split3[1]);
-		temp->vec.z = ft_atod(split3[2]);
-		temp->dia = ft_atod(split[3]);
-		temp->height = ft_atod(split[4]);
-		temp->color.x = ft_atod(split4[0]);
-		temp->color.y = ft_atod(split4[1]);
-		temp->color.z = ft_atod(split4[2]);
-		scene->cylinder->next = temp;
-	}
-}
-
-void	input_sphere(t_scene *scene, char *str)
-{
-	t_sphere	*temp;
-	char		**split;
-	char		**split2;
-	char		**split3;
-
-	split = ft_split(str, ' ');
-	split2 = ft_split(split[1], ',');
-	split3 = ft_split(split[3], ',');
-	if (!(scene->sphere))
-	{
-		scene->sphere = (t_sphere *)malloc(sizeof(t_sphere));
-		scene->sphere->point.x = ft_atod(split2[0]);
-		scene->sphere->point.y = ft_atod(split2[1]);
-		scene->sphere->point.z = ft_atod(split2[2]);
-		scene->sphere->dia = ft_atod(split[2]);
-		scene->sphere->color.x = ft_atod(split3[0]);
-		scene->sphere->color.y = ft_atod(split3[1]);
-		scene->sphere->color.z = ft_atod(split3[2]);
-	}
-	else
-	{
-		while (scene->sphere->next)
-			scene->sphere = scene->sphere->next;
-		temp = (t_sphere *)malloc(sizeof(t_sphere));
-		temp->point.x = ft_atod(split2[0]);
-		temp->point.y = ft_atod(split2[1]);
-		temp->point.z = ft_atod(split2[2]);
-		temp->dia = ft_atod(split[2]);
-		temp->color.x = ft_atod(split3[0]);
-		temp->color.y = ft_atod(split3[1]);
-		temp->color.z = ft_atod(split3[2]);
-		scene->sphere->next = temp;
-	}
-}
-
 //만약 x, y, z가 없거나 그 다음 인자 있을 경우 false
 t_vec	parse_vec(char **split)
 {
@@ -215,63 +131,44 @@ t_vec	parse_vec(char **split)
 	return (temp);
 }
 
-void	input_plane(t_scene *scene, char *str)
+//만약 x, y, z가 없거나 그 다음 인자 있을 경우 false
+//parse_vec 후에 컬러값 노멀라이즈 해주는 함수
+t_vec	parse_vec_normalize_color(char **split)
 {
-	char	**split;
-	char	**temp_center;
-	char	**temp_dir;
-	char	**temp_color;
-
-	split = ft_split(str, ' ');
-	if (!split[0] || !split[1] || !split[2] || split[3])
-		exit_error(ERROR_PARSE);
-	temp_center = ft_split(split[1], ',');
-	temp_dir = ft_split(split[2], ',');
-	temp_color = ft_split(split[3], ',');
-	if (!scene->world)
-		scene->world = object(PL, plane(parse_vec(temp_center), 
-		parse_vec(temp_dir)), parse_vec(temp_color));
-	else
-		oadd(&scene->world, object(PL, plane(parse_vec(temp_center), \
-		parse_vec(temp_dir)), parse_vec(temp_color)));
-	//free_split(split);
+	return(vdivn(parse_vec(split), 255));
 }
 
-void	input_light(t_scene *scene, char *str)
+//split 이후 에러 방지, str에서 , 개수 세서 3개의 인자 받는지 확인
+char *valid_parse_vec(char *str)
 {
-	t_light		*temp;
-	char		**split;
-	char		**split2;
-	char		**temp_dir;
+	char 	*temp;
+	int		cnt;
 
-	split = ft_split(str, ' ');
-	split2 = ft_split(split[1], ',');
-	split3 = ft_split(split[3], ',');
-	if (!(scene->light))
+	temp = str;
+	cnt = 0;
+	while (*temp)
 	{
-		scene->light = (t_light *)malloc(sizeof(t_light));
-		scene->light->point.x = ft_atod(split2[0]);
-		scene->light->point.y = db_atoi(split2[1]);
-		scene->light->point.z = db_atoi(split2[2]);
-		scene->light->bright = ft_atod(split[2]);
-		scene->light->color.x = db_atoi(split3[0]);
-		scene->light->color.y = db_atoi(split3[1]);
-		scene->light->color.z = db_atoi(split3[2]);
+		if (*temp == ',')
+			cnt++;
+		temp++;
 	}
-	else
+	if (cnt != 2)
+		exit_error(ERROR_PARSE);
+	return (str);
+}
+
+//동적할당한 **char들 해제
+void	free_split(char **split)
+{
+	int		i;
+
+	i = 0;
+	while (split[i])
 	{
-		while (scene->light->next)
-			scene->light = scene->light->next;
-		temp = (t_light *)malloc(sizeof(t_light));
-		temp->point.x = ft_atod(split2[0]);
-		temp->point.y = db_atoi(split2[1]);
-		temp->point.z = db_atoi(split2[2]);
-		temp->bright = ft_atod(split[2]);
-		temp->color.x = db_atoi(split3[0]);
-		temp->color.y = db_atoi(split3[1]);
-		temp->color.z = db_atoi(split3[2]);
-		scene->light->next = temp;
+		free(split[i]);
+		i++;
 	}
+	free(split);
 }
 
 void	input_camera(t_scene *scene, char *str)
@@ -296,74 +193,79 @@ void	input_camera(t_scene *scene, char *str)
 		scene->cam->fov = ft_atod(split[3]);
 		scene->cam->next = NULL;
 	}
-	else
-	{
-		while (scene->cam->next)
-			scene->cam = scene->cam->next;
-		temp = (t_camera *)malloc(sizeof(t_camera));
-		temp->point.x = db_atoi(split2[0]);
-		temp->point.y = db_atoi(split2[1]);
-		temp->point.z = db_atoi(split2[2]);
-		temp->vec.x = db_atoi(split3[0]);
-		temp->vec.y = db_atoi(split3[1]);
-		temp->vec.z = db_atoi(split3[2]);
-		scene->cam->fov = db_atoi(split[3]);
-		scene->cam->next = temp;
-	}
 }
 
+//진행중 _ 왜 xyz에서 db atoi쓰는지? 모르겠는데 일단 parse_vec(ft_atoi사용)으로 처리
+//만약 따로 이유 있을 경우 parse_vec에 함수포인터 받아서 바꾸면 될듯
+//복수의 ambient 고려하지 않음
+//원래 식 : scene.ambient = vmuln(vec(1, 1, 1), ka)
 void	input_ambient(t_scene *scene, char *str)
 {
 	char	**split;
-	char	**split2;
+	char	**temp_color;
 
 	split = ft_split(str, ' ');
-	split2 = ft_split(split[2], ',');
-	scene->ambient.range = ft_atod(split[1]);
-	scene->ambient.color.x = db_atoi(split2[0]);
-	scene->ambient.color.y = db_atoi(split2[1]);
-	scene->ambient.color.z = db_atoi(split2[2]);
+	if (!split[0] || !split[1] || !split[2] || split[3])
+		exit_error(ERROR_PARSE);
+	temp_color = ft_split(split[2], ',');
+	scene->ambient = vmuln(parse_vec_normalize_color(temp_color), \
+					ft_atod(split[1]));
+	free_split(split);
+	free_split(temp_color);
+}
+
+//ok
+void	input_plane(t_scene *scene, char *str)
+{
+	char	**split;
+	char	**temp_center;
+	char	**temp_dir;
+	char	**temp_color;
+
+	printf("str is %s\n", str);
+	split = ft_split(str, ' ');
+	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
+		exit_error(ERROR_PARSE);
+	temp_center = ft_split(valid_parse_vec(split[1]), ',');
+	temp_dir = ft_split(valid_parse_vec(split[2]), ',');
+	temp_color = ft_split(valid_parse_vec(split[3]), ',');
+	if (!scene->world)
+		scene->world = object(PL, plane(parse_vec(temp_center), 
+		parse_vec(temp_dir)), parse_vec(temp_color));
+	else
+		oadd(&scene->world, object(PL, plane(parse_vec(temp_center), \
+		parse_vec(temp_dir)), parse_vec(temp_color)));
+	free_split(split);
+	free_split(temp_center);
+	free_split(temp_dir);
+	free_split(temp_color);
 }
 
 //check id in front of string, and get code
 void	id_check(t_scene *scene, char *str)
 {
-	// if (str[0] == 'A')
-	// 	input_ambient(scene, str);
-	if (str[0] == 'C')
-		input_camera(scene, str);
-	else if (str[0] == 'L')
-		input_light(scene, str);
-	else if (ft_strncmp(str, "pl", 2) == 0)
+	if (str[0] == 'A')
+		input_ambient(scene, str);
+	// if (str[0] == 'C')
+	// 	input_camera(scene, str);
+	// else if (str[0] == 'L')
+	// 	input_light(scene, str);
+	if (ft_strncmp(str, "pl", 2) == 0)
 		input_plane(scene, str);
-	else if (ft_strncmp(str, "sp", 2) == 0)
-		input_sphere(scene, str);
-	else if (ft_strncmp(str, "cy", 2) == 0)
-		input_cylinder(scene, str);
+	// else if (ft_strncmp(str, "sp", 2) == 0)
+	// 	input_sphere(scene, str);
+	// else if (ft_strncmp(str, "cy", 2) == 0)
+	// 	input_cylinder(scene, str);
 	else
 		printf("nothing\n");
 }
 
-//checking if is available for parsing
-int check_parse_error(str);
-
-
-//check if world is unvalid : 
-// - no light
-//not finished
-int check_world_error(t_scene *scene)
-{
-	if (scene->light == NULL)
-		return (1);
-	else
-		return (0);
-}
 
 //read and parse elements in map file
 void readmap(t_scene *scene, int fd)
 {
 	char	*str;
-	char	*temp;
+	// char	*temp;
 
 	str = get_next_line(fd);
 	convert_space(str);
@@ -371,6 +273,7 @@ void readmap(t_scene *scene, int fd)
 	{
 		// if (check_parse_error(str))
 		// 	exit_error(ERROR_PARSE);
+		printf("%s\n", str);
 		id_check(scene, str);
 		free(str);
 		str = NULL;
@@ -380,14 +283,4 @@ void readmap(t_scene *scene, int fd)
 	free(str);
 	// if (check_world_error(scene))
 	// 	exit_error(ERROR_NO_ELEMENT);
-}
-
-void	printmap(t_scene *scene)
-{
-	printf("%f\n",scene->plane->color.x);
-	// printf("%f\n",scene->);
-	// printf("%f\n",scene->);
-	// printf("%f\n",scene->);
-	// printf("%f\n",scene->);
-	// printf("%f\n",scene->
 }

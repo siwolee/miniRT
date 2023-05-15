@@ -6,7 +6,7 @@
 #    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/05/13 17:07:38 by siwolee          ###   ########.fr        #
+#    Updated: 2023/05/15 16:29:59 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,9 @@ SRCS = ./srcs/main.c \
 		./srcs/object.c \
 		./srcs/phong.c \
 		./srcs/plane.c \
-		./srcs/cylinder.c
+		./srcs/cylinder.c \
+		./srcs/parse.c 
+		
 OBJS = $(SRCS:.c=.o)
 LMLX = -L./mlx -lmlx -framework OpenGL -framework Appkit
 

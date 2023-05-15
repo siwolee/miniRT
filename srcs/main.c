@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haecho <haecho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/14 14:46:13 by haecho           ###   ########.fr       */
+/*   Updated: 2023/05/15 17:50:54 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,34 @@ int	key_hook(int keycode, t_vars *vars)
 		exit(0);
 	}
 	return (0);
+}
+
+//
+t_scene	scene_init(void)
+{
+	t_scene		scene;
+	t_object	*world;
+	t_object	*lights;
+	double		ka;
+
+	// if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
+	// 	return (NULL);
+	// scene->canvas_height = 800;
+	// scene->canvas_width = 500;
+	scene.canvas = canvas(500, 800);
+	scene.camera = camera(&scene.canvas, vec(0, 0, 6));
+	world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
+	// oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
+	// oadd(&world, object(SP, sphere(vec(2, 0, -5), 2), vec(0, 0.5, 0)));
+	// oadd(&world, object(SP, sphere(vec(0, 7, -5), 3), vec(1, 1, 1)));
+	//oadd(&world, object(PL, plane(vec(2, 0, -100), vec(0.5, 0, 0.5)), vec(0.2, 0.2, 0.2)));
+	oadd(&world, object(CY, cylinder(vec(0, 2, -5), vec(0, 0.5, 0.2), 2, 6), vec(0, 0, 0.5)));
+	scene.world = world;
+	lights = object(LIGHT_POINT, light_point(vec(0, 0, 5), vec(1, 1, 1), 0.5), vec(0, 0, 0));
+	scene.light = lights;
+	ka = 0.1;
+	// scene.ambient = vmuln(vec(1, 1, 1), ka);
+	return (scene);
 }
 
 //원본 함수에서 바뀐 점 :
@@ -127,27 +155,29 @@ void	exit_error(int code)
 		printf("too many arguments\n");
 	else if (code == 3)
 		printf("cannot open file\n");
+	else
+		printf("error not specified yet : %d\n", code);
 
 	exit(1);
 }
 
 int file_check(int ac, char **av)
 {
-	// int 	fd;
-	// if (ac != 2)
-	// {
-	// 	exit_error(NO_INPUT);
-	// }
-	// fd = open(av[1], O_RDONLY);
-	// if (fd == -1)
-	// {
-	// 	exit_error(2);
-	// }
-	// return (fd);
+	int 	fd;
+	if (ac != 2)
+	{
+		exit_error(ERROR_NO_INPUT);
+	}
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		exit_error(2);
+	}
+	return (fd);
 	
-	av[ac - 1] = 0;
-	printf("not doing input file right now\n");
-	return (1);
+	// av[ac - 1] = 0;
+	// printf("not doing input file right now\n");
+	// return (1);
 }
 
 // controling key in keyboard
@@ -181,8 +211,8 @@ int	main(int ac, char **av)
 
 	fd = file_check(ac, av);
 	printf("%d\n", fd);
-	scene = temp_init();
-
+	scene = scene_init();
+	readmap(&scene, fd);
 	ft_init_mlx(&vars, &scene, &image);
 	ft_draw(&scene, &image);
 	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);

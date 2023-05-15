@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haecho <haecho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/14 15:04:20 by haecho           ###   ########.fr       */
+/*   Updated: 2023/05/15 16:29:26 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,6 +162,12 @@ typedef struct	s_scene
 	int			canvas_width;//추가 05.10 by sw
 }		t_scene;
 
+//parse
+void	readmap(t_scene *scene, int fd);
+
+//error
+void	exit_error(int code);
+
 //vecter
 t_vec  vmin(t_vec vec1, t_vec vec2);
 t_vec	vunit(t_vec vec);
@@ -218,5 +224,7 @@ t_vec	get_cylinder_normal(t_cylinder *cy, t_vec at_point, double hit_height);
 int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height);
 int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
+
+
 
 #endif

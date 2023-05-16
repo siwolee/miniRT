@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/15 16:29:26 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:39:06 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,10 +115,10 @@ typedef struct s_hit_record
 
 typedef struct	s_object
 {
-	t_object_type	type;
-	void			*element;
-	void			*next;
-	t_color			albedo;
+	t_object_type		type;
+	void				*element;
+	struct	s_object	*next;
+	t_color				albedo;
 }	t_object;
 
 typedef struct s_light

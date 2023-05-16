@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/16 15:09:15 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/16 19:48:14 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,7 @@ void	free_split(char **split)
 	free(split);
 }
 
+//parsing cylinder -->ok
 //split[3]= dia, split[4]=height
 void	input_cylinder(t_scene *scene, char *str)
 {
@@ -183,6 +184,8 @@ void	input_cylinder(t_scene *scene, char *str)
 	char		**color;
 
 	split = ft_split(str, ' ');
+	if (!split[0] || !split[1] || !split[2] || !split[3] || !split[4] || split[5])
+		exit_error(ERROR_PARSE);
 	point = ft_split(split[1], ',');
 	vec = ft_split(split[2], ',');
 	color = ft_split(split[5], ',');
@@ -200,6 +203,7 @@ void	input_cylinder(t_scene *scene, char *str)
 	free_split(split);
 }
 
+//parsing sphere -->ok
 void	input_sphere(t_scene *scene, char *str)
 {
 	char	**split;
@@ -213,10 +217,10 @@ void	input_sphere(t_scene *scene, char *str)
 	center = ft_split(valid_parse_vec(split[1]), ',');
 	dia = db_atoi(split[2]);
 	color = ft_split(valid_parse_vec(split[3]), ',');
-	if (!scene->world)
-		scene->world = object(SP, sphere(parse_vec(center), \
-		dia), parse_vec_normalize_color(color));
-	else
+	// if (!scene->world)
+	// 	scene->world = object(SP, sphere(parse_vec(center), \
+	// 	dia), parse_vec_normalize_color(color));
+	// else
 		oadd(&scene->world, object(SP, sphere(parse_vec(center), \
 		dia), parse_vec_normalize_color(color)));
 	free_split(center);
@@ -267,7 +271,7 @@ void	input_ambient(t_scene *scene, char *str)
 	free_split(color);
 }
 
-//ok
+//ok.. 그러나 값이 다다르르게 나나옴
 void	input_plane(t_scene *scene, char *str)
 {
 	char	**split;
@@ -275,7 +279,6 @@ void	input_plane(t_scene *scene, char *str)
 	char	**dir;
 	char	**color;
 
-	printf("str is %s\n", str);
 	split = ft_split(str, ' ');
 	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
 		exit_error(ERROR_PARSE);
@@ -287,9 +290,32 @@ void	input_plane(t_scene *scene, char *str)
 		parse_vec(dir)), parse_vec(color));
 	else
 		oadd(&scene->world, object(PL, plane(parse_vec(center), \
-		parse_vec(dir)), parse_vec(color)));
+		parse_vec(dir)), parse_vec_normalize_color(color)));
 	free_split(center);
 	free_split(dir);
+	free_split(color);
+	free_split(split);
+}
+
+//bright = split[2]
+//복수의 빛 고려하지 않음
+//왜안돼는지 모르겠음
+void	input_light(t_scene *scene, char *str)
+{
+	char		**split;
+	char		**origin;
+	char		**color;
+
+	split = ft_split(str, ' ');
+	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
+		exit_error(ERROR_PARSE);
+	origin = ft_split(split[1], ',');
+	color = ft_split(split[3], ',');
+	// oadd(&scene->light, object(LIGHT_POINT, light_point(parse_vec(origin), \
+	//  vec(1, 1, 1), db_atoi(split[2])), parse_vec_normalize_color(color)));
+	scene->light = object(LIGHT_POINT, light_point(parse_vec(origin), \
+	 vec(1, 1, 1), ft_atod(split[2])), vec(0, 0, 0));
+	free_split(origin);
 	free_split(color);
 	free_split(split);
 }
@@ -303,14 +329,18 @@ void	id_check(t_scene *scene, char *str)
 	// 	input_camera(scene, str);
 	// else if (str[0] == 'L')
 	// 	input_light(scene, str);
-	if (ft_strncmp(str, "pl", 2) == 0)
+	else if (ft_strncmp(str, "pl", 2) == 0)
 		input_plane(scene, str);
 	else if (ft_strncmp(str, "sp", 2) == 0)
 		input_sphere(scene, str);
 	else if (ft_strncmp(str, "cy", 2) == 0)
 		input_cylinder(scene, str);
 	else
+	{
 		printf("nothing\n");
+		return ;
+	}
+	printf("%s\n", str);
 }
 
 
@@ -324,8 +354,6 @@ void readmap(t_scene *scene, int fd)
 	convert_space(str);
 	while (str != 0)
 	{
-		// if (check_parse_error(str))
-		// 	exit_error(ERROR_PARSE);
 		id_check(scene, str);
 		free(str);
 		str = NULL;

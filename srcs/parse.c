@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/15 20:19:58 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/16 15:09:15 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,27 +174,53 @@ void	free_split(char **split)
 	free(split);
 }
 
+//split[3]= dia, split[4]=height
+void	input_cylinder(t_scene *scene, char *str)
+{
+	char		**split;
+	char		**point;
+	char		**vec;
+	char		**color;
+
+	split = ft_split(str, ' ');
+	point = ft_split(split[1], ',');
+	vec = ft_split(split[2], ',');
+	color = ft_split(split[5], ',');
+	if (!scene->world)
+		scene->world = object(CY, cylinder(parse_vec(point), \
+		parse_vec(vec), db_atoi(split[3]), db_atoi(split[4])), \
+		parse_vec_normalize_color(color));
+	else
+		oadd(&scene->world, object(CY, cylinder(parse_vec(point), \
+		parse_vec(vec), db_atoi(split[3]), db_atoi(split[4])), \
+		parse_vec_normalize_color(color)));
+	free_split(point);
+	free_split(vec);
+	free_split(color);
+	free_split(split);
+}
+
 void	input_sphere(t_scene *scene, char *str)
 {
 	char	**split;
-	char	**temp_center;
-	double	temp_dia;
-	char	**temp_color;
+	char	**center;
+	double	dia;
+	char	**color;
 
 	split = ft_split(str, ' ');
 	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
 		exit_error(ERROR_PARSE);
-	temp_center = ft_split(valid_parse_vec(split[1]), ',');
-	temp_dia = db_atoi(split[2]);
-	temp_color = ft_split(valid_parse_vec(split[3]), ',');
+	center = ft_split(valid_parse_vec(split[1]), ',');
+	dia = db_atoi(split[2]);
+	color = ft_split(valid_parse_vec(split[3]), ',');
 	if (!scene->world)
-		scene->world = object(SP, sphere(parse_vec(temp_center), \
-		temp_dia), parse_vec_normalize_color(temp_color));
+		scene->world = object(SP, sphere(parse_vec(center), \
+		dia), parse_vec_normalize_color(color));
 	else
-		oadd(&scene->world, object(SP, sphere(parse_vec(temp_center), \
-		temp_dia), parse_vec_normalize_color(temp_color)));
-	free_split(temp_center);
-	free_split(temp_color);
+		oadd(&scene->world, object(SP, sphere(parse_vec(center), \
+		dia), parse_vec_normalize_color(color)));
+	free_split(center);
+	free_split(color);
 	free_split(split);
 }
 
@@ -229,42 +255,42 @@ void	input_sphere(t_scene *scene, char *str)
 void	input_ambient(t_scene *scene, char *str)
 {
 	char	**split;
-	char	**temp_color;
+	char	**color;
 
 	split = ft_split(str, ' ');
 	if (!split[0] || !split[1] || !split[2] || split[3])
 		exit_error(ERROR_PARSE);
-	temp_color = ft_split(split[2], ',');
-	scene->ambient = vmuln(parse_vec_normalize_color(temp_color), \
+	color = ft_split(split[2], ',');
+	scene->ambient = vmuln(parse_vec_normalize_color(color), \
 					ft_atod(split[1]));
 	free_split(split);
-	free_split(temp_color);
+	free_split(color);
 }
 
 //ok
 void	input_plane(t_scene *scene, char *str)
 {
 	char	**split;
-	char	**temp_center;
-	char	**temp_dir;
-	char	**temp_color;
+	char	**center;
+	char	**dir;
+	char	**color;
 
 	printf("str is %s\n", str);
 	split = ft_split(str, ' ');
 	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
 		exit_error(ERROR_PARSE);
-	temp_center = ft_split(valid_parse_vec(split[1]), ',');
-	temp_dir = ft_split(valid_parse_vec(split[2]), ',');
-	temp_color = ft_split(valid_parse_vec(split[3]), ',');
+	center = ft_split(valid_parse_vec(split[1]), ',');
+	dir = ft_split(valid_parse_vec(split[2]), ',');
+	color = ft_split(valid_parse_vec(split[3]), ',');
 	if (!scene->world)
-		scene->world = object(PL, plane(parse_vec(temp_center), 
-		parse_vec(temp_dir)), parse_vec(temp_color));
+		scene->world = object(PL, plane(parse_vec(center), 
+		parse_vec(dir)), parse_vec(color));
 	else
-		oadd(&scene->world, object(PL, plane(parse_vec(temp_center), \
-		parse_vec(temp_dir)), parse_vec(temp_color)));
-	free_split(temp_center);
-	free_split(temp_dir);
-	free_split(temp_color);
+		oadd(&scene->world, object(PL, plane(parse_vec(center), \
+		parse_vec(dir)), parse_vec(color)));
+	free_split(center);
+	free_split(dir);
+	free_split(color);
 	free_split(split);
 }
 
@@ -281,8 +307,8 @@ void	id_check(t_scene *scene, char *str)
 		input_plane(scene, str);
 	else if (ft_strncmp(str, "sp", 2) == 0)
 		input_sphere(scene, str);
-	// else if (ft_strncmp(str, "cy", 2) == 0)
-	// 	input_cylinder(scene, str);
+	else if (ft_strncmp(str, "cy", 2) == 0)
+		input_cylinder(scene, str);
 	else
 		printf("nothing\n");
 }
@@ -300,7 +326,6 @@ void readmap(t_scene *scene, int fd)
 	{
 		// if (check_parse_error(str))
 		// 	exit_error(ERROR_PARSE);
-		printf("%s\n", str);
 		id_check(scene, str);
 		free(str);
 		str = NULL;

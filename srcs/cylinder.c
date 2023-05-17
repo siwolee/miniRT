@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:23:38 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/16 15:16:41 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/16 21:58:41 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ t_bool      hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
     rec->t = root; // 광선의 원점과 교점까지의 거리를 rec에 저장한다.
     rec->p = ray_at(ray, root); // 교점의 좌표를 rec에 저장한다.
     rec->normal = get_cylinder_normal(cy, rec->p, hit_height); // vmult(ray->dir, root)하면 안돼!!!
-    set_face_normal(ray, rec);   
+    set_face_normal(ray, rec);
     rec->albedo = cy_obj->albedo;
     return (TRUE);
 }

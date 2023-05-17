@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/16 19:48:14 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/16 21:53:29 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,7 +184,7 @@ void	input_cylinder(t_scene *scene, char *str)
 	char		**color;
 
 	split = ft_split(str, ' ');
-	if (!split[0] || !split[1] || !split[2] || !split[3] || !split[4] || split[5])
+	if (!split[0] || !split[1] || !split[2] || !split[3] || !split[4] || !split[5] || split[6])
 		exit_error(ERROR_PARSE);
 	point = ft_split(split[1], ',');
 	vec = ft_split(split[2], ',');
@@ -286,7 +286,7 @@ void	input_plane(t_scene *scene, char *str)
 	dir = ft_split(valid_parse_vec(split[2]), ',');
 	color = ft_split(valid_parse_vec(split[3]), ',');
 	if (!scene->world)
-		scene->world = object(PL, plane(parse_vec(center), 
+		scene->world = object(PL, plane(parse_vec(center),
 		parse_vec(dir)), parse_vec(color));
 	else
 		oadd(&scene->world, object(PL, plane(parse_vec(center), \

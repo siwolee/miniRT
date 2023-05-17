@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/16 19:28:36 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/17 21:20:13 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_scene	scene_init(void)
 {
 	t_scene		scene;
 	// t_object	*world;
-	// t_object	*lights;
 	// double		ka;
 
 	// if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
@@ -73,10 +72,11 @@ t_scene	scene_init(void)
 	//oadd(&world, object(PL, plane(vec(2, 0, -100), vec(0.5, 0, 0.5)), vec(0.2, 0.2, 0.2)));
 	// oadd(&world, object(CY, cylinder(vec(0, 2, -5), vec(0, 0.5, 0.2), 2, 6), vec(0, 0, 0.5)));
 	// scene.world = world;
-	// lights = object(LIGHT_POINT, light_point(vec(0, 0, 5), 
-	//vec(1, 1, 1), 0.5), vec(0, 0, 0));
-	// scene.light = lights;
-	scene.light = NULL;
+	t_object	*lights;
+	lights = object(LIGHT_POINT, light_point(vec(0, 0, 5), 
+	vec(1, 1, 1), 0.5), vec(0, 0, 0));
+	scene.light = lights;
+	// scene.light = NULL;
 	// ka = 0.1;
 	// scene.ambient = vmuln(vec(1, 1, 1), ka);
 	return (scene);

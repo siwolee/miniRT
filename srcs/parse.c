@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/16 21:53:29 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/17 21:19:25 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,9 +125,10 @@ t_vec	parse_vec(char **split)
 
 	if (!split[0] || !split[1] || !split[2] || split[3])
 		exit_error(ERROR_PARSE);
-	temp.x = db_atoi(split[0]);
-	temp.y = db_atoi(split[1]);
-	temp.z = db_atoi(split[2]);
+	temp.x = ft_atod(split[0]);
+	temp.y = ft_atod(split[1]);
+	temp.z = ft_atod(split[2]);
+	printf(" x %f y %f z%f \n", temp.x, temp.y, temp.z);
 	return (temp);
 }
 
@@ -189,13 +190,14 @@ void	input_cylinder(t_scene *scene, char *str)
 	point = ft_split(split[1], ',');
 	vec = ft_split(split[2], ',');
 	color = ft_split(split[5], ',');
+	printf("this is cylinder\n");
 	if (!scene->world)
 		scene->world = object(CY, cylinder(parse_vec(point), \
-		parse_vec(vec), db_atoi(split[3]), db_atoi(split[4])), \
+		parse_vec(vec), ft_atod(split[3]), ft_atod(split[4])), \
 		parse_vec_normalize_color(color));
 	else
 		oadd(&scene->world, object(CY, cylinder(parse_vec(point), \
-		parse_vec(vec), db_atoi(split[3]), db_atoi(split[4])), \
+		parse_vec(vec), ft_atod(split[3]), ft_atod(split[4])), \
 		parse_vec_normalize_color(color)));
 	free_split(point);
 	free_split(vec);
@@ -215,7 +217,7 @@ void	input_sphere(t_scene *scene, char *str)
 	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
 		exit_error(ERROR_PARSE);
 	center = ft_split(valid_parse_vec(split[1]), ',');
-	dia = db_atoi(split[2]);
+	dia = ft_atod(split[2]);
 	color = ft_split(valid_parse_vec(split[3]), ',');
 	// if (!scene->world)
 	// 	scene->world = object(SP, sphere(parse_vec(center), \
@@ -241,12 +243,12 @@ void	input_sphere(t_scene *scene, char *str)
 // 	if (!(scene->cam))
 // 	{
 // 		scene->cam = (t_camera *)malloc(sizeof(t_camera));
-// 		scene->cam->point.x = db_atoi(split2[0]);
-// 		scene->cam->point.y = db_atoi(split2[1]);
-// 		scene->cam->point.z = db_atoi(split2[2]);
-// 		scene->cam->vec.x = db_atoi(split3[0]);
-// 		scene->cam->vec.y = db_atoi(split3[1]);
-// 		scene->cam->vec.z = db_atoi(split3[2]);
+// 		scene->cam->point.x = ft_atod(split2[0]);
+// 		scene->cam->point.y = ft_atod(split2[1]);
+// 		scene->cam->point.z = ft_atod(split2[2]);
+// 		scene->cam->vec.x = ft_atod(split3[0]);
+// 		scene->cam->vec.y = ft_atod(split3[1]);
+// 		scene->cam->vec.z = ft_atod(split3[2]);
 // 		scene->cam->fov = ft_atod(split[3]);
 // 		scene->cam->next = NULL;
 // 	}
@@ -312,7 +314,7 @@ void	input_light(t_scene *scene, char *str)
 	origin = ft_split(split[1], ',');
 	color = ft_split(split[3], ',');
 	// oadd(&scene->light, object(LIGHT_POINT, light_point(parse_vec(origin), \
-	//  vec(1, 1, 1), db_atoi(split[2])), parse_vec_normalize_color(color)));
+	//  vec(1, 1, 1), ft_atod(split[2])), parse_vec_normalize_color(color)));
 	scene->light = object(LIGHT_POINT, light_point(parse_vec(origin), \
 	 vec(1, 1, 1), ft_atod(split[2])), vec(0, 0, 0));
 	free_split(origin);
@@ -327,8 +329,8 @@ void	id_check(t_scene *scene, char *str)
 		input_ambient(scene, str);
 	// if (str[0] == 'C')
 	// 	input_camera(scene, str);
-	// else if (str[0] == 'L')
-	// 	input_light(scene, str);
+	else if (str[0] == 'L')
+		input_light(scene, str);
 	else if (ft_strncmp(str, "pl", 2) == 0)
 		input_plane(scene, str);
 	else if (ft_strncmp(str, "sp", 2) == 0)

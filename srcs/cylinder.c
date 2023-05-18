@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:23:38 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/17 21:52:26 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/18 23:13:41 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,14 @@ int	cy_boundary(t_cylinder *cy, t_vec at_point)
 	double	hit_height;
 	double	max_height;
 
-	hit_height = vdot(vsub(at_point, cy->center), cy->dir);
+	hit_height = vdot(vsub(at_point, cy->center), cy->dir) / 2;
 	max_height = cy->height / 2;
 	if (fabs(hit_height) > max_height)
+	{
+		printf("%lf\n", hit_height);
+		printf("%lf\n", max_height);
 		return (0);
+	}
 	return (1);
 }
 
@@ -104,10 +108,10 @@ int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double hei
 	double	diameter;
 
 	cy = cy_obj->element;
-	r = cy->dia ;
-	circle_center = vadd(cy->center, vmuln(cy->dir, height / 2));
+	r = cy->dia / 2;
+	circle_center = vadd(cy->center, vmuln(cy->dir, height));
 	//원래식
-	// root = vdot(vsub(circle_center, ray->orig), cy->dir);
+	//root = vdot(vsub(circle_center, ray->orig), cy->dir);
 	//이렇게하니까보이기는하더라
 	root = vdot(vsub(circle_center, ray->orig), cy->dir) / vdot(ray->dir, cy->dir);
 	diameter = vlength(vsub(circle_center, ray_at(ray, root)));
@@ -118,8 +122,8 @@ int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double hei
 	rec->t = root;
 	rec->p = ray_at(ray, root);
 	rec->tmax = rec->t;
-	if (0 < height / 2)
-		rec->normal = cy->dir; 
+	if (0 < height)
+		rec->normal = cy->dir;
 	else
 		rec->normal = vmuln(cy->dir, -1);
 	set_face_normal(ray, rec);
@@ -145,7 +149,7 @@ int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	double	hit_height;
 
 	cy = cy_obj->element;
-	hit_height = cy->height;
+	// hit_height = cy->height;
 	u = ray->dir;
 	o = cy->dir;
 	r = cy->dia / 2;
@@ -175,7 +179,7 @@ int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	return (1);
 }
 
-//조건문 
+//조건문
 t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cylinder	*cy;
@@ -184,8 +188,8 @@ t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	cy = (t_cylinder *)cy_obj->element;
 	result = 0;
 	//height/2 수정하고 위에서 추가함
-	result += hit_cylinder_cap(cy_obj, ray, rec, cy->height);
-	result += hit_cylinder_cap(cy_obj, ray, rec, -(cy->height));
+	result += hit_cylinder_cap(cy_obj, ray, rec, cy->height / 2);
+	result += hit_cylinder_cap(cy_obj, ray, rec, -(cy->height / 2));
 	result += hit_cylinder_side(cy_obj, ray, rec);
 	if (result > 0)
 		return (TRUE);

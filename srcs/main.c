@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/17 21:20:13 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/19 18:19:40 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_vars
 	void	*mlx;
 	void	*win;
 	t_data	image;
+	t_scene	scene;
 }	t_vars;
 
 int	create_trgb(int t, int r, int g, int b)
@@ -63,7 +64,7 @@ t_scene	scene_init(void)
 	// scene->canvas_height = 800;
 	// scene->canvas_width = 500;
 	scene.canvas = canvas(500, 800);
-	scene.camera = camera(&scene.canvas, vec(0, 0, 6));
+	scene.camera = camera(&scene.canvas, vec(0, 0, 6), 70);
 	scene.world = NULL;
 	// scene.world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
 	// oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
@@ -82,34 +83,34 @@ t_scene	scene_init(void)
 	return (scene);
 }
 
-//원본 함수에서 바뀐 점 :
-//	동적할당 없앰 ->scene은 메인 함수에서 선언
-t_scene temp_init(void)
-{//화면쳐다보는기준으로 위쪽이y, 오른쪽이 x, 뒤쪽 방향으로 z
-	t_scene		scene;
-	t_object	*world;
-	t_object	*lights;
-	double		ka;
+// //원본 함수에서 바뀐 점 :
+// //	동적할당 없앰 ->scene은 메인 함수에서 선언
+// t_scene temp_init(void)
+// {//화면쳐다보는기준으로 위쪽이y, 오른쪽이 x, 뒤쪽 방향으로 z
+// 	t_scene		scene;
+// 	t_object	*world;
+// 	t_object	*lights;
+// 	double		ka;
 
-	// if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
-	// 	return (NULL);
-	// scene->canvas_height = 800;
-	// scene->canvas_width = 500;
-	scene.canvas = canvas(500, 800);
-	scene.camera = camera(&scene.canvas, vec(0, 0, 6));
-	world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
-	oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
-	oadd(&world, object(SP, sphere(vec(2, 0, -5), 2), vec(0, 0.5, 0)));
-	oadd(&world, object(SP, sphere(vec(0, 7, -5), 3), vec(1, 1, 1)));
-	//oadd(&world, object(PL, plane(vec(2, 0, -100), vec(0.5, 0, 0.5)), vec(0.2, 0.2, 0.2)));
-	oadd(&world, object(CY, cylinder(vec(0, 2, -5), vec(0, 0.5, 0.2), 2, 6), vec(0, 0, 0.5)));
-	scene.world = world;
-	lights = object(LIGHT_POINT, light_point(vec(0, 0, 5), vec(1, 1, 1), 0.5), vec(0, 0, 0));
-	scene.light = lights;
-	ka = 0.1;
-	scene.ambient = vmuln(vec(1, 1, 1), ka);
-	return (scene);
-}
+// 	// if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
+// 	// 	return (NULL);
+// 	// scene->canvas_height = 800;
+// 	// scene->canvas_width = 500;
+// 	scene.canvas = canvas(500, 800);
+// 	scene.camera = camera(&scene.canvas, vec(0, 0, 6));
+// 	world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
+// 	oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
+// 	oadd(&world, object(SP, sphere(vec(2, 0, -5), 2), vec(0, 0.5, 0)));
+// 	oadd(&world, object(SP, sphere(vec(0, 7, -5), 3), vec(1, 1, 1)));
+// 	//oadd(&world, object(PL, plane(vec(2, 0, -100), vec(0.5, 0, 0.5)), vec(0.2, 0.2, 0.2)));
+// 	oadd(&world, object(CY, cylinder(vec(0, 2, -5), vec(0, 0.5, 0.2), 2, 6), vec(0, 0, 0.5)));
+// 	scene.world = world;
+// 	lights = object(LIGHT_POINT, light_point(vec(0, 0, 5), vec(1, 1, 1), 0.5), vec(0, 0, 0));
+// 	scene.light = lights;
+// 	ka = 0.1;
+// 	scene.ambient = vmuln(vec(1, 1, 1), ka);
+// 	return (scene);
+// }
 
 // // 랜더링
 // // P3 는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
@@ -185,22 +186,44 @@ int file_check(int ac, char **av)
 	// return (1);
 }
 
+// //redraw when camera is changed
+// int tilt_camera();
+// {
+// 	if (keycode == 13)
+// 		scene.camera.dir.y += 0.1;
+// 	else if (keycode == 1)
+// 		scene.camera.dir.y -= 0.1;
+// 	else if (keycode == 0)
+// 		scene.camera.dir.x -= 0.1;
+// 	else if (keycode == 2)
+// 		scene.camera.dir.y += 0.1;
+// 	ft_draw(&scene, &image);
+// }
+
+
+
 // controling key in keyboard
-int	key_press(int keycode, t_mlx *mlx)
+int	key_press(int keycode, t_vars *vars)
 {
-	if (keycode == 13)
-		printf("W\n");
-	else if (keycode == 1)
-		printf("S\n");
-	else if (keycode == 0)
-		printf("A\n");
-	else if (keycode == 2)
-		printf("D\n");
-	else if (keycode == 53)
+	if (keycode == 53)
 	{
-		mlx_destroy_window(mlx->mlx, mlx->win);
+		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
+	if (keycode == 13)
+		vars->scene.camera.dir.y += 0.1;
+	else if (keycode == 1)
+		vars->scene.camera.dir.y -= 0.1;
+	else if (keycode == 0)
+		vars->scene.camera.dir.x -= 0.1;
+	else if (keycode == 2)
+		vars->scene.camera.dir.y += 0.1;
+	else
+		return (0);
+	printf("camera is dir %0.2f %0.2f\n", vars->scene.camera.dir.x, vars->scene.camera.dir.y);
+	printf("key input \n");
+	ft_draw(&vars->scene, &vars->image);
+	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	return (0);
 }
 
@@ -209,18 +232,18 @@ int	main(int ac, char **av)
 // int	main(void)
 {
 	t_vars		vars;
-	t_data		image;
-	t_scene		scene;
+	// t_data		image;
+	// t_scene		scene;
 	int			fd;
 
 
 	fd = file_check(ac, av);
 	printf("%d\n", fd);
-	scene = scene_init();
-	readmap(&scene, fd);
-	ft_init_mlx(&vars, &scene, &image);
-	ft_draw(&scene, &image);
-	mlx_put_image_to_window(vars.mlx, vars.win, image.img, 0, 0);
+	vars.scene = scene_init();
+	readmap(&vars.scene, fd);
+	ft_init_mlx(&vars, &vars.scene, &vars.image);
+	ft_draw(&vars.scene, &vars.image);
+	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_press, &vars);
 	mlx_loop(vars.mlx);
     return (0);

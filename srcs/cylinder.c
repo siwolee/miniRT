@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:23:38 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/18 23:13:41 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/19 16:45:31 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int	cy_boundary(t_cylinder *cy, t_vec at_point)
 	max_height = cy->height / 2;
 	if (fabs(hit_height) > max_height)
 	{
-		printf("%lf\n", hit_height);
-		printf("%lf\n", max_height);
+		// printf("%lf\n", hit_height);
+		// printf("%lf\n", max_height);
 		return (0);
 	}
 	return (1);

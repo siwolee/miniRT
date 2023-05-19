@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:14:14 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/07 18:24:03 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/19 18:18:18 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ t_canvas	canvas(int width, int height)
 	return (canvas);
 }
 
-t_camera	camera(t_canvas *canvas, t_point orig)
+//focal length 적용 안되고 있음
+//
+t_camera	camera(t_canvas *canvas, t_point orig, int fov)
 {
 	t_camera	cam;
 	double		focal_len;
 	double		viewport_height;
 
 	viewport_height = 2.0;
-	focal_len = 1.0;//cam.focal_len = (float)WIDTH / 2 / get_tan(cam.fov / 2);
+	// focal_len = 1.0; 
+	cam.focal_len = (float)cam.width / 2 / get_tan(fov / 2);
 	cam.orig = orig;
 	cam.viewport_h = viewport_height;
 	cam.viewport_w = viewport_height * canvas->aspect_ratio;
@@ -41,3 +44,5 @@ t_camera	camera(t_canvas *canvas, t_point orig)
 
 	return (cam);
 }
+
+

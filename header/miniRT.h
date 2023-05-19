@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/19 18:19:03 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/19 20:57:26 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,7 +188,7 @@ t_vec	reflect(t_vec v, t_vec n);
 
 //camera
 t_canvas	canvas(int width, int height);
-t_camera	camera(t_canvas *canvas, t_point orig, int fov);
+t_camera camera(t_point lookfrom, t_vec lookat, t_vec vup, double fov, double aspect);
 
 //ray
 t_ray	ray(t_point orig, t_vec dir);

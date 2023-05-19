@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/19 18:19:40 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/19 21:08:11 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ t_scene	scene_init(void)
 	// 	return (NULL);
 	// scene->canvas_height = 800;
 	// scene->canvas_width = 500;
-	scene.canvas = canvas(500, 800);
-	scene.camera = camera(&scene.canvas, vec(0, 0, 6), 70);
+	scene.canvas = canvas(500, 1000);
+	scene.camera = camera(vec(0,0,1), vec(0, 0, 0), vec(0, 1, 0), 90, (double)1/2);
 	scene.world = NULL;
 	// scene.world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
 	// oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));

@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:23:38 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/19 16:45:31 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:25:10 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double hei
 		return (0);
 	if (root < rec->tmin || rec->tmax < root)
 		return (0);
+	// printf("%lf \n", diameter);
 	rec->t = root;
 	rec->p = ray_at(ray, root);
 	rec->tmax = rec->t;
@@ -168,6 +169,7 @@ int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 		if (root < rec->tmin || rec->tmax < root)
 			return (0);
 	}
+	printf("%lf\n", half_b);
 	//위아래 높이 찾아주는 부분
 	if (!(hit_height = cy_boundary(cy, ray_at(ray, root))))
 		return (0);

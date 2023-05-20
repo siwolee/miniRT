@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:14:14 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/19 21:11:38 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/20 20:48:17 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,23 +54,36 @@ t_camera camera(t_point lookfrom, t_vec lookat, t_vec vup, double fov, double as
 	float half_width;
 	t_vec w, u, v;
 	
+	cam.fov = fov;
+	cam.focal_len = 1.0;
+	cam.dir = lookat;
+	cam.aspect = aspect;
+	cam.vup = vup;
 	theta = fov * M_PI / 180;
 	printf("aspect %0.2f\n", aspect);
+	printf("theta %0.2f\n", theta);
 	half_height = tan(theta / 2);
+	printf("half_height %0.2f\n", half_height);
+
 	half_width = aspect * half_height;
+	printf("half_width %0.2f\n", half_width);
 	cam.viewport_h = half_height * 2;
 	cam.viewport_w = half_width * 2;
 	printf("viewport %0.2f %0.2f \n", cam.viewport_h, cam.viewport_w);
 	cam.orig = lookfrom;
+	vprint("orig", cam.orig);
+	vprint("orig?", vsub(lookfrom, lookat));
 	w = vunit(vsub(lookfrom, lookat));
+	vprint("w", w);
 	u = vunit(vcross(vup, w));
+	vprint("u", u);
 	v = vcross(w, u);
+	vprint("v", v);
 	// lower_left_corner = vec(cam.viewport_w / 2, cam.viewport_h / 2, -1.0);
-	cam.focal_len = 1.0;
 	cam.left_bottom = vsub(vsub(vsub(cam.orig, vmuln(u, half_width))\
 	, vmuln(v, half_height)), w);
 	cam.horizontal = vmuln(u, half_width * 2);
-	cam.vertical = vmuln(u, half_height * 2);
+	cam.vertical = vmuln(v, half_height * 2);
 	return (cam);
 }
 

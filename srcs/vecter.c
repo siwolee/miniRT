@@ -3,14 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   vecter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:24:59 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/08 17:40:45 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/20 20:22:52 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	vprint(char *name, t_vec v)
+{
+	printf("%6s is...", name);
+	printf("x is %0.2f ", v.x);
+	printf("y is %0.2f ", v.y);
+	printf("z is %0.2f \n", v.z);
+}
 
 t_vec	vec(double x, double y, double z)
 {

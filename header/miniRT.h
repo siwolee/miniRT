@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/19 20:57:26 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/20 20:48:41 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ typedef struct  s_camera
 {
 	t_point		orig;  // 카메라 원점(위치)
 	t_vec		dir; // 카메라 벡터
+	double		aspect;//추가
+	t_vec		vup; //ㅊㅜ가
 	double		viewport_h;
 	double		viewport_w;
 	t_vec		horizontal;
@@ -169,6 +171,7 @@ void	readmap(t_scene *scene, int fd);
 void	exit_error(int code);
 
 //vecter
+void	vprint(char *name, t_vec v);
 t_vec  vmin(t_vec vec1, t_vec vec2);
 t_vec	vunit(t_vec vec);
 t_vec	vcross(t_vec vec, t_vec vec2);

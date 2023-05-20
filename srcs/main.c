@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/19 21:08:11 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/20 21:19:10 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ t_scene	scene_init(void)
 	// scene->canvas_height = 800;
 	// scene->canvas_width = 500;
 	scene.canvas = canvas(500, 1000);
-	scene.camera = camera(vec(0,0,1), vec(0, 0, 0), vec(0, 1, 0), 90, (double)1/2);
+	scene.camera = camera(vec(0,0,1), vec(0, 0, -1), vec(0, 1, 0), 90, (double)1/2);
 	scene.world = NULL;
 	// scene.world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
 	// oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
@@ -201,27 +201,32 @@ int file_check(int ac, char **av)
 // }
 
 
-
+#define VAL 10
 // controling key in keyboard
 int	key_press(int keycode, t_vars *vars)
 {
+	t_camera		*cam;
+	t_vec			vup;
+
 	if (keycode == 53)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
+	vup = vars->scene.camera.orig;
 	if (keycode == 13)
-		vars->scene.camera.dir.y += 0.1;
+		vup = vec(vup.x, vup.y + VAL, vup.z);
 	else if (keycode == 1)
-		vars->scene.camera.dir.y -= 0.1;
+		vup = vec(vup.x, vup.y - VAL, vup.z);
 	else if (keycode == 0)
-		vars->scene.camera.dir.x -= 0.1;
+		vup = vec(vup.x + VAL, vup.y, vup.z);
 	else if (keycode == 2)
-		vars->scene.camera.dir.y += 0.1;
+		vup = vec(vup.x - VAL, vup.y, vup.z);
 	else
 		return (0);
-	printf("camera is dir %0.2f %0.2f\n", vars->scene.camera.dir.x, vars->scene.camera.dir.y);
-	printf("key input \n");
+	vprint("vup", vup);
+	cam = &vars->scene.camera;
+	vars->scene.camera = camera(vup, cam->dir, cam->vup, cam->fov, cam->aspect);
 	ft_draw(&vars->scene, &vars->image);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	return (0);

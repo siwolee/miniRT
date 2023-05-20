@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/20 21:19:10 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/20 22:01:47 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,6 +214,8 @@ int	key_press(int keycode, t_vars *vars)
 		exit(0);
 	}
 	vup = vars->scene.camera.orig;
+	//orig->카메라 위치(lookfrom)
+	//vup->시점각도..? 
 	if (keycode == 13)
 		vup = vec(vup.x, vup.y + VAL, vup.z);
 	else if (keycode == 1)
@@ -226,6 +228,7 @@ int	key_press(int keycode, t_vars *vars)
 		return (0);
 	vprint("vup", vup);
 	cam = &vars->scene.camera;
+	//여기서도 바꿔줘야함
 	vars->scene.camera = camera(vup, cam->dir, cam->vup, cam->fov, cam->aspect);
 	ft_draw(&vars->scene, &vars->image);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);

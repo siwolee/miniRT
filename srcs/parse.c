@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/17 21:19:25 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/21 18:21:22 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ void	convert_space(char *c)
 }
 
 //만약 x, y, z가 없거나 그 다음 인자 있을 경우 false
-t_vec	parse_vec(char **split)
+t_vec	parse_point(char **split)
 {
 	t_vec	temp;
 
@@ -132,11 +132,25 @@ t_vec	parse_vec(char **split)
 	return (temp);
 }
 
+t_vec	parse_vec(char **split)
+{
+	t_vec	temp;
+
+	if (!split[0] || !split[1] || !split[2] || split[3])
+		exit_error(ERROR_PARSE);
+	temp.x = ft_atod(split[0]);
+	temp.y = ft_atod(split[1]);
+	temp.z = ft_atod(split[2]);
+	temp = vunit(temp);
+	printf(" x %f y %f z%f \n", temp.x, temp.y, temp.z);
+	return (temp);
+}
+
 //만약 x, y, z가 없거나 그 다음 인자 있을 경우 false
 //parse_vec 후에 컬러값 노멀라이즈 해주는 함수
 t_vec	parse_vec_normalize_color(char **split)
 {
-	return(vdivn(parse_vec(split), 255));
+	return(vdivn(parse_point(split), 255));
 }
 
 //split 이후 에러 방지, str에서 , 개수 세서 3개의 인자 받는지 확인
@@ -192,11 +206,11 @@ void	input_cylinder(t_scene *scene, char *str)
 	color = ft_split(split[5], ',');
 	printf("this is cylinder\n");
 	if (!scene->world)
-		scene->world = object(CY, cylinder(parse_vec(point), \
+		scene->world = object(CY, cylinder(parse_point(point), \
 		parse_vec(vec), ft_atod(split[3]), ft_atod(split[4])), \
 		parse_vec_normalize_color(color));
 	else
-		oadd(&scene->world, object(CY, cylinder(parse_vec(point), \
+		oadd(&scene->world, object(CY, cylinder(parse_point(point), \
 		parse_vec(vec), ft_atod(split[3]), ft_atod(split[4])), \
 		parse_vec_normalize_color(color)));
 	free_split(point);
@@ -223,7 +237,7 @@ void	input_sphere(t_scene *scene, char *str)
 	// 	scene->world = object(SP, sphere(parse_vec(center), \
 	// 	dia), parse_vec_normalize_color(color));
 	// else
-		oadd(&scene->world, object(SP, sphere(parse_vec(center), \
+		oadd(&scene->world, object(SP, sphere(parse_point(center), \
 		dia), parse_vec_normalize_color(color)));
 	free_split(center);
 	free_split(color);
@@ -288,10 +302,10 @@ void	input_plane(t_scene *scene, char *str)
 	dir = ft_split(valid_parse_vec(split[2]), ',');
 	color = ft_split(valid_parse_vec(split[3]), ',');
 	if (!scene->world)
-		scene->world = object(PL, plane(parse_vec(center),
-		parse_vec(dir)), parse_vec(color));
+		scene->world = object(PL, plane(parse_point(center),
+		parse_vec(dir)), parse_point(color));
 	else
-		oadd(&scene->world, object(PL, plane(parse_vec(center), \
+		oadd(&scene->world, object(PL, plane(parse_point(center), \
 		parse_vec(dir)), parse_vec_normalize_color(color)));
 	free_split(center);
 	free_split(dir);
@@ -315,7 +329,7 @@ void	input_light(t_scene *scene, char *str)
 	color = ft_split(split[3], ',');
 	// oadd(&scene->light, object(LIGHT_POINT, light_point(parse_vec(origin), \
 	//  vec(1, 1, 1), ft_atod(split[2])), parse_vec_normalize_color(color)));
-	scene->light = object(LIGHT_POINT, light_point(parse_vec(origin), \
+	scene->light = object(LIGHT_POINT, light_point(parse_point(origin), \
 	 vec(1, 1, 1), ft_atod(split[2])), vec(0, 0, 0));
 	free_split(origin);
 	free_split(color);

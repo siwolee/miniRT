@@ -6,11 +6,19 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:24:59 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/08 17:40:45 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:37:10 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
+
+void	vprint(char *name, t_vec v)
+{
+	printf("%6s is...", name);
+	printf("x is %0.2f ", v.x);
+	printf("y is %0.2f ", v.y);
+	printf("z is %0.2f \n", v.z);
+}
 
 t_vec	vec(double x, double y, double z)
 {
@@ -141,4 +149,9 @@ t_vec  vmin(t_vec vec1, t_vec vec2)
 t_vec	reflect(t_vec v, t_vec n)
 {
 	return (vsub(v, vmuln(n, vdot(v, n) * 2)));
+}
+
+void	print_vec(t_vec t)
+{
+	printf("x : %lf y : %lf z : %lf", t.x, t.y, t.z);
 }

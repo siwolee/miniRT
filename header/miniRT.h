@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/16 15:39:06 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/21 18:17:10 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,8 @@ typedef struct  s_camera
 {
 	t_point		orig;  // 카메라 원점(위치)
 	t_vec		dir; // 카메라 벡터
+	double		aspect;//추가
+	t_vec		vup; //ㅊㅜ가
 	double		viewport_h;
 	double		viewport_w;
 	t_vec		horizontal;
@@ -169,6 +171,7 @@ void	readmap(t_scene *scene, int fd);
 void	exit_error(int code);
 
 //vecter
+void	vprint(char *name, t_vec v);
 t_vec  vmin(t_vec vec1, t_vec vec2);
 t_vec	vunit(t_vec vec);
 t_vec	vcross(t_vec vec, t_vec vec2);
@@ -185,10 +188,12 @@ double	vlength2(t_vec vec);
 void	vset(t_vec *vec, double x, double y, double z);
 t_vec	vec(double x, double y, double z);
 t_vec	reflect(t_vec v, t_vec n);
+void	print_vec(t_vec t);
+t_vec	parse_point(char **split);
 
 //camera
 t_canvas	canvas(int width, int height);
-t_camera	camera(t_canvas *canvas, t_point orig);
+t_camera camera(t_point lookfrom, t_vec lookat, t_vec vup, double fov, double aspect);
 
 //ray
 t_ray	ray(t_point orig, t_vec dir);

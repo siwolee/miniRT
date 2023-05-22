@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/21 18:28:07 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:08:14 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,21 +123,21 @@ void	ft_draw(t_scene *scene, t_data *image)
 	t_color pixel_color;
 
 	j = scene->canvas.height - 1;
-    while (j >= 0)
-    {
-        i = 0;
-        while (i < scene->canvas.width)
-        {
-            u = (double)i / (scene->canvas.width - 1);
-            v = (double)j / (scene->canvas.height - 1);
+	while (j >= 0)
+	{
+		i = 0;
+		while (i < scene->canvas.width)
+		{
+			u = (double)i / (scene->canvas.width - 1);
+			v = (double)j / (scene->canvas.height - 1);
 			scene->ray = ray_primary(&scene->camera, u, v);
 			pixel_color = ray_color(scene);
-            my_mlx_pixel_put(image, i, scene->canvas.height - 1 - j, \
+			my_mlx_pixel_put(image, i, scene->canvas.height - 1 - j, \
 			create_trgb(0, pixel_color.x * 255.999, pixel_color.y * 255.999, pixel_color.z * 255.999));
-        ++i;
-        }
-    --j;
-    }
+			++i;
+		}
+		--j;
+	}
 }
 
 void	ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image)
@@ -169,11 +169,10 @@ void	exit_error(int code)
 
 int file_check(int ac, char **av)
 {
-	int 	fd;
+	int	fd;
+
 	if (ac != 2)
-	{
 		exit_error(ERROR_NO_INPUT);
-	}
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
@@ -226,7 +225,6 @@ int	key_press(int keycode, t_vars *vars)
 		vup = vec(vup.x - VAL, vup.y, vup.z);
 	else
 		return (0);
-	vprint("vup", vup);
 	cam = &vars->scene.camera;
 	//여기서도 바꿔줘야함
 	vars->scene.camera = camera(vup, cam->dir, cam->vup, cam->fov, cam->aspect);
@@ -239,10 +237,10 @@ int	key_press(int keycode, t_vars *vars)
 int	main(int ac, char **av)
 // int	main(void)
 {
-	t_vars		vars;
+	t_vars	vars;
+	int		fd;
 	// t_data		image;
 	// t_scene		scene;
-	int			fd;
 
 
 	fd = file_check(ac, av);
@@ -254,6 +252,6 @@ int	main(int ac, char **av)
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_press, &vars);
 	mlx_loop(vars.mlx);
-    return (0);
+	return (0);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: haecho <haecho@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 18:31:42 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/14 15:04:00 by haecho           ###   ########.fr       */
+/*   Updated: 2023/05/22 16:57:43 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_plane	*plane(t_point center, t_vec dir)
 {
 	t_plane	*pl;
 
-	if (!(pl = (t_plane *)malloc(sizeof(t_plane))))
+	pl = (t_plane *)malloc(sizeof(t_plane));
+	if (!pl)
 		return (NULL);
 	pl->center = center;
 	pl->dir = dir;
@@ -25,7 +26,7 @@ t_plane	*plane(t_point center, t_vec dir)
 
 t_bool	hit_plane(t_object *pl_obj, t_ray *ray, t_hit_record *rec)
 {
-	t_plane *pl;
+	t_plane	*pl;
 	double	numrator;
 	float	denominator;
 	float	root;

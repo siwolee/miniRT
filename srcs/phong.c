@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 23:09:23 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/08 18:28:22 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:10:34 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_light	*light_point(t_point light_origin, t_color light_color, double bright_ra
 {
 	t_light	*light;
 
-	if (!(light = (t_light *)malloc(sizeof(t_light))))
+	light = (t_light *)malloc(sizeof(t_light));
+	if (!light)
 		return (NULL);
 	light->origin = light_origin;
 	light->light_color = light_color;
@@ -34,7 +35,8 @@ t_color	phong_lighting(t_scene *scene)
 	while (lights)
 	{
 		if (lights->type == LIGHT_POINT)
-			light_color = vadd(light_color, point_light_get(scene, lights->element));
+			light_color = vadd(light_color, \
+			point_light_get(scene, lights->element));
 		lights = lights->next;
 	}
 	light_color = vadd(light_color, scene->ambient);
@@ -46,7 +48,6 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 	t_color	diffuse;
 	t_vec	light_dir;
 	double	kd;
-
 	t_color	specular;
 	t_vec	view_dir;
 	t_vec	reflect_dir;
@@ -62,7 +63,8 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 
 	light_dir = vsub(light->origin, scene->rec.p);
 	light_len = vlength(light_dir);
-	light_ray = ray(vadd(scene->rec.p, vmuln(scene->rec.normal, EPSILON)), light_dir);
+	light_ray = ray(vadd(scene->rec.p, \
+	vmuln(scene->rec.normal, EPSILON)), light_dir);
 	if (in_shadow(scene->world, light_ray, light_len))
 		return (vec(0, 0, 0));
 	light_dir = vunit(light_dir);

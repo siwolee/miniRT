@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:08:11 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/19 18:17:24 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/22 17:10:47 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_ray	ray_primary(t_camera *cam, double u, double v)
 	t_ray	ray;
 
 	ray.orig = cam->orig;
-	ray.dir = vunit(vsub(vadd(vadd(cam->left_bottom,\
-	 vmuln(cam->horizontal, u)), vmuln(cam->vertical, v)), cam->orig));
+	ray.dir = vunit(vsub(vadd(vadd(cam->left_bottom, \
+	vmuln(cam->horizontal, u)), vmuln(cam->vertical, v)), cam->orig));
 	return (ray);
 }
 
@@ -50,8 +50,7 @@ t_hit_record	record_init(void)
 
 t_color	ray_color(t_scene *scene)
 {
-	// t_hit_record	rec;
-	double			t;
+	double	t;
 
 	scene->rec = record_init();
 	if (hit(scene->world, &scene->ray, &scene->rec) == TRUE)

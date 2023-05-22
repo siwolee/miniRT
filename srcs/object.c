@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:10:22 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/08 19:45:12 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:08:52 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ t_object	*object(t_object_type type, void *element, t_color albedo)
 {
 	t_object	*new;
 
-	if (!(new = (t_object *)malloc(sizeof(t_object))))
+	new = (t_object *)malloc(sizeof(t_object));
+	if (!new)
 		return (NULL);
 	new->type = type;
 	new->element = element;

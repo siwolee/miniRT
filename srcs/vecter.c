@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:24:59 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/21 17:37:10 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:12:54 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ double	vlength2(t_vec vec)
 	return (vec.x * vec.x + vec.y * vec.y + vec.z * vec.z);
 }
 
-double	 vlength(t_vec vec)
+double	vlength(t_vec vec)
 {
 	return (sqrt(vlength2(vec)));
 }
@@ -55,7 +55,7 @@ t_vec	vadd(t_vec vec, t_vec vec2)
 	return (vec);
 }
 
-t_vec	  vaddn(t_vec vec, double x, double y, double z)
+t_vec	vaddn(t_vec vec, double x, double y, double z)
 {
 	vec.x += x;
 	vec.y += y;
@@ -63,7 +63,7 @@ t_vec	  vaddn(t_vec vec, double x, double y, double z)
 	return (vec);
 }
 
-t_vec	  vsub(t_vec vec, t_vec vec2)
+t_vec	vsub(t_vec vec, t_vec vec2)
 {
 	vec.x -= vec2.x;
 	vec.y -= vec2.y;
@@ -71,7 +71,7 @@ t_vec	  vsub(t_vec vec, t_vec vec2)
 	return (vec);
 }
 
-t_vec	  vsubn(t_vec vec, double x, double y, double z)
+t_vec	vsubn(t_vec vec, double x, double y, double z)
 {
 	vec.x -= x;
 	vec.y -= y;
@@ -87,7 +87,7 @@ t_vec	vmuln(t_vec vec, double t)
 	return (vec);
 }
 
-t_vec	  vmulv(t_vec vec, t_vec vec2)
+t_vec	vmulv(t_vec vec, t_vec vec2)
 {
 	vec.x *= vec2.x;
 	vec.y *= vec2.y;
@@ -95,13 +95,12 @@ t_vec	  vmulv(t_vec vec, t_vec vec2)
 	return (vec);
 }
 
-t_vec	  vdivn(t_vec vec, double t)
-{// 벡터 스칼라 나누기
+t_vec	vdivn(t_vec vec, double t)
+{
 	vec.x *= 1 / t;
 	vec.y *= 1 / t;
 	vec.z *= 1 / t;
-
-	return vec;
+	return (vec);
 }
 
 double	vdot(t_vec vec, t_vec vec2)
@@ -111,7 +110,7 @@ double	vdot(t_vec vec, t_vec vec2)
 
 t_vec	vcross(t_vec vec, t_vec vec2)
 {
-	t_vec new;
+	t_vec	new;
 
 	new.x = vec.y * vec2.z - vec.z * vec2.y;
 	new.y = vec.z * vec2.x - vec.x * vec2.z;
@@ -122,7 +121,9 @@ t_vec	vcross(t_vec vec, t_vec vec2)
 // 단위 벡터
 t_vec	vunit(t_vec vec)
 {
-	double len = vlength(vec);
+	double	len;
+
+	len = vlength(vec);
 	if (len == 0)
 	{
 		printf("Error\n:Devide is 0");

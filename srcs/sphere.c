@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:52:12 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/08 19:48:38 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:56:49 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ t_sphere	*sphere(t_point center, double radius)
 {
 	t_sphere	*sp;
 
-	if (!(sp = (t_sphere *)malloc(sizeof(t_sphere))))
+	sp = (t_sphere *)malloc(sizeof(t_sphere));
+	if (!sp)
 		return (NULL);
 	sp->center = center;
 	sp->radius = radius;
@@ -26,15 +27,14 @@ t_sphere	*sphere(t_point center, double radius)
 
 t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 {
-	t_vec	oc;
+	t_vec		oc;
 	t_sphere	*sp;
-	double	a;
-	double	half_b;
-	double	c;
-	double	discriminant;
-
-	double	sqrtd;
-	double	root;
+	double		a;
+	double		half_b;
+	double		c;
+	double		discriminant;
+	double		sqrtd;
+	double		root;
 
 	sp = (t_sphere *)(sp_obj->element);
 	oc = vsub(ray->orig, sp->center);
@@ -63,7 +63,7 @@ t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 
 t_bool	hit(t_object *world, t_ray *ray, t_hit_record *rec)
 {
-	t_bool	hit_anything;
+	t_bool			hit_anything;
 	t_hit_record	temp_rec;
 
 	temp_rec = *rec;

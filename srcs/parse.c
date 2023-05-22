@@ -6,13 +6,11 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/21 18:21:22 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 17:09:49 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/miniRT.h"
-
-//파싱하고 식별자 구분해서 연결 리스트 구조체에 만들어서 넣어주셈
 
 char	*ft_strndup(const char *s1, size_t n)
 {
@@ -103,7 +101,6 @@ double	ft_atod(const char *str)
 	return ((pos + neg) * sign);
 }
 
-//converting white space to normal space
 void	convert_space(char *c)
 {
 	if (c == NULL)
@@ -118,7 +115,6 @@ void	convert_space(char *c)
 	}
 }
 
-//만약 x, y, z가 없거나 그 다음 인자 있을 경우 false
 t_vec	parse_point(char **split)
 {
 	t_vec	temp;
@@ -128,7 +124,6 @@ t_vec	parse_point(char **split)
 	temp.x = ft_atod(split[0]);
 	temp.y = ft_atod(split[1]);
 	temp.z = ft_atod(split[2]);
-	printf(" x %f y %f z%f \n", temp.x, temp.y, temp.z);
 	return (temp);
 }
 
@@ -142,7 +137,6 @@ t_vec	parse_vec(char **split)
 	temp.y = ft_atod(split[1]);
 	temp.z = ft_atod(split[2]);
 	temp = vunit(temp);
-	printf(" x %f y %f z%f \n", temp.x, temp.y, temp.z);
 	return (temp);
 }
 
@@ -150,13 +144,13 @@ t_vec	parse_vec(char **split)
 //parse_vec 후에 컬러값 노멀라이즈 해주는 함수
 t_vec	parse_vec_normalize_color(char **split)
 {
-	return(vdivn(parse_point(split), 255));
+	return (vdivn(parse_point(split), 255));
 }
 
 //split 이후 에러 방지, str에서 , 개수 세서 3개의 인자 받는지 확인
 char *valid_parse_vec(char *str)
 {
-	char 	*temp;
+	char	*temp;
 	int		cnt;
 
 	temp = str;
@@ -168,10 +162,7 @@ char *valid_parse_vec(char *str)
 		temp++;
 	}
 	if (cnt != 2)
-	{
-		printf("error on %s \n",str);
 		exit_error(ERROR_PARSE);
-	}
 	return (str);
 }
 
@@ -302,7 +293,7 @@ void	input_plane(t_scene *scene, char *str)
 	dir = ft_split(valid_parse_vec(split[2]), ',');
 	color = ft_split(valid_parse_vec(split[3]), ',');
 	if (!scene->world)
-		scene->world = object(PL, plane(parse_point(center),
+		scene->world = object(PL, plane(parse_point(center), \
 		parse_vec(dir)), parse_point(color));
 	else
 		oadd(&scene->world, object(PL, plane(parse_point(center), \

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:23:38 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 17:06:28 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:13:17 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,13 @@ t_cylinder	*cylinder(t_point center, t_vec dir, double dia, double height)
 	return (cy);
 }
 
+//addnote : hit_height /2 
 int	cy_boundary(t_cylinder *cy, t_vec at_point)
 {
 	double	hit_height;
 	double	max_height;
 
 	hit_height = vdot(vsub(at_point, cy->center), cy->dir);
-	//나누기 2를 추가하였습니다 .
 	max_height = cy->height / 2;
 	if (fabs(hit_height) > max_height)
 		return (0);
@@ -50,6 +50,7 @@ t_vec	get_cylinder_normal(t_cylinder *cy, t_vec at_point, double hit_height)
 	return (vunit(normal));
 }
 
+// rec->normal = vunit(vminus(circle_center, ray->origin)); // vmult(ray->dir, root)하면 안돼!!!
 int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height)
 {
 	const t_cylinder *cy = cy_obj->element;
@@ -69,17 +70,17 @@ int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double hei
 	else
 		rec->normal = vmuln(cy->dir, -1);
 
-	// rec->normal = vunit(vminus(circle_center, ray->origin)); // vmult(ray->dir, root)하면 안돼!!!
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (1);
 }
 
+//a, b, c는 각각 t에 관한 근의 공식 2차 방정식의 계수
+// discriminant : 판별식
 int      hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cylinder *cy;
 
-    //a, b, c는 각각 t에 관한 근의 공식 2차 방정식의 계수
 	double	a;
 	double	half_b;
 	double	c;
@@ -87,7 +88,7 @@ int      hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	t_vec	o;
 	t_vec	delta_P;
 	double	r;
-	double discriminant; // 판별식
+	double discriminant;
 	double sqrtd;
 	double root;
 	double hit_height;

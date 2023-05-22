@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 17:09:49 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/22 20:46:39 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -224,40 +224,33 @@ void	input_sphere(t_scene *scene, char *str)
 	center = ft_split(valid_parse_vec(split[1]), ',');
 	dia = ft_atod(split[2]);
 	color = ft_split(valid_parse_vec(split[3]), ',');
-	// if (!scene->world)
-	// 	scene->world = object(SP, sphere(parse_vec(center), \
-	// 	dia), parse_vec_normalize_color(color));
-	// else
-		oadd(&scene->world, object(SP, sphere(parse_point(center), \
-		dia), parse_vec_normalize_color(color)));
+	oadd(&scene->world, object(SP, sphere(parse_point(center), \
+			dia), parse_vec_normalize_color(color)));
 	free_split(center);
 	free_split(color);
 	free_split(split);
 }
 
-// void	input_camera(t_scene *scene, char *str)
-// {
-// 	t_camera	*temp;
-// 	char		**split;
-// 	char		**split2;
-// 	char		**split3;
+void	input_camera(t_scene *scene, char *str)
+{
+	char		**split;
+	char		**orig;
+	char		**dir;
+	double		fov;
 
-// 	split = ft_split(str, ' ');
-// 	split2 = ft_split(split[1], ',');
-// 	split3 = ft_split(split[2], ',');
-// 	if (!(scene->cam))
-// 	{
-// 		scene->cam = (t_camera *)malloc(sizeof(t_camera));
-// 		scene->cam->point.x = ft_atod(split2[0]);
-// 		scene->cam->point.y = ft_atod(split2[1]);
-// 		scene->cam->point.z = ft_atod(split2[2]);
-// 		scene->cam->vec.x = ft_atod(split3[0]);
-// 		scene->cam->vec.y = ft_atod(split3[1]);
-// 		scene->cam->vec.z = ft_atod(split3[2]);
-// 		scene->cam->fov = ft_atod(split[3]);
-// 		scene->cam->next = NULL;
-// 	}
-// }
+
+	split = ft_split(str, ' ');
+	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
+		exit_error(ERROR_PARSE);
+	orig = ft_split(valid_parse_vec(split[1]), ',');
+	dir = ft_split(valid_parse_vec(split[2]), ',');
+	fov = ft_atod(split[3]);
+	oadd(&scene->camera, camera(orig, dir, vec(0, 1, 0), fov, \
+		scene->canvas_width / scene->canvas_height));
+	free_split(orig);
+	free_split(dir);
+	free_split(split);
+}
 
 //진행중 _ 왜 xyz에서 db atoi쓰는지? 모르겠는데 일단 parse_vec(ft_atoi사용)으로 처리
 //만약 따로 이유 있을 경우 parse_vec에 함수포인터 받아서 바꾸면 될듯
@@ -318,10 +311,10 @@ void	input_light(t_scene *scene, char *str)
 		exit_error(ERROR_PARSE);
 	origin = ft_split(split[1], ',');
 	color = ft_split(split[3], ',');
-	// oadd(&scene->light, object(LIGHT_POINT, light_point(parse_vec(origin), \
-	//  vec(1, 1, 1), ft_atod(split[2])), parse_vec_normalize_color(color)));
-	scene->light = object(LIGHT_POINT, light_point(parse_point(origin), \
-	 vec(1, 1, 1), ft_atod(split[2])), vec(0, 0, 0));
+	oadd(&scene->light, object(LIGHT_POINT, light_point(parse_vec(origin), \
+	 vec(1, 1, 1), ft_atod(split[2])), parse_vec_normalize_color(color)));
+	// scene->light = object(LIGHT_POINT, light_point(parse_point(origin), \
+	//  vec(1, 1, 1), ft_atod(split[2])), vec(0, 0, 0));
 	free_split(origin);
 	free_split(color);
 	free_split(split);

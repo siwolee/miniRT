@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/23 17:00:00 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:02:59 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,14 @@ int	key_press(int keycode, t_vars *vars)
 	return (0);
 }
 
+
+// int	endgame(t_map_info *par)
+// {//추가
+// 	mlx_destroy_window(par->mlx_ptr, par->win_ptr);
+// 	exit(0);
+// 	return (0);
+// }
+
 // //norminated version
 int	main(int ac, char **av)
 {
@@ -217,7 +225,7 @@ int	main(int ac, char **av)
 	ft_draw(&vars.scene, &vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_press, &vars);
-	mlx_hook(param.win_ptr, X_EVENT_KEY_EXIT, 0, &endgame, &param);
+	//mlx_hook(param.win_ptr, X_EVENT_KEY_EXIT, 0, &endgame, &param);
 	mlx_loop(vars.mlx);
 	return (0);
 }

@@ -6,9 +6,10 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/23 16:56:32 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:00:00 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../header/miniRT.h"
 
@@ -64,8 +65,8 @@ t_scene	scene_init(void)
 	// scene->canvas_height = 800;
 	// scene->canvas_width = 500;
 	scene.canvas = canvas(500, 1000);
-	scene.camera = camera(vec(0,0,1), vec(0, 0, -1), vec(0, 1, 0), 90, (double)1/2);
-	scene.world = NULL;
+	// scene.camera = camera(vec(0,0,1), vec(0, 0, -1), vec(0, 1, 0), 90, (double)1/2);
+	// scene.world = NULL;
 	// scene.world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
 	// oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
 	// oadd(&world, object(SP, sphere(vec(2, 0, -5), 2), vec(0, 0.5, 0)));
@@ -77,40 +78,8 @@ t_scene	scene_init(void)
 	lights = object(LIGHT_POINT, light_point(vec(0, 0, 5),
 	vec(1, 1, 1), 0.5), vec(0, 0, 0));
 	scene.light = lights;
-	// scene.light = NULL;
-	// ka = 0.1;
-	// scene.ambient = vmuln(vec(1, 1, 1), ka);
 	return (scene);
 }
-
-// //원본 함수에서 바뀐 점 :
-// //	동적할당 없앰 ->scene은 메인 함수에서 선언
-// t_scene temp_init(void)
-// {//화면쳐다보는기준으로 위쪽이y, 오른쪽이 x, 뒤쪽 방향으로 z
-// 	t_scene		scene;
-// 	t_object	*world;
-// 	t_object	*lights;
-// 	double		ka;
-
-// 	// if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
-// 	// 	return (NULL);
-// 	// scene->canvas_height = 800;
-// 	// scene->canvas_width = 500;
-// 	scene.canvas = canvas(500, 800);
-// 	scene.camera = camera(&scene.canvas, vec(0, 0, 6));
-// 	world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
-// 	oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
-// 	oadd(&world, object(SP, sphere(vec(2, 0, -5), 2), vec(0, 0.5, 0)));
-// 	oadd(&world, object(SP, sphere(vec(0, 7, -5), 3), vec(1, 1, 1)));
-// 	//oadd(&world, object(PL, plane(vec(2, 0, -100), vec(0.5, 0, 0.5)), vec(0.2, 0.2, 0.2)));
-// 	oadd(&world, object(CY, cylinder(vec(0, 2, -5), vec(0, 0.5, 0.2), 2, 6), vec(0, 0, 0.5)));
-// 	scene.world = world;
-// 	lights = object(LIGHT_POINT, light_point(vec(0, 0, 5), vec(1, 1, 1), 0.5), vec(0, 0, 0));
-// 	scene.light = lights;
-// 	ka = 0.1;
-// 	scene.ambient = vmuln(vec(1, 1, 1), ka);
-// 	return (scene);
-// }
 
 // // 랜더링
 // // P3 는 색상값이 아스키코드라는 뜻, 그리고 다음 줄은 캔버스의 가로, 세로 픽셀 수, 마지막은 사용할 색상값
@@ -130,7 +99,7 @@ void	ft_draw(t_scene *scene, t_data *image)
 		{
 			u = (double)i / (scene->canvas.width - 1);
 			v = (double)j / (scene->canvas.height - 1);
-			scene->ray = ray_primary(&scene->camera, u, v);
+			scene->ray = ray_primary(scene->camera, u, v);
 			pixel_color = ray_color(scene);
 			my_mlx_pixel_put(image, i, scene->canvas.height - 1 - j, \
 			create_trgb(0, pixel_color.x * 255.999, pixel_color.y * 255.999, pixel_color.z * 255.999));
@@ -212,7 +181,7 @@ int	key_press(int keycode, t_vars *vars)
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
 	}
-	vup = vars->scene.camera.orig;
+	vup = vars->scene.camera->orig;
 	//orig->카메라 위치(lookfrom)
 	//vup->시점각도..?
 	if (keycode == 13)
@@ -225,7 +194,7 @@ int	key_press(int keycode, t_vars *vars)
 		vup = vec(vup.x - VAL, vup.y, vup.z);
 	else
 		return (0);
-	cam = &vars->scene.camera;
+	cam = vars->scene.camera;
 	//여기서도 바꿔줘야함
 	vars->scene.camera = camera(vup, cam->dir, cam->vup, cam->fov, cam->aspect);
 	ft_draw(&vars->scene, &vars->image);
@@ -235,12 +204,9 @@ int	key_press(int keycode, t_vars *vars)
 
 // //norminated version
 int	main(int ac, char **av)
-// int	main(void)
 {
 	t_vars	vars;
 	int		fd;
-	// t_data		image;
-	// t_scene		scene;
 
 
 	fd = file_check(ac, av);

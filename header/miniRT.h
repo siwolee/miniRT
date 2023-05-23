@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/23 16:56:12 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/23 17:00:56 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ typedef struct s_canvas
 typedef struct	s_scene
 {
 	t_canvas	canvas;
-	t_camera	camera;
+	t_camera	*camera;
 	t_object	*world;
 	t_object	*light;
 	t_color		ambient;

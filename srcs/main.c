@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/23 17:02:59 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/23 21:42:58 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ int	key_press(int keycode, t_vars *vars)
 		return (0);
 	cam = vars->scene.camera;
 	//여기서도 바꿔줘야함
-	vars->scene.camera = camera(vup, cam->dir, cam->vup, cam->fov, cam->aspect);
+	move_camera(vars->scene.camera, vup);
 	ft_draw(&vars->scene, &vars->image);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	return (0);

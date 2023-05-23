@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:14:14 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 20:46:38 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/23 22:03:38 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_camera camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 	cam.viewport_w = aspect * cam.viewport_h;
 	cam.orig = lookfrom;
 	w = vunit(vsub(lookfrom, lookat));
-	u = vunit(vcross(vup, w));
+	u = vunit(vcross(cam.vup, w));
 	v = vcross(w, u);
 	cam.left_bottom = vsub(vsub(vsub(cam.orig, \
 	vmuln(u, cam.viewport_w / 2)), vmuln(v, cam.viewport_h / 2)), w);
@@ -49,30 +49,23 @@ t_camera camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 	return (cam);
 }
 
-t_camera *add_camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
+void	move_camera(t_camera *cam, t_vec vup)
 {
-	t_camera	*cam;
-	float		theta;
+	// float		theta;
 	t_vec		w;
 	t_vec		u;
 	t_vec		v;
 	
-	cam = malloc(sizeof(t_camera));
-	cam.fov = fov;
-	cam.focal_len = 1.0;
-	cam.dir = lookat;
-	cam.aspect = aspect;
-	cam.vup = vec(0, 1, 0);
-	theta = fov * M_PI / 180;
-	cam.viewport_h = (tan(theta / 2)) * 2;
-	cam.viewport_w = aspect * cam.viewport_h;
-	cam.orig = lookfrom;
-	w = vunit(vsub(lookfrom, lookat));
+	cam->vup = vup;
+	// theta = fov * M_PI / 180;
+	// cam->viewport_h = (tan(theta / 2)) * 2;
+	// cam->viewport_w = aspect * cam->viewport_h;
+	// cam->orig = lookfrom;
+	w = vunit(vsub(cam->orig, cam->dir));
 	u = vunit(vcross(vup, w));
 	v = vcross(w, u);
-	cam.left_bottom = vsub(vsub(vsub(cam.orig, \
-	vmuln(u, cam.viewport_w / 2)), vmuln(v, cam.viewport_h / 2)), w);
-	cam.horizontal = vmuln(u, cam.viewport_w);
-	cam.vertical = vmuln(v, cam.viewport_h);
-	return (cam);
+	cam->left_bottom = vsub(vsub(vsub(cam->orig, \
+	vmuln(u, cam->viewport_w / 2)), vmuln(v, cam->viewport_h / 2)), w);
+	cam->horizontal = vmuln(u, cam->viewport_w);
+	cam->vertical = vmuln(v, cam->viewport_h);
 }

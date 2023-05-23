@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 20:46:39 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/23 22:03:39 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,7 +245,7 @@ void	input_camera(t_scene *scene, char *str)
 	orig = ft_split(valid_parse_vec(split[1]), ',');
 	dir = ft_split(valid_parse_vec(split[2]), ',');
 	fov = ft_atod(split[3]);
-	oadd(&scene->camera, camera(orig, dir, vec(0, 1, 0), fov, \
+	oadd(&scene->camera, camera(orig, dir, fov, \
 		scene->canvas_width / scene->canvas_height));
 	free_split(orig);
 	free_split(dir);

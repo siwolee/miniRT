@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/21 18:17:10 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:56:12 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 # define TRUE 1
 # define FALSE 0
+# define X_EVENT_KEY_EXIT	17
 
 enum error_code
 {

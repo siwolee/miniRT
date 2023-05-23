@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 17:08:14 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/23 16:56:32 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,6 +251,7 @@ int	main(int ac, char **av)
 	ft_draw(&vars.scene, &vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_press, &vars);
+	mlx_hook(param.win_ptr, X_EVENT_KEY_EXIT, 0, &endgame, &param);
 	mlx_loop(vars.mlx);
 	return (0);
 }

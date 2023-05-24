@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/23 22:03:39 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/24 15:43:40 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ void	convert_space(char *c)
 	}
 }
 
+//좌표값 파싱
 t_vec	parse_point(char **split)
 {
 	t_vec	temp;
@@ -127,6 +128,7 @@ t_vec	parse_point(char **split)
 	return (temp);
 }
 
+//정규화 진행
 t_vec	parse_vec(char **split)
 {
 	t_vec	temp;
@@ -196,12 +198,7 @@ void	input_cylinder(t_scene *scene, char *str)
 	vec = ft_split(split[2], ',');
 	color = ft_split(split[5], ',');
 	printf("this is cylinder\n");
-	if (!scene->world)
-		scene->world = object(CY, cylinder(parse_point(point), \
-		parse_vec(vec), ft_atod(split[3]), ft_atod(split[4])), \
-		parse_vec_normalize_color(color));
-	else
-		oadd(&scene->world, object(CY, cylinder(parse_point(point), \
+	oadd(&scene->world, object(CY, cylinder(parse_point(point), \
 		parse_vec(vec), ft_atod(split[3]), ft_atod(split[4])), \
 		parse_vec_normalize_color(color)));
 	free_split(point);
@@ -245,8 +242,9 @@ void	input_camera(t_scene *scene, char *str)
 	orig = ft_split(valid_parse_vec(split[1]), ',');
 	dir = ft_split(valid_parse_vec(split[2]), ',');
 	fov = ft_atod(split[3]);
-	oadd(&scene->camera, camera(orig, dir, fov, \
-		scene->canvas_width / scene->canvas_height));
+	printf("....%f\n", (float)scene->canvas_width / (float)scene->canvas_height);
+	scene->camera = camera(parse_point(orig), parse_point(dir), fov, \
+		(float)scene->canvas_width /(float) scene->canvas_height);
 	free_split(orig);
 	free_split(dir);
 	free_split(split);
@@ -313,8 +311,6 @@ void	input_light(t_scene *scene, char *str)
 	color = ft_split(split[3], ',');
 	oadd(&scene->light, object(LIGHT_POINT, light_point(parse_vec(origin), \
 	 vec(1, 1, 1), ft_atod(split[2])), parse_vec_normalize_color(color)));
-	// scene->light = object(LIGHT_POINT, light_point(parse_point(origin), \
-	//  vec(1, 1, 1), ft_atod(split[2])), vec(0, 0, 0));
 	free_split(origin);
 	free_split(color);
 	free_split(split);
@@ -325,8 +321,8 @@ void	id_check(t_scene *scene, char *str)
 {
 	if (str[0] == 'A')
 		input_ambient(scene, str);
-	// if (str[0] == 'C')
-	// 	input_camera(scene, str);
+	else if (str[0] == 'C')
+		input_camera(scene, str);
 	else if (str[0] == 'L')
 		input_light(scene, str);
 	else if (ft_strncmp(str, "pl", 2) == 0)
@@ -336,10 +332,7 @@ void	id_check(t_scene *scene, char *str)
 	else if (ft_strncmp(str, "cy", 2) == 0)
 		input_cylinder(scene, str);
 	else
-	{
-		printf("nothing\n");
 		return ;
-	}
 	printf("%s\n", str);
 }
 

@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/23 21:42:45 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/24 15:16:36 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,7 @@ t_vec	parse_point(char **split);
 
 //camera
 t_canvas	canvas(int width, int height);
-t_camera camera(t_point lookfrom, t_vec lookat, double fov, double aspect);
+t_camera *camera(t_point lookfrom, t_vec lookat, double fov, double aspect);
 void	move_camera(t_camera *cam, t_vec vup);
 
 //ray

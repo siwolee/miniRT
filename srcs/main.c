@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/23 21:42:58 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/24 15:46:10 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,31 +53,19 @@ int	key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
-//
+
+
+
 t_scene	scene_init(void)
 {
 	t_scene		scene;
-	// t_object	*world;
-	// double		ka;
 
-	// if (!(scene = (t_scene *)malloc(sizeof(t_scene))))
-	// 	return (NULL);
-	// scene->canvas_height = 800;
-	// scene->canvas_width = 500;
-	scene.canvas = canvas(500, 1000);
-	// scene.camera = camera(vec(0,0,1), vec(0, 0, -1), vec(0, 1, 0), 90, (double)1/2);
-	// scene.world = NULL;
-	// scene.world = object(SP, sphere(vec(-2, 0, -5), 2), vec(0.5, 0, 0));
-	// oadd(&world, object(SP, sphere(vec(0, -1000, 0), 995), vec(1, 1, 1)));
-	// oadd(&world, object(SP, sphere(vec(2, 0, -5), 2), vec(0, 0.5, 0)));
-	// oadd(&world, object(SP, sphere(vec(0, 7, -5), 3), vec(1, 1, 1)));
-	//oadd(&world, object(PL, plane(vec(2, 0, -100), vec(0.5, 0, 0.5)), vec(0.2, 0.2, 0.2)));
-	// oadd(&world, object(CY, cylinder(vec(0, 2, -5), vec(0, 0.5, 0.2), 2, 6), vec(0, 0, 0.5)));
-	// scene.world = world;
-	t_object	*lights;
-	lights = object(LIGHT_POINT, light_point(vec(0, 0, 5),
-	vec(1, 1, 1), 0.5), vec(0, 0, 0));
-	scene.light = lights;
+	scene.canvas_height = 800;
+	scene.canvas_width = 500;
+	scene.canvas = canvas(scene.canvas_width, scene.canvas_height);
+	scene.camera = NULL;
+	scene.world = NULL;
+	scene.light = NULL;
 	return (scene);
 }
 
@@ -169,14 +157,15 @@ int file_check(int ac, char **av)
 // }
 
 
-#define VAL 10
+#define VAL 5
 // controling key in keyboard
+// X_EVENT_KEY_EXIT 정의 필요
 int	key_press(int keycode, t_vars *vars)
 {
 	t_camera		*cam;
 	t_vec			vup;
 
-	if (keycode == 53)
+	if (keycode == 53 || keycode == X_EVENT_KEY_EXIT)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
 		exit(0);
@@ -195,20 +184,12 @@ int	key_press(int keycode, t_vars *vars)
 	else
 		return (0);
 	cam = vars->scene.camera;
-	//여기서도 바꿔줘야함
+	vprint("cam orig is", vup);
 	move_camera(vars->scene.camera, vup);
 	ft_draw(&vars->scene, &vars->image);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	return (0);
 }
-
-
-// int	endgame(t_map_info *par)
-// {//추가
-// 	mlx_destroy_window(par->mlx_ptr, par->win_ptr);
-// 	exit(0);
-// 	return (0);
-// }
 
 // //norminated version
 int	main(int ac, char **av)
@@ -225,7 +206,6 @@ int	main(int ac, char **av)
 	ft_draw(&vars.scene, &vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_press, &vars);
-	//mlx_hook(param.win_ptr, X_EVENT_KEY_EXIT, 0, &endgame, &param);
 	mlx_loop(vars.mlx);
 	return (0);
 }

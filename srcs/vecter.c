@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vecter.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:24:59 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 17:12:54 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/24 15:58:43 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,7 @@ t_vec	vunit(t_vec vec)
 	len = vlength(vec);
 	if (len == 0)
 	{
-		printf("Error\n:Devide is 0");
+		printf("Error 0\n");
 		exit(0);
 	}
 	vec.x /= len;

@@ -6,10 +6,9 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 23:00:50 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:24:10 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "../header/miniRT.h"
 
@@ -30,7 +29,6 @@ int	main(int ac, char **av)
 	t_vars	vars;
 	int		fd;
 
-
 	fd = file_check(ac, av);
 	vars.scene = scene_init();
 	check_len(av[1]);
@@ -42,4 +40,3 @@ int	main(int ac, char **av)
 	mlx_loop(vars.mlx);
 	return (0);
 }
-

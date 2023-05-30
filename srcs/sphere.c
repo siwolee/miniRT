@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:52:12 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 16:56:49 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:23:24 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,36 +27,28 @@ t_sphere	*sphere(t_point center, double radius)
 
 t_bool	hit_sphere(t_object *sp_obj, t_ray *ray, t_hit_record *rec)
 {
-	t_vec		oc;
-	t_sphere	*sp;
-	double		a;
-	double		half_b;
-	double		c;
-	double		discriminant;
-	double		sqrtd;
-	double		root;
+	t_sphere_temp	temp;
 
-	sp = (t_sphere *)(sp_obj->element);
-	oc = vsub(ray->orig, sp->center);
-	a = vlength2(ray->dir);
-	half_b = vdot(oc, ray->dir);
-	c = vlength2(oc) - sp->radius2;
-	discriminant = half_b * half_b - a * c;
-
-	if (discriminant < 0)
+	temp.sp = (t_sphere *)(sp_obj->element);
+	temp.oc = vsub(ray->orig, temp.sp->center);
+	temp.a = vlength2(ray->dir);
+	temp.half_b = vdot(temp.oc, ray->dir);
+	temp.c = vlength2(temp.oc) - temp.sp->radius2;
+	temp.discriminant = temp.half_b * temp.half_b - temp.a * temp.c;
+	if (temp.discriminant < 0)
 		return (FALSE);
-	sqrtd = sqrt(discriminant);
-	root = (-half_b - sqrtd) / a;
-	if (root < rec->tmin || rec->tmax < root)
+	temp.sqrtd = sqrt(temp.discriminant);
+	temp.root = (-temp.half_b - temp.sqrtd) / temp.a;
+	if (temp.root < rec->tmin || rec->tmax < temp.root)
 	{
-		root = (-half_b + sqrtd) / a;
-		if (root < rec->tmin || rec->tmax < root)
+		temp.root = (-temp.half_b + temp.sqrtd) / temp.a;
+		if (temp.root < rec->tmin || rec->tmax < temp.root)
 			return (FALSE);
 	}
 	rec->albedo = sp_obj->albedo;
-	rec->t = root;
-	rec->p = ray_at(ray, root);
-	rec->normal = vdivn(vsub(rec->p, sp->center), sp->radius);
+	rec->t = temp.root;
+	rec->p = ray_at(ray, temp.root);
+	rec->normal = vdivn(vsub(rec->p, temp.sp->center), temp.sp->radius);
 	set_face_normal(ray, rec);
 	return (TRUE);
 }

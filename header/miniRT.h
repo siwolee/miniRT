@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/30 19:07:43 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:23:10 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_mlx
 	int		endian;
 }	t_mlx;
 
-
 typedef struct s_ambient
 {
 	double		range;
@@ -86,6 +85,13 @@ typedef struct s_plane
 	t_point	center;
 	t_vec	dir;
 }				t_plane;
+typedef struct s_ray
+{
+	t_point	orig;
+	t_vec	dir;
+	float	t_min;
+	float	t_max;
+}	t_ray;
 
 typedef struct s_cy_temp
 {
@@ -101,6 +107,40 @@ typedef struct s_cy_temp
 	double	root;
 	double	hit_height;
 }		t_cy_temp;
+
+typedef struct s_light_temp
+{
+	t_color	diffuse;
+	t_vec	light_dir;
+	double	kd;
+	t_color	specular;
+	t_vec	view_dir;
+	t_vec	reflect_dir;
+	double	light_len;
+	t_ray	light_ray;
+	double	spec;
+	double	ksn;
+	double	ks;
+	double	brightness;
+}		t_light_temp;
+typedef struct s_sphere
+{
+	t_point	center;
+	double	radius;
+	double	radius2;
+}		t_sphere;
+
+typedef struct s_sphere_temp
+{
+	t_vec		oc;
+	t_sphere	*sp;
+	double		a;
+	double		half_b;
+	double		c;
+	double		discriminant;
+	double		sqrtd;
+	double		root;
+}		t_sphere_temp;
 typedef struct s_cylinder
 {
 	t_point				center;
@@ -108,21 +148,6 @@ typedef struct s_cylinder
 	double				dia;
 	double				height;
 }	t_cylinder;
-
-typedef struct s_ray
-{
-	t_point	orig;
-	t_vec	dir;
-	float	t_min;
-	float	t_max;
-}	t_ray;
-
-typedef struct s_sphere
-{
-	t_point	center;
-	double	radius;
-	double	radius2;
-}		t_sphere;
 
 typedef struct s_hit_record
 {
@@ -171,7 +196,6 @@ typedef struct s_canvas
 	int		height;
 	double	aspect_ratio;
 }		t_canvas;
-
 
 typedef struct s_scene
 {
@@ -278,6 +302,7 @@ int			hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 void		cy_temp_struct(t_cy_temp *temp, t_cylinder *cy, t_ray *ray);
 int			hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
+int			cy_boundary(t_cylinder *cy, t_vec at_point);
 
 //mlx
 int			key_press(int keycode, t_vars *vars);

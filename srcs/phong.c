@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 23:09:23 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 22:28:18 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:19:39 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,42 +44,35 @@ t_color	phong_lighting(t_scene *scene)
 	return (vmin(vmulv(light_color, scene->rec.albedo), vec(1, 1, 1)));
 }
 
+void	light_sub(t_light_temp *temp, t_light *light, t_scene *scene)
+{
+	temp->light_dir = vsub(light->origin, scene->rec.p);
+	temp->light_len = vlength(temp->light_dir);
+	temp->light_ray = ray(vadd(scene->rec.p, \
+	vmuln(scene->rec.normal, EPSILON)), temp->light_dir);
+	temp->light_dir = vunit(temp->light_dir);
+	temp->kd = fmax(vdot(scene->rec.normal, temp->light_dir), 0.0);
+	temp->diffuse = vmuln(light->light_color, temp->kd);
+	temp->view_dir = vunit(vmuln(scene->ray.dir, -1));
+	temp->reflect_dir = reflect(vmuln(temp->light_dir, -1), scene->rec.normal);
+	temp->ksn = 64;
+	temp->ks = 0.5;
+	temp->spec = pow(fmax(vdot(temp->view_dir, temp->reflect_dir), 0.0), \
+	temp->ksn);
+	temp->specular = vmuln(vmuln(light->light_color, temp->ks), temp->spec);
+	temp->brightness = light->bright_ratio * LUMEN;
+}
+
 t_color	point_light_get(t_scene *scene, t_light *light)
 {
-	t_color	diffuse;
-	t_vec	light_dir;
-	double	kd;
-	t_color	specular;
-	t_vec	view_dir;
-	t_vec	reflect_dir;
+	t_light_temp	*temp;
 
-	double	light_len;
-	t_ray	light_ray;
-
-	double	spec;
-	double	ksn;
-	double	ks;
-
-	double	brightness;
-
-	light_dir = vsub(light->origin, scene->rec.p);
-	light_len = vlength(light_dir);
-	light_ray = ray(vadd(scene->rec.p, \
-	vmuln(scene->rec.normal, EPSILON)), light_dir);
-	if (in_shadow(scene->world, light_ray, light_len))
+	temp = malloc(sizeof(t_light_temp));
+	light_sub(temp, light, scene);
+	if (in_shadow(scene->world, temp->light_ray, temp->light_len))
 		return (vec(0, 0, 0));
-	light_dir = vunit(light_dir);
-	kd = fmax(vdot(scene->rec.normal, light_dir), 0.0);
-	diffuse = vmuln(light->light_color, kd);
-
-	view_dir = vunit(vmuln(scene->ray.dir, -1));
-	reflect_dir = reflect(vmuln(light_dir, -1), scene->rec.normal);
-	ksn = 64;
-	ks = 0.5;
-	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
-	specular = vmuln(vmuln(light->light_color, ks), spec);
-	brightness = light->bright_ratio * LUMEN;
-	return (vmuln(vadd(vadd(scene->ambient, diffuse), specular), brightness));
+	return (vmuln(vadd(vadd(scene->ambient, temp->diffuse), \
+	temp->specular), temp->brightness));
 }
 
 t_bool	in_shadow(t_object *objs, t_ray light_ray, double light_len)

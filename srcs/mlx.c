@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:22:02 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 22:23:49 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:07:55 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	exit_error(int code)
 		printf("parsing error\n");
 	else
 		printf("error not specified yet : %d\n", code);
-
 	exit(1);
 }
 

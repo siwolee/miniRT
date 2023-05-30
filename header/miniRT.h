@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/28 17:29:30 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:07:43 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,6 @@ typedef struct s_vars
 	t_scene	scene;
 }	t_vars;
 
-
 //parse
 void		readmap(t_scene *scene, int fd);
 t_vec		parse_point(char **split);
@@ -277,6 +276,8 @@ int			hit_cylinder_cap(t_object *cy_obj, t_ray *ray, \
 t_hit_record *rec, double height);
 int			hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 t_bool		hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
+void		cy_temp_struct(t_cy_temp *temp, t_cylinder *cy, t_ray *ray);
+int			hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec);
 
 //mlx
 int			key_press(int keycode, t_vars *vars);

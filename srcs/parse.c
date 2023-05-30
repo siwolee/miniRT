@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 22:24:34 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:08:03 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ void	input_camera(t_scene *scene, char *str)
 	char		**orig;
 	char		**dir;
 	double		fov;
-
 
 	split = ft_split(str, ' ');
 	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])

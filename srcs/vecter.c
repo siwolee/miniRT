@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 16:24:59 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 22:28:31 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/30 19:08:35 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,3 @@ t_vec	vunit(t_vec vec)
 	vec.z /= len;
 	return (vec);
 }
-

@@ -6,13 +6,14 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 23:09:23 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 17:10:34 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/27 22:28:18 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
-t_light	*light_point(t_point light_origin, t_color light_color, double bright_ratio)
+t_light	*light_point(t_point light_origin, t_color light_color, \
+double bright_ratio)
 {
 	t_light	*light;
 
@@ -73,8 +74,8 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 
 	view_dir = vunit(vmuln(scene->ray.dir, -1));
 	reflect_dir = reflect(vmuln(light_dir, -1), scene->rec.normal);
-	ksn = 64; //shininess value
-	ks = 0.5; //specular strength
+	ksn = 64;
+	ks = 0.5;
 	spec = pow(fmax(vdot(view_dir, reflect_dir), 0.0), ksn);
 	specular = vmuln(vmuln(light->light_color, ks), spec);
 	brightness = light->bright_ratio * LUMEN;

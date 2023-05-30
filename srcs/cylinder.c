@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/08 19:23:38 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 20:13:17 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/05/28 19:01:01 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_cylinder	*cylinder(t_point center, t_vec dir, double dia, double height)
 	return (cy);
 }
 
-//addnote : hit_height /2 
 int	cy_boundary(t_cylinder *cy, t_vec at_point)
 {
 	double	hit_height;
@@ -50,17 +49,32 @@ t_vec	get_cylinder_normal(t_cylinder *cy, t_vec at_point, double hit_height)
 	return (vunit(normal));
 }
 
-// rec->normal = vunit(vminus(circle_center, ray->origin)); // vmult(ray->dir, root)하면 안돼!!!
-int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height)
+int	cap_discrement(double r, float diameter, float root, t_hit_record *rec)
 {
-	const t_cylinder *cy = cy_obj->element;
-	const double r = cy->dia / 2;
-	const t_vec	circle_center = vadd(cy->center, vmuln(cy->dir, height));
-	const float	root = vdot(vsub(circle_center, ray->orig), cy->dir) / vdot(ray->dir, cy->dir);
-	const float	diameter = vlength(vsub(circle_center, ray_at(ray, root)));
 	if (fabs(r) < fabs(diameter))
 		return (0);
 	if (root < rec->tmin || rec->tmax < root)
+		return (0);
+	return (1);
+}
+
+int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, \
+t_hit_record *rec, double height)
+{
+	t_cylinder	*cy;
+	double		r;
+	t_vec		circle_center;
+	float		root;
+	float		diameter;
+
+	cy = cy_obj->element;
+	r = cy->dia / 2;
+	circle_center = vadd(cy->center, vmuln(cy->dir, height));
+	root = vdot(vsub(circle_center, ray->orig), cy->dir) / \
+	vdot(ray->dir, cy->dir);
+	diameter = vlength(vsub(circle_center, ray_at(ray, root)));
+
+	if (!(cap_discrement(r, diameter, root, rec)))
 		return (0);
 	rec->t = root;
 	rec->p = ray_at(ray, root);
@@ -69,159 +83,71 @@ int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double hei
 		rec->normal = cy->dir;
 	else
 		rec->normal = vmuln(cy->dir, -1);
-
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (1);
 }
 
-//a, b, c는 각각 t에 관한 근의 공식 2차 방정식의 계수
-// discriminant : 판별식
-int      hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
+void	cy_temp_struct(t_cy_temp *temp, t_cylinder *cy, t_ray *ray)
+{
+	temp->u = ray->dir;
+	temp->o = cy->dir;
+	temp->r = cy->dia / 2;
+	temp->delta_p = vsub(ray->orig, cy->center);
+	temp->a = vlength2(vcross(temp->u, temp->o));
+	temp->half_b = vdot(vcross(temp->u, temp->o), vcross(temp->delta_p, temp->o));
+	temp->c = vlength2(vcross(temp->u, temp->o)) - pow(temp->r, 2);
+	temp->discriminant = temp->half_b * temp->half_b - temp->a * temp->c;
+	temp->sqrtd = sqrt(temp->discriminant);
+	temp->root = (-temp->half_b - temp->sqrtd) / temp->a;
+}
+
+int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cylinder *cy;
+	t_cy_temp *temp;
 
-	double	a;
-	double	half_b;
-	double	c;
-	t_vec	u;
-	t_vec	o;
-	t_vec	delta_P;
-	double	r;
-	double discriminant;
-	double sqrtd;
-	double root;
+	temp = malloc(sizeof(t_cy_temp));
+	// double	a;
+	// double	half_b;
+	// double	c;
+	// t_vec	u;
+	// t_vec	o;
+	// t_vec	delta_P;
+	// double	r;
+	// double discriminant;
+	// double sqrtd;
+	// double root;
 	double hit_height;
 	cy = cy_obj->element;
-	u = ray->dir;
-	o = cy->dir;
-	r = cy->dia / 2;
-	delta_P = vsub(ray->orig, cy->center);
-	a = vlength2(vcross(u, o));
-	half_b = vdot(vcross(u, o), vcross(delta_P, o));
-	c = vlength2(vcross(delta_P, o)) - pow(r, 2);
-	discriminant = half_b * half_b - a * c;
-	if (discriminant < 0)
-	    return (0);
-	// 이 시점에서 판별식이 참이 나왔기에 근이 존재한다고 판단한다.
-	sqrtd = sqrt(discriminant);
-	root = (-half_b - sqrtd) / a;  // 근의 공식 해, 작은 근부터 고려.
-	if (root < rec->tmin || rec->tmax < root)
-	{
-	root = (-half_b + sqrtd) / a;
-	    if (root < rec->tmin || rec->tmax < root)
-	    return (0);
-	}
-	if (!(hit_height = cy_boundary(cy, ray_at(ray, root))))
+	cy_temp_struct(temp, cy, ray);
+	// u = ray->dir;
+	// o = cy->dir;
+	// r = cy->dia / 2;
+	// delta_P = vsub(ray->orig, cy->center);
+	// a = vlength2(vcross(u, o));
+	// half_b = vdot(vcross(u, o), vcross(delta_P, o));
+	// c = vlength2(vcross(delta_P, o)) - pow(r, 2);
+	// discriminant = half_b * half_b - a * c;
+	if (temp->discriminant < 0)
 		return (0);
-	rec->t = root; // 광선의 원점과 교점까지의 거리를 rec에 저장한다.
-	rec->p = ray_at(ray, root); // 교점의 좌표를 rec에 저장한다.
+	// sqrtd = sqrt(discriminant);
+	// root = (-half_b - sqrtd) / a;
+	if (temp->root < rec->tmin || rec->tmax < temp->root)
+	{
+	temp->root = (-temp->half_b + temp->sqrtd) / temp->a;
+		if (temp->root < rec->tmin || rec->tmax < temp->root)
+			return (0);
+	}
+	hit_height = cy_boundary(cy, ray_at(ray, temp->root));
+	if (!hit_height)
+		return (0);
+	rec->t = temp->root;
+	rec->p = ray_at(ray, temp->root);
 	rec->normal = get_cylinder_normal(cy, rec->p, hit_height);
-		set_face_normal(ray, rec);
+	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
 	return (1);
 }
 
-// int	hit_cylinder_cap(t_object *cy_obj, t_ray *ray, t_hit_record *rec, double height)
-// {
-// 	t_cylinder	*cy;
-// 	double	r;
-// 	t_vec	circle_center;
-// 	double	root;
-// 	double	diameter;
 
-// 	cy = cy_obj->element;
-// 	r = cy->dia / 2;
-// 	//printf("%lf\n", cy->dir.z);
-// 	circle_center = vadd(cy->center, vmuln(cy->dir, height));
-// 	printf("%lf\n",circle_center.z);
-// 	//방향벡터 정규화가 안되어있다?
-// 	//원래식
-// 	//root = vdot(vsub(circle_center, ray->orig), cy->dir);
-// 	//이렇게하니까보이기는하더라
-// 	root = vdot(vsub(circle_center, ray->orig), cy->dir) / vdot(ray->dir, cy->dir);
-// 	diameter = vlength(vsub(circle_center, ray_at(ray, root)));
-// 	if (fabs(r) < fabs(diameter))
-// 		return (0);
-// 	if (root < rec->tmin || rec->tmax < root)
-// 		return (0);
-// 	rec->t = root;
-// 	rec->p = ray_at(ray, root);
-// 	rec->tmax = rec->t;
-// 	if (0 < height)
-// 		rec->normal = cy->dir;
-// 	else
-// 		rec->normal = vmuln(cy->dir, -1);
-// 	set_face_normal(ray, rec);
-// 	rec->albedo = cy_obj->albedo;
-// 	return (1);
-// }
-
-// int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
-// {
-// 	t_cylinder *cy;
-
-// 	double	a;
-// 	double	half_b;
-// 	double	c;
-// 	t_vec	u;
-// 	t_vec	o;
-// 	t_vec	delta_p;
-// 	double	r;
-
-// 	double	discriminant;
-// 	double	sqrtd;
-// 	double	root;
-// 	double	hit_height;
-
-// 	cy = cy_obj->element;
-// 	// hit_height = cy->height;
-// 	u = ray->dir;
-// 	o = cy->dir;
-// 	r = cy->dia / 2;
-// 	delta_p = vsub(ray->orig, cy->center);
-// 	a = vlength2(vcross(u, o));
-// 	half_b = vdot(vcross(u, o), vcross(delta_p, o));
-// 	c = vlength2(vcross(delta_p, o)) - pow(r, 2);
-// 	discriminant = half_b * half_b - a * c;
-// 	if (discriminant < 0)
-// 		return (0);
-// 	sqrtd = sqrt(discriminant);
-// 	root = (-half_b - sqrtd) / a;
-// 	if (root < rec->tmin || rec->tmax < root)
-// 	{
-// 		root = (-half_b + sqrtd) / a;
-// 		if (root < rec->tmin || rec->tmax < root)
-// 			return (0);
-// 	}
-// 	//위아래 높이 찾아주는 부분
-// 	if (!(hit_height = cy_boundary(cy, ray_at(ray, root))))
-// 		return (0);
-// 	rec->t = root;
-// 	rec->p = ray_at(ray, root);
-// 	rec->normal	= get_cylinder_normal(cy, rec->p, hit_height);
-// 	set_face_normal(ray, rec);
-// 	rec->albedo = cy_obj->albedo;
-// 	return (1);
-// }
-
-//조건문
-t_bool	hit_cylinder(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
-{
-	t_cylinder	*cy;
-	int	result;
-
-	cy = (t_cylinder *)cy_obj->element;
-	//printf("dia : %lf height : %lf\n", cy->dia, cy->height);
-	result = 0;
-	//height/2 수정하고 위에서 추가함
-	result += hit_cylinder_cap(cy_obj, ray, rec, cy->height / 2);
-	result += hit_cylinder_cap(cy_obj, ray, rec, -(cy->height / 2));
-	//저거 height /2가 빠져있었네? 니가그랬냐?
-	result += hit_cylinder_side(cy_obj, ray, rec);
-	if (result > 0)
-		return (TRUE);
-	else
-		return (FALSE);
-	// return (result);
-}

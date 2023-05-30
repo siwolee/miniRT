@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:08:11 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/22 17:10:47 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/27 22:14:36 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,18 +57,4 @@ t_color	ray_color(t_scene *scene)
 		return (phong_lighting(scene));
 	t = 0.5 * (scene->ray.dir.y + 1.0);
 	return (vadd(vmuln(vec(1, 1, 1), 1.0 - t), vmuln(vec(0.5, 0.7, 1.0), t)));
-}
-
-void	set_face_normal(t_ray *r, t_hit_record *rec)
-{
-	if (vdot(r->dir, rec->normal) < 0)
-	{
-		rec->front_face = TRUE;
-		rec->normal = rec->normal;
-	}
-	else
-	{
-		rec->front_face = FALSE;
-		rec->normal = vmuln(rec->normal, -1);
-	}
 }

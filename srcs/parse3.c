@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:16:58 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 22:17:35 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/05/31 19:37:53 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ void	readmap(t_scene *scene, int fd)
 	char	*str;
 
 	str = get_next_line(fd);
+	if (!str)
+		exit_error(ERROR_NO_INPUT);
 	convert_space(str);
 	while (str != 0)
 	{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 18:03:31 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:44:11 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,6 +239,9 @@ int			read_mapsize(int fd, t_scene *scene);
 
 //error
 void		exit_error(int code);
+
+//free
+void		free_vars(t_vars *vars);
 
 //vecter
 void		vprint(char *name, t_vec v);

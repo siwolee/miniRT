@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 16:55:51 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/01 20:00:45 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,28 +43,7 @@ int	main(int ac, char **av)
 	ft_draw(&vars.scene, &vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_press, &vars);
-
-
-	printf("%6s is", "vars");
-	printf("%10lu\n", sizeof(vars));
-	printf("%6s is", "scene");
-	printf("%10lu\n", sizeof(vars.scene));
-	printf("%6s is", "mlx");
-	printf("%10lu\n", sizeof(vars.mlx));
-	printf("%6s is", "window");
-	printf("%10lu\n", sizeof(vars.win));
-	printf("%6s is", "image");
-	printf("%10lu\n", sizeof(vars.image));
-
-	
-
-
-
 	mlx_loop(vars.mlx);
 	exit(0);
 	return (0);
 }
-
-//Process 48170: 1200039 leaks for 204799200 total leaked bytes.
-// Process 61204: 1200041 leaks for 204799728 total leaked bytes.
-

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:15:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 17:21:00 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:50:51 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ void	free_split(char **split)
 	i = 0;
 	while (split[i])
 	{
-		printf("freed %s\n", split[i]);
 		free(split[i]);
 		split[i] = NULL;
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:15:27 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 19:25:07 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:48:19 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,9 @@ double	ft_atod(const char *str)
 	int		i;
 	double	pos;
 	double	neg;
-	double	sign;
 	char	*temp;
 
 	i = 0;
-	sign = 1;
 	neg = 0;
 	while (str[i] != '.' && str[i])
 		i++;
@@ -102,11 +100,8 @@ double	ft_atod(const char *str)
 		free(temp);
 	}
 	if (pos < 0)
-	{
-		sign *= -1;
-		pos *= -1;
-	}
-	return ((pos + neg) * sign);
+		return ((pos + (neg * -1)));
+	return (pos + neg);
 }
 
 void	convert_space(char *c)

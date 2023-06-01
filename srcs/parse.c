@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 17:30:11 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/01 19:50:30 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	input_cylinder(t_scene *scene, char *str)
 	point = ft_split(split[1], ',');
 	vec = ft_split(split[2], ',');
 	color = ft_split(split[5], ',');
-	printf("this is cylinder\n");
 	oadd(&scene->world, object(CY, cylinder(parse_point(point), \
 		parse_vec(vec), ft_atod(split[3]), ft_atod(split[4])), \
 		parse_vec_normalize_color(color)));
@@ -87,8 +86,6 @@ void	input_ambient(t_scene *scene, char *str)
 	color = ft_split(split[2], ',');
 	scene->ambient = vmuln(parse_vec_normalize_color(color), \
 					ft_atod(split[1]));
-	system("leaks minirt");
-	system("sleep 1000");
 	free_split(color);
 	free_split(split);
 }

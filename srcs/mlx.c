@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:22:02 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/30 19:07:55 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:13:08 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+//editing
 void	ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image)
 {
 	vars->mlx = mlx_init();
@@ -52,14 +53,54 @@ int	file_check(int ac, char **av)
 	return (fd);
 }
 
+void *free_cam(t_camera *node)
+{
+	t_camera	*next;
+
+	if(!node)
+		return (NULL);
+	while(node)
+	{
+		next = node->next;
+		free(node);
+		node = next;
+	}
+	return (NULL);
+}
+
+void *free_object(t_object *node)
+{
+	t_object	*next;
+
+	if(!node)
+		return (NULL);
+	while(node)
+	{
+		next = node->next;
+		free(node->element);
+		free(node);
+		node = next;
+	}
+	return (NULL);
+}
+
+
+// camera, world, light
+void	free_vars(t_vars *vars)
+{
+	vars->scene.camera = free_cam(vars->scene.camera);
+	vars->scene.world = free_object(vars->scene.world);
+	vars->scene.light = free_object(vars->scene.light);
+}
+
 int	key_press(int keycode, t_vars *vars)
 {
-	t_camera		*cam;
 	t_vec			vup;
 
 	if (keycode == 53 || keycode == X_EVENT_KEY_EXIT)
 	{
 		mlx_destroy_window(vars->mlx, vars->win);
+		free_vars(vars);
 		exit(0);
 	}
 	vup = vars->scene.camera->orig;
@@ -73,7 +114,6 @@ int	key_press(int keycode, t_vars *vars)
 		vup = vec(vup.x - VAL, vup.y, vup.z);
 	else
 		return (0);
-	cam = vars->scene.camera;
 	vprint("cam orig is", vup);
 	move_camera(vars->scene.camera, vup);
 	ft_draw(&vars->scene, &vars->image);

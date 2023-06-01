@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:19:51 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/30 19:07:05 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:00:49 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ void	cy_temp_struct(t_cy_temp *temp, t_cylinder *cy, t_ray *ray)
 	temp->root = (-(temp->half_b) - temp->sqrtd) / temp->a;
 }
 
+int	free_temp(t_cy_temp	*temp, int i)
+{
+	free(temp);
+	return (i);
+}
+
+//leaks ok;
 int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
 	t_cylinder	*cy;
@@ -53,20 +60,20 @@ int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 	cy = cy_obj->element;
 	cy_temp_struct(temp, cy, ray);
 	if (temp->discriminant < 0)
-		return (0);
+		return (free_temp(temp, 0));
 	if (temp->root < rec->tmin || rec->tmax < temp->root)
 	{
 	temp->root = (-temp->half_b + temp->sqrtd) / temp->a;
 		if (temp->root < rec->tmin || rec->tmax < temp->root)
-			return (0);
+			return (free_temp(temp, 0));
 	}
 	hit_height = cy_boundary(cy, ray_at(ray, temp->root));
 	if (!hit_height)
-		return (0);
+		return (free_temp(temp, 0));
 	rec->t = temp->root;
 	rec->p = ray_at(ray, temp->root);
 	rec->normal = get_cylinder_normal(cy, rec->p, hit_height);
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
-	return (1);
+	return (free_temp(temp, 1));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:21:22 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 23:04:39 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:24:47 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,7 @@ t_scene	scene_init(void)
 {
 	t_scene		scene;
 
-	scene.canvas_height = 800;
-	scene.canvas_width = 500;
-	scene.canvas = canvas(scene.canvas_width, scene.canvas_height);
+	scene.canvas = canvas(600, 400);
 	scene.camera = NULL;
 	scene.world = NULL;
 	scene.light = NULL;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:14:14 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/28 19:12:50 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 16:39:06 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 	vmuln(u, cam->viewport_w / 2)), vmuln(v, cam->viewport_h / 2)), w);
 	cam->horizontal = vmuln(u, cam->viewport_w);
 	cam->vertical = vmuln(v, cam->viewport_h);
+	cam->next = NULL;
 	return (cam);
 }
 

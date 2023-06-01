@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+         #
+#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/05/28 17:25:33 by juhyulee         ###   ########.fr        #
+#    Updated: 2023/06/01 17:30:38 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,19 +32,21 @@ SRCS = ./srcs/main.c \
 		./srcs/parse3.c \
 
 OBJS = $(SRCS:.c=.o)
-LMLX = -L./mlx -lmlx -framework OpenGL -framework Appkit
+LMLX_DIR = mlx2
+LMLX = ./$(LMLX_DIR)/libmlx.a
+LMLX_FLAG = -L./$(LMLX_DIR) -lmlx -framework OpenGL -framework Appkit
 
 LIBFT = ./libft/libft.a
 HEADER = -I./header
 NAME = miniRT
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
 RM = rm -f
 
 all : 		$(NAME)
 
-$(NAME) :	$(OBJS) $(LIBFT)
-			$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX) \
+$(NAME) :	$(OBJS) $(LIBFT) $(LMLX)
+			$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX_FLAG) \
 			$(SRCS) -o $(NAME)
 
 %.o : %.c
@@ -52,6 +54,9 @@ $(NAME) :	$(OBJS) $(LIBFT)
 
 $(LIBFT) :
 			make -C ./libft
+
+$(LMLX)	:
+			make -C ./$(LMLX_DIR)
 
 clean :
 			make -C ./libft fclean

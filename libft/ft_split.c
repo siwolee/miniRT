@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2022/11/23 15:06:20 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 11:53:52 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,13 +103,11 @@ char	**ft_split(char const *str, char c)
 {
 	char	**res;
 	int		wordcnt;
-	int		i;
 
 	wordcnt = allo(str, c);
 	res = (char **)malloc(sizeof(char *) * (wordcnt + 1));
 	if (!res)
 		return (0);
-	i = 0;
 	res = allo3(res, str, c, wordcnt);
 	if (res != 0)
 		res = allo2(res, str, c, wordcnt);

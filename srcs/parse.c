@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/30 19:08:03 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:30:11 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,8 @@ void	input_camera(t_scene *scene, char *str)
 	orig = ft_split(valid_parse_vec(split[1]), ',');
 	dir = ft_split(valid_parse_vec(split[2]), ',');
 	fov = ft_atod(split[3]);
-	printf("....%f\n", (float)scene->canvas_width / (float)scene->canvas_height);
 	scene->camera = camera(parse_point(orig), parse_point(dir), fov, \
-		(float)scene->canvas_width / (float) scene->canvas_height);
+		(float)scene->canvas.width / (float) scene->canvas.height);
 	free_split(orig);
 	free_split(dir);
 	free_split(split);
@@ -88,8 +87,10 @@ void	input_ambient(t_scene *scene, char *str)
 	color = ft_split(split[2], ',');
 	scene->ambient = vmuln(parse_vec_normalize_color(color), \
 					ft_atod(split[1]));
-	free_split(split);
+	system("leaks minirt");
+	system("sleep 1000");
 	free_split(color);
+	free_split(split);
 }
 
 void	input_plane(t_scene *scene, char *str)

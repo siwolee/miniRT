@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:16:58 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/31 19:37:53 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:26:21 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,21 @@ void	input_light(t_scene *scene, char *str)
 	free_split(split);
 }
 
+void	input_canvas(t_scene *scene, char *str)
+{
+	int		width;
+	int 	height;
+	char	**split;
+
+	split = ft_split(str, ' ');
+	if (!split[0] || !split[1] || !split[2] || split[3])
+		exit_error(ERROR_PARSE);
+	width = ft_atoi(split[1]);
+	height = ft_atoi(split[2]);
+	scene->canvas = canvas(width, height);
+	free_split(split);
+}
+
 void	id_check(t_scene *scene, char *str)
 {
 	if (str[0] == 'A')
@@ -44,9 +59,8 @@ void	id_check(t_scene *scene, char *str)
 		input_sphere(scene, str);
 	else if (ft_strncmp(str, "cy", 2) == 0)
 		input_cylinder(scene, str);
-	else
-		return ;
-	printf("%s\n", str);
+	else if (ft_strncmp(str, "map", 3) == 0)
+		input_canvas(scene, str);
 }
 
 void	readmap(t_scene *scene, int fd)
@@ -65,5 +79,7 @@ void	readmap(t_scene *scene, int fd)
 		str = get_next_line(fd);
 		convert_space(str);
 	}
+	if (!scene->camera)
+		exit_error(10);
 	free(str);
 }

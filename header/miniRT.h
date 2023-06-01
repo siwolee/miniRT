@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/30 19:23:10 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 18:03:31 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,17 +177,18 @@ typedef struct s_light
 
 typedef struct s_camera
 {
-	t_point		orig;
-	t_vec		dir;
-	double		aspect;
-	t_vec		vup;
-	double		viewport_h;
-	double		viewport_w;
-	t_vec		horizontal;
-	t_vec		vertical;
-	t_point		left_bottom;
-	double		fov;
-	double		focal_len;
+	t_point			orig;
+	t_vec			dir;
+	double			aspect;
+	t_vec			vup;
+	double			viewport_h;
+	double			viewport_w;
+	t_vec			horizontal;
+	t_vec			vertical;
+	t_point			left_bottom;
+	double			fov;
+	double			focal_len;
+	struct s_camera	*next;
 }t_camera;
 
 typedef struct s_canvas
@@ -224,7 +225,7 @@ t_vec		parse_vec(char **split);
 t_vec		parse_vec_normalize_color(char **split);
 int			file_check(int ac, char **av);
 t_scene		scene_init(void);
-double		ft_atod(const char *str);
+double		ft_(const char *str);
 char		*valid_parse_vec(char *str);
 void		free_split(char **split);
 void		input_cylinder(t_scene *scene, char *str);
@@ -233,6 +234,8 @@ void		input_camera(t_scene *scene, char *str);
 void		input_ambient(t_scene *scene, char *str);
 void		input_plane(t_scene *scene, char *str);
 void		convert_space(char *c);
+double		ft_atod(const char *str);
+int			read_mapsize(int fd, t_scene *scene);
 
 //error
 void		exit_error(int code);

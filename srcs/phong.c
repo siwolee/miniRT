@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 23:09:23 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/30 19:19:39 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/01 17:01:10 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,20 @@ void	light_sub(t_light_temp *temp, t_light *light, t_scene *scene)
 	temp->brightness = light->bright_ratio * LUMEN;
 }
 
+//leaks ok
 t_color	point_light_get(t_scene *scene, t_light *light)
 {
 	t_light_temp	*temp;
+	t_color			color;
 
 	temp = malloc(sizeof(t_light_temp));
 	light_sub(temp, light, scene);
 	if (in_shadow(scene->world, temp->light_ray, temp->light_len))
 		return (vec(0, 0, 0));
-	return (vmuln(vadd(vadd(scene->ambient, temp->diffuse), \
-	temp->specular), temp->brightness));
+	color = vmuln(vadd(vadd(scene->ambient, temp->diffuse), \
+	temp->specular), temp->brightness);
+	free(temp);
+	return (color);
 }
 
 t_bool	in_shadow(t_object *objs, t_ray light_ray, double light_len)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 19:44:11 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/03 19:53:06 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,11 @@
 # define TRUE 1
 # define FALSE 0
 # define X_EVENT_KEY_EXIT	17
+
+extern void* __debug_tmp__;
+# define malloc(x) \
+(__debug_tmp__ = malloc(x)); \
+printf("%s:%d %p [%lubyte]\n", __FILE__, __LINE__, __debug_tmp__, x)
 
 enum e_error_code
 {

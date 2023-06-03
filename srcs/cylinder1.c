@@ -6,7 +6,7 @@
 /*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 17:19:51 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/03 19:45:44 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/03 20:12:06 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,28 +52,27 @@ int	free_temp(t_cy_temp	*temp, int i)
 //leaks ok;
 int	hit_cylinder_side(t_object *cy_obj, t_ray *ray, t_hit_record *rec)
 {
-	t_cylinder	*cy;
-	t_cy_temp	*temp;
-	double		hit_height;
+	static t_cylinder	*cy;
+	static t_cy_temp	temp;
+	double				hit_height;
 
-	temp = malloc(sizeof(t_cy_temp));
 	cy = cy_obj->element;
-	cy_temp_struct(temp, cy, ray);
-	if (temp->discriminant < 0)
-		return (free_temp(temp, 0));
-	if (temp->root < rec->tmin || rec->tmax < temp->root)
+	cy_temp_struct(&temp, cy, ray);
+	if (temp.discriminant < 0)
+		return (0);
+	if (temp.root < rec->tmin || rec->tmax < temp.root)
 	{
-	temp->root = (-temp->half_b + temp->sqrtd) / temp->a;
-		if (temp->root < rec->tmin || rec->tmax < temp->root)
-			return (free_temp(temp, 0));
+	temp.root = (-temp.half_b + temp.sqrtd) / temp.a;
+		if (temp.root < rec->tmin || rec->tmax < temp.root)
+			return (0);
 	}
-	hit_height = cy_boundary(cy, ray_at(ray, temp->root));
+	hit_height = cy_boundary(cy, ray_at(ray, temp.root));
 	if (!hit_height)
-		return (free_temp(temp, 0));
-	rec->t = temp->root;
-	rec->p = ray_at(ray, temp->root);
+		return (0);
+	rec->t = temp.root;
+	rec->p = ray_at(ray, temp.root);
 	rec->normal = get_cylinder_normal(cy, rec->p, hit_height);
 	set_face_normal(ray, rec);
 	rec->albedo = cy_obj->albedo;
-	return (free_temp(temp, 1));
+	return (1);
 }

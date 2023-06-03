@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   phong.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 23:09:23 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 17:01:10 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/03 20:28:35 by juhyulee         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,10 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 	temp = malloc(sizeof(t_light_temp));
 	light_sub(temp, light, scene);
 	if (in_shadow(scene->world, temp->light_ray, temp->light_len))
+	{
+		free(temp);
 		return (vec(0, 0, 0));
+	}
 	color = vmuln(vadd(vadd(scene->ambient, temp->diffuse), \
 	temp->specular), temp->brightness);
 	free(temp);

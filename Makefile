@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
+#    By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/06/01 19:48:52 by siwolee          ###   ########.fr        #
+#    Updated: 2023/06/03 19:54:01 by juhyulee         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS = ./srcs/main.c \
 		./srcs/parse1.c \
 		./srcs/parse2.c \
 		./srcs/parse3.c \
-		./srcs/free.c 
+		./srcs/free.c \
+		./srcs/debug.c
 
 OBJS = $(SRCS:.c=.o)
 LMLX_DIR = mlx2

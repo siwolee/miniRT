@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+         #
+#    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/06/03 19:54:01 by juhyulee         ###   ########.fr        #
+#    Updated: 2023/06/08 19:52:53 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,11 @@ SRCS = ./srcs/main.c \
 		./srcs/parse2.c \
 		./srcs/parse3.c \
 		./srcs/free.c \
-		./srcs/debug.c
+		./srcs/camera_tilt.c
+	#  ./srcs/debug.c 
 
 OBJS = $(SRCS:.c=.o)
-LMLX_DIR = mlx2
+LMLX_DIR = mlx
 LMLX = ./$(LMLX_DIR)/libmlx.a
 LMLX_FLAG = -L./$(LMLX_DIR) -lmlx -framework OpenGL -framework Appkit
 

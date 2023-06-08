@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:22:02 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 19:49:57 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/08 20:33:46 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,29 +52,39 @@ int	file_check(int ac, char **av)
 	return (fd);
 }
 
+int	key_destroy(t_vars *vars)
+{
+	mlx_destroy_window(vars->mlx, vars->win);
+	free_vars(vars);
+	printf("EXIT\n");
+	exit(0);
+}
+
+#define ANGLE (15)
+#define ANGLE_ (360 - ANGLE)
+#define THETA vars->scene.camera->theta
+#define LOOKAT vars->scene.camera
+
 int	key_press(int keycode, t_vars *vars)
 {
-	t_vec			vup;
+	static int x_angle;
+	static int y_angle;
 
 	if (keycode == 53 || keycode == X_EVENT_KEY_EXIT)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		free_vars(vars);
-		exit(0);
-	}
-	vup = vars->scene.camera->orig;
+		key_destroy(vars);
 	if (keycode == 13)
-		vup = vec(vup.x, vup.y + VAL, vup.z);
+		xaxis_rotate(LOOKAT, cos(THETA * ANGLE), sin(THETA * ANGLE));
 	else if (keycode == 1)
-		vup = vec(vup.x, vup.y - VAL, vup.z);
+		xaxis_rotate(LOOKAT, cos(THETA * ANGLE_), sin(THETA * ANGLE_));
 	else if (keycode == 0)
-		vup = vec(vup.x + VAL, vup.y, vup.z);
+		yaxis_rotate(LOOKAT, cos(THETA * ANGLE), sin(THETA * ANGLE));
 	else if (keycode == 2)
-		vup = vec(vup.x - VAL, vup.y, vup.z);
+		yaxis_rotate(LOOKAT, cos(THETA * ANGLE_), sin(THETA * ANGLE_));
 	else
 		return (0);
-	vprint("cam side : ", vup);
-	move_camera(vars->scene.camera, vup);
+	move_camera(vars->scene.camera);
+	printf("key %d \n", keycode);
+	print_vec(LOOKAT->dir);
 	ft_draw(&vars->scene, &vars->image);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	return (0);

@@ -3,6 +3,7 @@
 	"files.associations": {
 		"stdlib.h": "c",
 		"vec3.h": "c",
-		"minirt.h": "c"
+		"minirt.h": "c",
+		"complex": "c"
 	}
 }

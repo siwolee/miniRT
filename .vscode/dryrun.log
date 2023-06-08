@@ -1,8 +1,8 @@
 make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/siwolee/minirt'
-cc -I./header -Wall -Wextra -Werror -g3  -c srcs/free.c -o srcs/free.o
-cc -I./header -Wall -Wextra -Werror -g3  ./libft/libft.a -L./mlx2 -lmlx -framework OpenGL -framework Appkit \
-			./srcs/main.c ./srcs/mlx.c ./srcs/mlx1.c ./srcs/vecter.c ./srcs/vecter1.c ./srcs/vecter2.c ./srcs/vecter3.c ./srcs/camera.c ./srcs/ray.c ./srcs/ray1.c ./srcs/sphere.c ./srcs/object.c ./srcs/phong.c ./srcs/plane.c ./srcs/cylinder.c ./srcs/cylinder1.c ./srcs/parse.c ./srcs/parse1.c ./srcs/parse2.c ./srcs/parse3.c ./srcs/free.c  -o miniRT
+make: Entering directory `/Users/haecho/42/miniRT'
+cc -I./header -Wall -Wextra -Werror -g3  -c srcs/camera_tilt.c -o srcs/camera_tilt.o
  
-make: Leaving directory `/Users/siwolee/minirt'
+cc -I./header -Wall -Wextra -Werror -g3  ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework Appkit \
+			./srcs/main.c ./srcs/mlx.c ./srcs/mlx1.c ./srcs/vecter.c ./srcs/vecter1.c ./srcs/vecter2.c ./srcs/vecter3.c ./srcs/camera.c ./srcs/ray.c ./srcs/ray1.c ./srcs/sphere.c ./srcs/object.c ./srcs/phong.c ./srcs/plane.c ./srcs/cylinder.c ./srcs/cylinder1.c ./srcs/parse.c ./srcs/parse1.c ./srcs/parse2.c ./srcs/parse3.c ./srcs/free.c ./srcs/camera_tilt.c -o miniRT
+make: Leaving directory `/Users/haecho/42/miniRT'
  

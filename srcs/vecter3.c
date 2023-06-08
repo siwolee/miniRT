@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vecter3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:08:28 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 22:28:37 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/08 20:06:31 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,5 +30,5 @@ t_vec	reflect(t_vec v, t_vec n)
 
 void	print_vec(t_vec t)
 {
-	printf("x : %lf y : %lf z : %lf", t.x, t.y, t.z);
+	printf("x : %lf y : %lf z : %lf\n", t.x, t.y, t.z);
 }

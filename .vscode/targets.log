@@ -8,15 +8,16 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Thu Jun  1 19:48:58 2023
+# Make data base, printed on Thu Jun  8 19:53:03 2023
 
 # Variables
 
- 
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
+# environment
+VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -24,30 +25,32 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/siwolee/minirt
+CURDIR := /Users/haecho/42/miniRT
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 45)
+# makefile (from `Makefile', line 47)
 RM = rm -f
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from `Makefile', line 37)
+VSCODE_NLS_CONFIG = {"locale":"en-us","osLocale":"en-kr","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from `Makefile', line 39)
 LMLX = ./$(LMLX_DIR)/libmlx.a
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 44)
+# makefile (from `Makefile', line 46)
 CFLAGS = -Wall -Wextra -Werror -g3 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 35)
-OBJS = $(SRCS:.c=.o)
+# environment
+__CFBundleIdentifier = com.microsoft.VSCode
+# environment
+INFOPATH = /opt/homebrew/share/info:
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/go/bin:/usr/local/munki:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/siwolee/localBin
+PATH = /Users/haecho/.brew:/Library/Frameworks/Python.framework/Versions/3.6/bin:/opt/.brew/bin:/opt/.brew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Python.framework/Versions/3.6/bin:/opt/.brew/bin:/opt/.brew/sbin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `Makefile', line 38)
+# makefile (from `Makefile', line 40)
 LMLX_FLAG = -L./$(LMLX_DIR) -lmlx -framework OpenGL -framework Appkit
 # environment
 ELECTRON_RUN_AS_NODE = 1
@@ -56,27 +59,38 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 LS_COLORS = di=1;36:ln=35:so=32:pi=33:ex=31:bd=34;46:cd=34;43:su=30;41:sg=30;46:tw=30;42:ow=30;43
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.Xk1W59i4lw/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.D5RDPAj9Bn/Listeners
 # automatic
 %F = $(notdir $%)
+# makefile (from `Makefile', line 37)
+OBJS = $(SRCS:.c=.o)
 # environment
-PWD = /Users/siwolee/minirt
+PWD = /Users/haecho/42/miniRT
+# environment
+HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
+MANPATH = /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/share/man:/Library/Developer/CommandLineTools/usr/share/man:/Library/Developer/CommandLineTools/Toolchains/XcodeDefault.xctoolchain/usr/share/man:/opt/homebrew/share/man::
+# environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
-HOME = /Users/siwolee
-# makefile (from `Makefile', line 36)
-LMLX_DIR = mlx2
+HOME = /Users/haecho
+ 
+# makefile (from `Makefile', line 38)
+LMLX_DIR = mlx
 # default
-MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/siwolee/Library/Application Support/Code/CachedData/97dec172d3256f8ca4bfb2143f3f76b503ca0534
+VSCODE_CODE_CACHE_PATH = /Users/haecho/Library/Application Support/Code/CachedData/b3e4e68a0bc097f0ae7907b217c1119af9e03435
 # environment
-LOGNAME = siwolee
+LOGNAME = haecho
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+NVM_CD_FLAGS = -q
+# environment
+ZSH = /Users/haecho/.oh-my-zsh
 # environment
 VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
@@ -88,35 +102,37 @@ MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
 # makefile (from `Makefile', line 13)
-SRCS = ./srcs/main.c ./srcs/mlx.c ./srcs/mlx1.c ./srcs/vecter.c ./srcs/vecter1.c ./srcs/vecter2.c ./srcs/vecter3.c ./srcs/camera.c ./srcs/ray.c ./srcs/ray1.c ./srcs/sphere.c ./srcs/object.c ./srcs/phong.c ./srcs/plane.c ./srcs/cylinder.c ./srcs/cylinder1.c ./srcs/parse.c ./srcs/parse1.c ./srcs/parse2.c ./srcs/parse3.c ./srcs/free.c 
+SRCS = ./srcs/main.c ./srcs/mlx.c ./srcs/mlx1.c ./srcs/vecter.c ./srcs/vecter1.c ./srcs/vecter2.c ./srcs/vecter3.c ./srcs/camera.c ./srcs/ray.c ./srcs/ray1.c ./srcs/sphere.c ./srcs/object.c ./srcs/phong.c ./srcs/plane.c ./srcs/cylinder.c ./srcs/cylinder1.c ./srcs/parse.c ./srcs/parse1.c ./srcs/parse2.c ./srcs/parse3.c ./srcs/free.c ./srcs/camera_tilt.c
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 40)
+# makefile (from `Makefile', line 42)
 LIBFT = ./libft/libft.a
-# makefile (from `Makefile', line 43)
+# makefile (from `Makefile', line 45)
 CC = cc
+# environment
+VSCODE_CRASH_REPORTER_SANDBOXED_HINT = 1
 # default
 MAKE_VERSION := 3.81
 # environment
-USER = siwolee
+USER = haecho
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 42)
+# makefile (from `Makefile', line 44)
 NAME = miniRT
 # environment
 LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cv240036rj/T/
+TMPDIR = /var/folders/rn/1746g3wj6js2bmmc25t5fqm40000gp/T/
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/siwolee/Library/Application Support/Code/1.74.3-main.sock
+VSCODE_IPC_HOOK = /Users/haecho/Library/Application Support/Code/1.78-main.sock
 # environment
 MallocNanoZone = 0
 # makefile
@@ -126,24 +142,32 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2712
+NVM_DIR = /Users/haecho/.nvm
+# environment
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.1337777.1337987
+# environment
+HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
+# environment
+VSCODE_L10N_BUNDLE_LOCATION = 
 # automatic
 +F = $(notdir $+)
 # environment
-__CF_USER_TEXT_ENCODING = 0x19B11:0x0:0x0
+HOMEBREW_REPOSITORY = /opt/homebrew
+# environment
+__CF_USER_TEXT_ENCODING = 0x1F6:0x0:0x0
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
 # environment
-EDITOR = /usr/bin/vim
-# environment
 PAGER = less
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 41)
+# makefile (from `Makefile', line 43)
 HEADER = -I./header
 # automatic
 ^F = $(notdir $^)
@@ -155,11 +179,10 @@ SUFFIXES :=
 MAKELEVEL := 0
 # environment
 LANG = C
- 
 # environment
-VSCODE_PID = 14277
+VSCODE_PID = 5627
 # variable set hash-table stats:
-# Load=72/1024=7%, Rehash=0, Collisions=7/111=6%
+# Load=84/1024=8%, Rehash=0, Collisions=8/123=7%
 
 # Pattern-specific Variable Values
 
@@ -167,15 +190,15 @@ VSCODE_PID = 14277
 
 # Directories
 
-# . (device 16777225, inode 1776659): 13 files, no impossibilities.
-# srcs (device 16777225, inode 1949580): 42 files, no impossibilities so far.
+# . (device 16777231, inode 325651): 13 files, no impossibilities.
+# srcs (device 16777231, inode 326743): 47 files, no impossibilities so far.
 
-# 55 files, no impossibilities in 2 directories.
+# 60 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 %.o: %.c
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
@@ -186,27 +209,19 @@ VSCODE_PID = 14277
 srcs/phong.o: srcs/phong.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/phong'
-#  Last modified 2023-06-01 19:41:02
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
-	
-
-mlx2/libmlx.a:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 60):
-	make -C ./$(LMLX_DIR)
 	
 
 # Not a target:
 srcs/parse2.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:48:19
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -215,12 +230,12 @@ srcs/parse2.c:
 srcs/vecter3.o: srcs/vecter3.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/vecter3'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
@@ -237,12 +252,12 @@ all: miniRT
 srcs/ray.o: srcs/ray.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/ray'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
@@ -254,19 +269,19 @@ srcs/ray.o: srcs/ray.c
 srcs/parse3.o: srcs/parse3.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/parse3'
-#  Last modified 2023-06-01 19:41:02
+#  Last modified 2023-06-08 15:21:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/camera.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:40:29
+#  Last modified 2023-06-08 19:51:51
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -275,31 +290,31 @@ srcs/camera.c:
 srcs/vecter.o: srcs/vecter.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/vecter'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 srcs/mlx.o: srcs/mlx.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/mlx'
-#  Last modified 2023-06-01 19:48:16
+#  Last modified 2023-06-08 19:51:28
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/sphere.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-01 11:42:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -314,20 +329,20 @@ srcs/sphere.c:
 # Not a target:
 srcs/plane.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-01 11:42:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-miniRT: srcs/main.o srcs/mlx.o srcs/mlx1.o srcs/vecter.o srcs/vecter1.o srcs/vecter2.o srcs/vecter3.o srcs/camera.o srcs/ray.o srcs/ray1.o srcs/sphere.o srcs/object.o srcs/phong.o srcs/plane.o srcs/cylinder.o srcs/cylinder1.o srcs/parse.o srcs/parse1.o srcs/parse2.o srcs/parse3.o srcs/free.o libft/libft.a mlx2/libmlx.a
+miniRT: srcs/main.o srcs/mlx.o srcs/mlx1.o srcs/vecter.o srcs/vecter1.o srcs/vecter2.o srcs/vecter3.o srcs/camera.o srcs/ray.o srcs/ray1.o srcs/sphere.o srcs/object.o srcs/phong.o srcs/plane.o srcs/cylinder.o srcs/cylinder1.o srcs/parse.o srcs/parse1.o srcs/parse2.o srcs/parse3.o srcs/free.o srcs/camera_tilt.o libft/libft.a mlx/libmlx.a
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  commands to execute (from `Makefile', line 50):
+#  commands to execute (from `Makefile', line 52):
 	$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX_FLAG) \
 	$(SRCS) -o $(NAME)
 	
@@ -335,44 +350,29 @@ miniRT: srcs/main.o srcs/mlx.o srcs/mlx1.o srcs/vecter.o srcs/vecter1.o srcs/vec
 srcs/free.o: srcs/free.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/free'
-#  File does not exist.
+#  Last modified 2023-06-08 15:21:30
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := srcs/free.o
-# automatic
-# % := 
-# automatic
-# * := srcs/free
-# automatic
-# + := srcs/free.c
-# automatic
-# | := 
-# automatic
-# < := srcs/free.c
-# automatic
-# ^ := srcs/free.c
-# automatic
-# ? := srcs/free.c
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/15=13%
-#  commands to execute (from `Makefile', line 54):
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:48:52
+#  Last modified 2023-06-08 19:52:54
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+ 
 
 # Not a target:
 srcs/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:41:40
+#  Last modified 2023-06-08 15:24:46
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -381,55 +381,64 @@ srcs/main.c:
 srcs/object.o: srcs/object.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/object'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
+
+# Not a target:
+srcs/camera_tilt.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-06-08 19:49:31
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 srcs/cylinder.o: srcs/cylinder.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/cylinder'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 srcs/parse.o: srcs/parse.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/parse'
-#  Last modified 2023-06-01 19:41:02
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 srcs/ray1.o: srcs/ray1.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/ray1'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/phong.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:40:29
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -438,20 +447,19 @@ srcs/phong.c:
 srcs/vecter1.o: srcs/vecter1.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/vecter1'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
- 
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/vecter3.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-01 11:42:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -461,19 +469,19 @@ libft/libft.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 57):
+#  commands to execute (from `Makefile', line 59):
 	make -C ./libft
 	
 
 srcs/mlx1.o: srcs/mlx1.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/mlx1'
-#  Last modified 2023-06-01 19:41:02
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
@@ -486,7 +494,7 @@ bonus:
 # Not a target:
 srcs/ray.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -497,7 +505,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 67):
+#  commands to execute (from `Makefile', line 69):
 	rm -rf miniRT.dSYM
 	$(RM) $(NAME)
 	
@@ -505,7 +513,7 @@ fclean: clean
 # Not a target:
 srcs/parse3.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:40:29
+#  Last modified 2023-06-01 17:26:21
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -514,31 +522,31 @@ srcs/parse3.c:
 srcs/parse1.o: srcs/parse1.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/parse1'
-#  Last modified 2023-06-01 19:41:02
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 srcs/cylinder1.o: srcs/cylinder1.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/cylinder1'
-#  Last modified 2023-06-01 19:41:02
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/mlx.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:42:20
+#  Last modified 2023-06-08 19:49:55
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -550,10 +558,18 @@ srcs/mlx.c:
 #  Modification time never checked.
 #  File has not been updated.
 
+mlx/libmlx.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 62):
+	make -C ./$(LMLX_DIR)
+	
+
 # Not a target:
 srcs/vecter.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-01 11:42:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -562,7 +578,7 @@ srcs/vecter.c:
 # Not a target:
 srcs/free.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:44:39
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -571,19 +587,19 @@ srcs/free.c:
 srcs/vecter2.o: srcs/vecter2.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/vecter2'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/object.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-23 21:38:33
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -598,7 +614,7 @@ re: fclean all
 # Not a target:
 srcs/cylinder.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -609,7 +625,7 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 63):
+#  commands to execute (from `Makefile', line 65):
 	make -C ./libft fclean
 	$(RM) $(OBJS)
 	
@@ -617,7 +633,7 @@ clean:
 # Not a target:
 srcs/parse.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:40:29
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -626,7 +642,7 @@ srcs/parse.c:
 # Not a target:
 srcs/ray1.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-01 11:42:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -635,19 +651,20 @@ srcs/ray1.c:
 srcs/parse2.o: srcs/parse2.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/parse2'
-#  Last modified 2023-06-01 19:48:21
+#  Last modified 2023-06-08 15:21:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/vecter1.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+ 
+#  Last modified 2023-06-01 11:42:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -656,7 +673,7 @@ srcs/vecter1.c:
 # Not a target:
 srcs/mlx1.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:40:29
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -665,19 +682,19 @@ srcs/mlx1.c:
 srcs/camera.o: srcs/camera.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/camera'
-#  Last modified 2023-06-01 19:41:02
+#  Last modified 2023-06-08 19:51:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/parse1.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:40:29
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -686,7 +703,7 @@ srcs/parse1.c:
 # Not a target:
 srcs/cylinder1.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-01 19:40:29
+#  Last modified 2023-06-08 12:13:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -695,51 +712,78 @@ srcs/cylinder1.c:
 srcs/sphere.o: srcs/sphere.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/sphere'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 srcs/plane.o: srcs/plane.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/plane'
-#  Last modified 2023-05-30 19:27:45
+#  Last modified 2023-06-08 15:21:29
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 srcs/main.o: srcs/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `srcs/main'
-#  Last modified 2023-06-01 19:48:16
+#  Last modified 2023-06-08 15:24:47
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 54):
+#  commands to execute (from `Makefile', line 56):
+	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+	
+
+srcs/camera_tilt.o: srcs/camera_tilt.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `srcs/camera_tilt'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := srcs/camera_tilt.o
+# automatic
+# % := 
+# automatic
+# * := srcs/camera_tilt
+# automatic
+# + := srcs/camera_tilt.c
+# automatic
+# | := 
+# automatic
+# < := srcs/camera_tilt.c
+# automatic
+# ^ := srcs/camera_tilt.c
+# automatic
+# ? := srcs/camera_tilt.c
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=2/15=13%
+#  commands to execute (from `Makefile', line 56):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
 # Not a target:
 srcs/vecter2.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-05-30 19:25:58
+#  Last modified 2023-06-01 11:42:17
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
- 
-# Load=54/1024=5%, Rehash=0, Collisions=4/162=2%
+# Load=56/1024=5%, Rehash=0, Collisions=3/168=2%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -751,6 +795,6 @@ srcs/vecter2.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Thu Jun  1 19:48:58 2023
+# Finished Make data base on Thu Jun  8 19:53:03 2023
 
  

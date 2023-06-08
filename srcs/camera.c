@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:14:14 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 16:39:06 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/08 20:16:44 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,28 @@ t_canvas	canvas(int width, int height)
 	return (canvas);
 }
 
-void	camera_sub(t_camera *cam, float theta, double fov, double aspect)
+//right (or left) is perpendicular to forward and parrel to the floor(x, 0, z) 
+// = it's cross to the (forward, normalized y-axis(0, 1, 0))
+//then vup = cross(forward, right);
+void	camera_sub(t_camera *cam, float theta, double fov, double aspect, t_vec forward)
 {
+	t_vec	right;
+
 	cam->fov = fov;
 	cam->aspect = aspect;
-	cam->vup = vec(0, 1, 0);
+	right = vcross(forward, vec(0, -1, 0));
+	cam->vup = vcross(forward, right);
 	cam->viewport_h = (tan(theta / 2)) * 2;
 	cam->focal_len = 1 / tan(fov / 2);
 	cam->viewport_w = aspect * cam->viewport_h;
+	cam->theta = theta;
 }
 
 t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 {
 	t_camera	*cam;
 	float		theta;
-	t_vec		w;
+	t_vec		forward;
 	t_vec		u;
 	t_vec		v;
 
@@ -44,32 +51,32 @@ t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 	if (!cam)
 		exit_error(5);
 	theta = fov * M_PI / 180;
-	camera_sub(cam, theta, fov, aspect);
+	forward = vunit(vsub(lookfrom, lookat));
+	camera_sub(cam, theta, fov, aspect, forward);
 	cam->orig = lookfrom;
-	w = vunit(vsub(lookfrom, lookat));
-	u = vunit(vcross(cam->vup, w));
-	v = vcross(w, u);
+	cam->dir = lookat;
+	u = vunit(vcross(cam->vup, forward));
+	v = vcross(forward, u);
 	cam->left_bottom = vsub(vsub(vsub(cam->orig, \
-	vmuln(u, cam->viewport_w / 2)), vmuln(v, cam->viewport_h / 2)), w);
+	vmuln(u, cam->viewport_w / 2)), vmuln(v, cam->viewport_h / 2)), forward);
 	cam->horizontal = vmuln(u, cam->viewport_w);
 	cam->vertical = vmuln(v, cam->viewport_h);
 	cam->next = NULL;
 	return (cam);
 }
 
-void	move_camera(t_camera *cam, t_vec vup)
+void	move_camera(t_camera *cam)
 {
-	t_vec		w;
+	t_vec		forward;
 	t_vec		u;
 	t_vec		v;
 
-	cam->orig = vup;
 	cam->focal_len = 1 / tan(cam->fov / 2);
-	w = vunit(vsub(cam->orig, cam->dir));
-	u = vunit(vcross(vup, w));
-	v = vcross(w, u);
+	forward = vunit(vsub(cam->orig, cam->dir));
+	u = vunit(vcross(cam->vup, forward));
+	v = vcross(forward, u);
 	cam->left_bottom = vsub(vsub(vsub(cam->orig, \
-	vmuln(u, cam->viewport_w / 2)), vmuln(v, cam->viewport_h / 2)), w);
+	vmuln(u, cam->viewport_w / 2)), vmuln(v, cam->viewport_h / 2)), forward);
 	cam->horizontal = vmuln(u, cam->viewport_w);
 	cam->vertical = vmuln(v, cam->viewport_h);
 }

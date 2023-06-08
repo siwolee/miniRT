@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/03 19:53:06 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/08 19:57:31 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@
 # define FALSE 0
 # define X_EVENT_KEY_EXIT	17
 
-extern void* __debug_tmp__;
-# define malloc(x) \
-(__debug_tmp__ = malloc(x)); \
-printf("%s:%d %p [%lubyte]\n", __FILE__, __LINE__, __debug_tmp__, x)
+// extern void* __debug_tmp__;
+// # define malloc(x) \
+// (__debug_tmp__ = malloc(x)); \
+// printf("%s:%d %p [%lubyte]\n", __FILE__, __LINE__, __debug_tmp__, x)
 
 enum e_error_code
 {
@@ -193,6 +193,7 @@ typedef struct s_camera
 	t_point			left_bottom;
 	double			fov;
 	double			focal_len;
+	double			theta;
 	struct s_camera	*next;
 }t_camera;
 
@@ -272,7 +273,11 @@ t_vec		parse_point(char **split);
 //camera
 t_canvas	canvas(int width, int height);
 t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect);
-void		move_camera(t_camera *cam, t_vec vup);
+void		move_camera(t_camera *cam);
+
+//camera_tilt
+void		xaxis_rotate(t_camera *cam, double sin, double cos);
+void		yaxis_rotate(t_camera *cam, double sin, double cos);
 
 //ray
 t_ray		ray(t_point orig, t_vec dir);
@@ -319,5 +324,6 @@ int			cy_boundary(t_cylinder *cy, t_vec at_point);
 int			key_press(int keycode, t_vars *vars);
 void		ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image);
 void		ft_draw(t_scene *scene, t_data *image);
+int			key_destroy(t_vars *vars);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/06/08 19:52:53 by siwolee          ###   ########.fr        #
+#    Updated: 2023/06/08 21:38:38 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,8 @@ SRCS = ./srcs/main.c \
 		./srcs/parse1.c \
 		./srcs/parse2.c \
 		./srcs/parse3.c \
-		./srcs/free.c \
-		./srcs/camera_tilt.c
+		./srcs/free.c 
+		# ./srcs/camera_tilt.c
 	#  ./srcs/debug.c 
 
 OBJS = $(SRCS:.c=.o)

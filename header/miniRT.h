@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 19:57:31 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/08 21:32:39 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ typedef struct s_scene
 	t_color			ambient;
 	t_ray			ray;
 	t_hit_record	rec;
+	t_camera		*cam_now;
 	int				canvas_height;
 	int				canvas_width;
 }		t_scene;

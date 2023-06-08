@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:21:22 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 21:40:54 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/06/08 21:30:50 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_draw(t_scene *scene, t_data *image)
 		{
 			u = (double)i / (scene->canvas.width - 1);
 			v = (double)j / (scene->canvas.height - 1);
-			scene->ray = ray_primary(scene->camera, u, v);
+			scene->ray = ray_primary(scene->cam_now, u, v);
 			pixel_color = ray_color(scene);
 			my_mlx_pixel_put(image, i, scene->canvas.height - 1 - j, \
 			create_trgb(0, pixel_color.x * 255.999, pixel_color.y * 255.999, \

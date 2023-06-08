@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:22:02 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 20:33:46 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/08 21:40:08 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image)
 {
 	vars->mlx = mlx_init();
+	scene->cam_now = scene->camera;
 	vars->win = mlx_new_window(vars->mlx, scene->canvas.width, \
 	scene->canvas.height, "miniRT");
 	image->img = mlx_new_image(vars->mlx, scene->canvas.width, \
@@ -60,31 +61,44 @@ int	key_destroy(t_vars *vars)
 	exit(0);
 }
 
-#define ANGLE (15)
-#define ANGLE_ (360 - ANGLE)
-#define THETA vars->scene.camera->theta
-#define LOOKAT vars->scene.camera
+void	next_cam(t_scene *sc)
+{
+	if (!sc->cam_now->next)
+	{
+		printf("NEXT : no camera exits\n");
+		return ;
+	}
+	sc->cam_now = sc->cam_now->next;
+}
+
+void	prev_cam(t_scene *sc)
+{
+	t_camera	*prev;
+
+	if (sc->cam_now == sc->camera)
+	{
+		printf("PREV : no camera exits\n");
+		return ;
+	}
+	prev = sc->camera;
+	while (prev && prev->next != sc->cam_now)
+	{
+		prev = prev->next;
+	}
+	sc->cam_now = prev;
+}
+
 
 int	key_press(int keycode, t_vars *vars)
 {
-	static int x_angle;
-	static int y_angle;
-
 	if (keycode == 53 || keycode == X_EVENT_KEY_EXIT)
 		key_destroy(vars);
-	if (keycode == 13)
-		xaxis_rotate(LOOKAT, cos(THETA * ANGLE), sin(THETA * ANGLE));
-	else if (keycode == 1)
-		xaxis_rotate(LOOKAT, cos(THETA * ANGLE_), sin(THETA * ANGLE_));
-	else if (keycode == 0)
-		yaxis_rotate(LOOKAT, cos(THETA * ANGLE), sin(THETA * ANGLE));
+	if (keycode == 0)
+		next_cam(&vars->scene);
 	else if (keycode == 2)
-		yaxis_rotate(LOOKAT, cos(THETA * ANGLE_), sin(THETA * ANGLE_));
+		prev_cam(&vars->scene);
 	else
 		return (0);
-	move_camera(vars->scene.camera);
-	printf("key %d \n", keycode);
-	print_vec(LOOKAT->dir);
 	ft_draw(&vars->scene, &vars->image);
 	mlx_put_image_to_window(vars->mlx, vars->win, vars->image.img, 0, 0);
 	return (0);

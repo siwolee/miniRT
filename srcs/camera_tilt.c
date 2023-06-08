@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/08 17:09:50 by siwolee           #+#    #+#             */
-/*   Updated: 2023/06/08 20:26:36 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/08 21:14:52 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,18 +66,16 @@ t_vec _yaxis_rotate(t_vec point, double sin, double cos)
 	return (temp);
 }
 
-void	yaxis_rotate(t_camera *cam, double sin, double cos)
+void	yaxis_rotate(t_camera *cam, int angle)
 {
-t_vec	temp;
-	t_vec point;
+	t_vec new_dir;
+	double cos_;
+	double sin_;
+	t_vec	temp;
 
-	point = vadd(vec(20, 20, 20), cam->dir);
-	print_vec (point);
-	temp.x = point.x * cos + point.x * sin;
-	temp.y = point.y;
-	temp.z = - point.z * sin + point.x * cos;
-	cam->dir = vsub(temp, vec(1, 1, 1));
-	// cam->vup.x = cam->vup.x * cos + cam->vup.x * sin;
-	// cam->vup.y = cam->vup.y;
-	// cam->vup.z = - cam->vup.z * sin + cam->vup.x * cos;
+	cos_ = cos(angle);
+	sin_ = sin(angle);
+	temp.x = 1 * cos_ + 1 * sin_;
+	temp.y = 0;
+	temp.z = -1 * sin_ + 1 * cos_;
 }

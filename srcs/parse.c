@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 19:50:30 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/08 21:45:14 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ void	input_camera(t_scene *scene, char *str)
 	char		**orig;
 	char		**dir;
 	double		fov;
+	t_camera	*cam;
 
 	split = ft_split(str, ' ');
 	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
@@ -68,8 +69,17 @@ void	input_camera(t_scene *scene, char *str)
 	orig = ft_split(valid_parse_vec(split[1]), ',');
 	dir = ft_split(valid_parse_vec(split[2]), ',');
 	fov = ft_atod(split[3]);
-	scene->camera = camera(parse_point(orig), parse_point(dir), fov, \
+	if (!scene->camera)
+		scene->camera = camera(parse_point(orig), parse_point(dir), fov, \
 		(float)scene->canvas.width / (float) scene->canvas.height);
+	else
+	{
+		cam = scene->camera;
+		while (cam->next)
+			cam = cam->next;
+		cam->next = camera(parse_point(orig), parse_point(dir), fov, \
+		(float)scene->canvas.width / (float) scene->canvas.height);
+	}
 	free_split(orig);
 	free_split(dir);
 	free_split(split);

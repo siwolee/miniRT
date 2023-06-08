@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 19:57:01 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/08 21:48:19 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ int	main(int ac, char **av)
 	readmap(&vars.scene, fd);
 	ft_init_mlx(&vars, &vars.scene, &vars.image);
 	ft_draw(&vars.scene, &vars.image);
-	// system("leaks miniRT");
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);
 	mlx_key_hook(vars.win, key_press, &vars);
 	mlx_hook(vars.win, X_EVENT_KEY_EXIT, 0, &key_destroy, &vars);

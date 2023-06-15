@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   miniRT.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 21:32:39 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:29:59 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,14 @@
 enum e_error_code
 {
 	ERROR_NO_INPUT,
-	ERROR_CANNOT_OPEN_FILE,
 	ERROR_FILE_TYPE,
 	ERROR_PARSE,
-	ERROR_NO_ELEMENT
+	ERROR_NO_ELEMENT,
+	ERROR_NO_CAMERA,
+	ERROR_READFILE,
+	ERROR_NO_CAMERA_INPUT
 };
+
 typedef struct s_vec
 {
 	double	x;
@@ -194,6 +197,7 @@ typedef struct s_camera
 	double			fov;
 	double			focal_len;
 	double			theta;
+	int 			num;
 	struct s_camera	*next;
 }t_camera;
 
@@ -211,6 +215,7 @@ typedef struct s_scene
 	t_object		*world;
 	t_object		*light;
 	t_color			ambient;
+	t_color			bg_color;
 	t_ray			ray;
 	t_hit_record	rec;
 	t_camera		*cam_now;

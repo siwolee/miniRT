@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:14:14 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 21:32:17 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:18:54 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 
 	cam = malloc(sizeof(t_camera));
 	if (!cam)
-		exit_error(5);
+		exit_error(ERROR_NO_CAMERA);
 	theta = fov * M_PI / 180;
 	forward = vunit(vsub(lookfrom, lookat));
 	camera_sub(cam, theta, fov, aspect, forward);
@@ -62,6 +62,7 @@ t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 	cam->horizontal = vmuln(u, cam->viewport_w);
 	cam->vertical = vmuln(v, cam->viewport_h);
 	cam->next = NULL;
+	cam->num = 0;
 	return (cam);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:16:58 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/01 17:26:21 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/15 14:52:02 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ void	readmap(t_scene *scene, int fd)
 		convert_space(str);
 	}
 	if (!scene->camera)
-		exit_error(10);
+		exit_error(ERROR_NO_CAMERA_INPUT);
 	free(str);
 }

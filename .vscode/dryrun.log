@@ -1,5 +1,6 @@
 make --dry-run --keep-going --print-directory
-make: Entering directory `/Users/haecho/42/miniRT'
+make: Entering directory `/Users/siwolee/minirt'
 make: Nothing to be done for `all'.
-make: Leaving directory `/Users/haecho/42/miniRT'
+ 
+make: Leaving directory `/Users/siwolee/minirt'
  

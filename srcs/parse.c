@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 21:45:14 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/15 16:22:35 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	input_camera(t_scene *scene, char *str)
 			cam = cam->next;
 		cam->next = camera(parse_point(orig), parse_point(dir), fov, \
 		(float)scene->canvas.width / (float) scene->canvas.height);
+		cam->next->num = cam->num + 1;
 	}
 	free_split(orig);
 	free_split(dir);

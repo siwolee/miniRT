@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:22:02 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 21:40:08 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/06/15 15:20:56 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,35 @@ void	ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image)
 	&image->line_length, &image->endian);
 }
 
+// ERROR_NO_INPUT,
+// ERROR_CANNOT_OPEN_FILE,
+// ERROR_FILE_TYPE,
+// ERROR_PARSE,
+// ERROR_NO_ELEMENT, ->>no exit
+// ERROR_NO_CAMERA,
+// ERROR_READFILE,
+// ERROR_NO_CAMERA_INPUT
 void	exit_error(int code)
 {
-	if (code == ERROR_NO_INPUT)
+	if (code == ERROR_NO_ELEMENT)
 	{
-		printf("no file input\n");
+		printf("ERROR : no element\n");
+		return ;
 	}
-	else if (code == ERROR_CANNOT_OPEN_FILE)
-		printf("cannot open file\n");
+	if (code == ERROR_NO_INPUT)
+		printf("ERROR : no file input\n");
+	else if (code == ERROR_READFILE)
+		printf("ERROR : cannot open file\n");
+	else if (code == ERROR_FILE_TYPE)
+		printf("ERROR : file type is not\n");
 	else if (code == ERROR_PARSE)
-		printf("parsing error\n");
+		printf("ERROR : parsing error\n");
+	else if (code == ERROR_NO_CAMERA)
+		printf("ERROR : camera is unvalid\n");
+	else if (code == ERROR_NO_CAMERA_INPUT)
+		printf("ERROR : map file has no camera\n");
 	else
-		printf("error not specified yet : %d\n", code);
+		printf("ERROR : error not specified yet : %d\n", code);
 	exit(1);
 }
 
@@ -48,7 +65,7 @@ int	file_check(int ac, char **av)
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
-		exit_error(2);
+		exit_error(ERROR_READFILE);
 	}
 	return (fd);
 }
@@ -69,6 +86,7 @@ void	next_cam(t_scene *sc)
 		return ;
 	}
 	sc->cam_now = sc->cam_now->next;
+	printf("CAM : switched to cam %d\n", sc->cam_now->num);
 }
 
 void	prev_cam(t_scene *sc)
@@ -86,6 +104,7 @@ void	prev_cam(t_scene *sc)
 		prev = prev->next;
 	}
 	sc->cam_now = prev;
+	printf("CAM : switched to cam %d\n", sc->cam_now->num);
 }
 
 

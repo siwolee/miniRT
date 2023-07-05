@@ -6,69 +6,83 @@
 #    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/06/15 16:23:28 by siwolee          ###   ########.fr        #
+#    Updated: 2023/07/05 17:12:44 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = ./srcs/main.c \
-		./srcs/mlx.c \
-		./srcs/mlx1.c \
-		./srcs/vecter.c \
-		./srcs/vecter1.c \
-		./srcs/vecter2.c \
-		./srcs/vecter3.c \
-		./srcs/camera.c \
-		./srcs/ray.c \
-		./srcs/ray1.c \
-		./srcs/sphere.c \
-		./srcs/object.c \
-		./srcs/phong.c \
-		./srcs/plane.c \
-		./srcs/cylinder.c \
-		./srcs/cylinder1.c \
-		./srcs/parse.c \
-		./srcs/parse1.c \
-		./srcs/parse2.c \
-		./srcs/parse3.c \
-		./srcs/free.c 
-		# ./srcs/camera_tilt.c
-	#  ./srcs/debug.c 
+NAME = miniRT
 
-OBJS = $(SRCS:.c=.o)
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+RM = rm -f
+
+SRC = main.c \
+		mlx.c \
+		mlx1.c \
+		vecter.c \
+		vecter1.c \
+		vecter2.c \
+		vecter3.c \
+		camera.c \
+		ray.c \
+		ray1.c \
+		sphere.c \
+		object.c \
+		phong.c \
+		plane.c \
+		cylinder.c \
+		cylinder1.c \
+		parse.c \
+		parse1.c \
+		parse2.c \
+		parse3.c \
+		free.c 
+		# camera_tilt.c
+		#  debug.c 
+
+HEADER = -I./header
+OBJ_DIR = objs
+OBJS = $(patsubst %.o,$(OBJ_DIR)/%.o,$(SRC:.c=.o))
+SRC_DIR = srcs
+SRCS = $(patsubst %.o,$(SRC_DIR)/%.o,$(SRC:.c=.o))
 LMLX_DIR = mlx
 LMLX = ./$(LMLX_DIR)/libmlx.a
 LMLX_FLAG = -L./$(LMLX_DIR) -lmlx -framework OpenGL -framework Appkit
 
 LIBFT = ./libft/libft.a
-HEADER = -I./header
-NAME = miniRT
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
-RM = rm -f
+
 
 all : 		$(NAME)
 
-$(NAME) :	$(OBJS) $(LIBFT) $(LMLX)
-			$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX_FLAG) \
-			$(SRCS) -o $(NAME)
+$(NAME) :	$(OBJ_DIR) $(OBJS) $(LIBFT) $(LMLX)
+			@$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX_FLAG) \
+			$(OBJS) -o $(NAME)
+			@echo "🌹ALL compiled"
 
-%.o : %.c
-			$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
+$(OBJ_DIR) : 
+			@mkdir $(OBJ_DIR)
+
+$(OBJ_DIR)/%.o : $(SRC_DIR)/%.c 
+			@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+			@echo "obj compiling..."
 
 $(LIBFT) :
-			make -C ./libft
+			@make -sC ./libft
+			@echo "💗LIBFT compiled"
 
 $(LMLX)	:
-			make -C ./$(LMLX_DIR)
+			@make -sC ./$(LMLX_DIR)
+			@echo "💗MLX compiled"
 
 clean :
-			make -C ./libft fclean
-			$(RM) $(OBJS)
+			@make -sC ./libft fclean
+			@$(RM) $(OBJS)
+			@echo "💔LIBFT and OBJS cleaned"
 
 fclean :	clean
-			rm -rf miniRT.dSYM
-			make -C ./mlx clean
-			$(RM) $(NAME)
+			@rm -rf miniRT.dSYM
+			@$(RM) $(NAME)
+			@echo "💔cleaned everything"
 
 re :		fclean all
 

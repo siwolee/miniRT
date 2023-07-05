@@ -7,8 +7,10 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
+make: *** No rule to make target `objs', needed by `miniRT'.  Stop.
 
-# Make data base, printed on Wed Jul  5 16:27:19 2023
+
+# Make data base, printed on Wed Jul  5 16:55:38 2023
 
 # Variables
 
@@ -23,33 +25,35 @@ VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
 # automatic
- 
 @F = $(notdir $@)
 # makefile
 CURDIR := /Users/siwolee/minirt
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 47)
+# makefile (from `Makefile', line 17)
 RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","osLocale":"en","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from `Makefile', line 39)
+# makefile (from `Makefile', line 49)
+ 
 LMLX = ./$(LMLX_DIR)/libmlx.a
 # environment
 _ = /usr/bin/make
-# makefile (from `Makefile', line 46)
+# makefile (from `Makefile', line 16)
 CFLAGS = -Wall -Wextra -Werror -g3 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 37)
-OBJS = $(SRCS:.c=.o)
+# makefile (from `Makefile', line 45)
+OBJ_DIR = objs
+# makefile (from `Makefile', line 47)
+OBJS = $(patsubst %.o,$(OBJ_DIR)/%.o,$(SRC:.c=.o))
 # environment
 VSCODE_CWD = /
 # environment
 PATH = /Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/siwolee/localBin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `Makefile', line 40)
+# makefile (from `Makefile', line 50)
 LMLX_FLAG = -L./$(LMLX_DIR) -lmlx -framework OpenGL -framework Appkit
 # environment
 ELECTRON_RUN_AS_NODE = 1
@@ -69,7 +73,7 @@ ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/siwolee
-# makefile (from `Makefile', line 38)
+# makefile (from `Makefile', line 48)
 LMLX_DIR = mlx
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
@@ -89,13 +93,13 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 13)
+# makefile (from `Makefile', line 19)
 SRCS = ./srcs/main.c ./srcs/mlx.c ./srcs/mlx1.c ./srcs/vecter.c ./srcs/vecter1.c ./srcs/vecter2.c ./srcs/vecter3.c ./srcs/camera.c ./srcs/ray.c ./srcs/ray1.c ./srcs/sphere.c ./srcs/object.c ./srcs/phong.c ./srcs/plane.c ./srcs/cylinder.c ./srcs/cylinder1.c ./srcs/parse.c ./srcs/parse1.c ./srcs/parse2.c ./srcs/parse3.c ./srcs/free.c 
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 42)
+# makefile (from `Makefile', line 52)
 LIBFT = ./libft/libft.a
-# makefile (from `Makefile', line 45)
+# makefile (from `Makefile', line 15)
 CC = cc
 # default
 MAKE_VERSION := 3.81
@@ -103,7 +107,7 @@ MAKE_VERSION := 3.81
 USER = siwolee
 # makefile
 .DEFAULT_GOAL := all
-# makefile (from `Makefile', line 44)
+# makefile (from `Makefile', line 13)
 NAME = miniRT
 # environment
 LESS = -R
@@ -137,6 +141,8 @@ XPC_SERVICE_NAME = com.microsoft.VSCode.4316
 __CF_USER_TEXT_ENCODING = 0x19B11:0x0:0x0
 # default
 MAKEFILES := 
+# makefile (from `Makefile', line 46)
+SRC_DIR = srcs
 # automatic
 <F = $(notdir $<)
 # environment
@@ -145,7 +151,7 @@ EDITOR = /usr/bin/vim
 PAGER = less
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 43)
+# makefile (from `Makefile', line 44)
 HEADER = -I./header
 # automatic
 ^F = $(notdir $^)
@@ -160,7 +166,7 @@ LANG = C
 # environment
 VSCODE_PID = 21426
 # variable set hash-table stats:
-# Load=73/1024=7%, Rehash=0, Collisions=7/112=6%
+# Load=75/1024=7%, Rehash=0, Collisions=7/113=6%
 
 # Pattern-specific Variable Values
 
@@ -168,69 +174,37 @@ VSCODE_PID = 21426
 
 # Directories
 
-# . (device 16777225, inode 1776659): 12 files, no impossibilities.
-# srcs (device 16777225, inode 1949580): 10 files, no impossibilities so far.
+# . (device 16777225, inode 1776659): 13 files, no impossibilities.
+# srcs (device 16777225, inode 1949580): No files, no impossibilities so far.
 
-# 22 files, no impossibilities in 2 directories.
+# 13 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 %.o: %.c
-#  commands to execute (from `Makefile', line 56):
+#  commands to execute (from `Makefile', line 62):
 	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
 	
 
-# 1 implicit rules, 0 (0.0%) terminal.
+objs/%.o: srcs/%.c
+#  commands to execute (from `Makefile', line 64):
+	$(CC) $(CFLAGS) -c $< -o $@
+	
+
+# 2 implicit rules, 0 (0.0%) terminal.
 
 # Files
-
-# Not a target:
-srcs/phong.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/vecter3.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 all: miniRT
 #  Phony target (prerequisite of .PHONY).
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-
-# Not a target:
-srcs/ray.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
 #  File has not been updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 .PHONY: all clean fclean re bonus
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/parse3.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/vecter.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/mlx.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -241,86 +215,41 @@ srcs/mlx.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-miniRT: srcs/main.o srcs/mlx.o srcs/mlx1.o srcs/vecter.o srcs/vecter1.o srcs/vecter2.o srcs/vecter3.o srcs/camera.o srcs/ray.o srcs/ray1.o srcs/sphere.o srcs/object.o srcs/phong.o srcs/plane.o srcs/cylinder.o srcs/cylinder1.o srcs/parse.o srcs/parse1.o srcs/parse2.o srcs/parse3.o srcs/free.o libft/libft.a mlx/libmlx.a
+miniRT: objs libft/libft.a mlx/libmlx.a
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
+#  File has not been updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  commands to execute (from `Makefile', line 52):
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 58):
 	$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX_FLAG) \
 	$(SRCS) -o $(NAME)
- 
 	
-
-# Not a target:
-srcs/free.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-15 16:23:28
+#  Last modified 2023-07-05 16:55:32
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
-srcs/main.c:
+objs:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-15 14:46:15
-#  File has been updated.
-#  Successfully updated.
+#  File does not exist.
+#  File has not been updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/object.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/cylinder.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/parse.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/ray1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/vecter1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 libft/libft.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 59):
+#  commands to execute (from `Makefile', line 67):
 	make -C ./libft
 	
-
-# Not a target:
-srcs/mlx1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 bonus:
 #  Phony target (prerequisite of .PHONY).
@@ -333,23 +262,11 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 69):
+#  commands to execute (from `Makefile', line 77):
 	rm -rf miniRT.dSYM
 	make -C ./mlx clean
 	$(RM) $(NAME)
 	
-
-# Not a target:
-srcs/parse1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/cylinder1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -361,15 +278,9 @@ mlx/libmlx.a:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 62):
+#  commands to execute (from `Makefile', line 70):
 	make -C ./$(LMLX_DIR)
 	
-
-# Not a target:
-srcs/vecter2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -382,65 +293,13 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 65):
+#  commands to execute (from `Makefile', line 73):
 	make -C ./libft fclean
 	$(RM) $(OBJS)
 	
 
-# Not a target:
-srcs/parse2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/camera.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/sphere.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-srcs/plane.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-srcs/main.o: srcs/main.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `srcs/main'
-#  File does not exist.
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := srcs/main.o
-# automatic
-# % := 
-# automatic
-# * := srcs/main
-# automatic
-# + := srcs/main.c
-# automatic
-# | := 
-# automatic
-# < := srcs/main.c
-# automatic
-# ^ := srcs/main.c
-# automatic
-# ? := srcs/main.c
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/15=13%
-#  commands to execute (from `Makefile', line 56):
-	$(CC) $(HEADER) $(CFLAGS) -c $^ -o $@
-	
-
 # files hash-table stats:
-# Load=34/1024=3%, Rehash=0, Collisions=0/82=0%
+# Load=13/1024=1%, Rehash=0, Collisions=0/38=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -452,6 +311,6 @@ srcs/main.o: srcs/main.c
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Jul  5 16:27:19 2023
+# Finished Make data base on Wed Jul  5 16:55:38 2023
 
  

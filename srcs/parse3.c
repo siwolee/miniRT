@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:16:58 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/07 17:33:31 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:29:21 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,22 @@ void	input_light(t_scene *scene, char *str)
 	free_split(split);
 }
 
+void	input_background(t_scene *scene, char *str)
+{
+	char	**split;
+	char	**color_up;
+	char	**color_down;
+
+	split = ft_split(str, ' ');
+	if (!split[0] || !split[1] || !split[2] || split[3])
+		exit_error(ERROR_PARSE);
+	color_up = ft_split(split[1], ',');
+	color_down = ft_split(split[2], ',');
+	scene->bgcolor_up = parse_vec_normalize_color(color_up);
+	scene->bgcolor_down = parse_vec_normalize_color(color_down);
+	free_split(split);
+}
+
 void	input_canvas(t_scene *scene, char *str)
 {
 	int		width;
@@ -50,6 +66,8 @@ void	id_check(t_scene *scene, char *str)
 {
 	if (ft_strncmp(str, "map", 3) == 0)
 		input_canvas(scene, str);
+	else if (ft_strncmp(str, "bg", 2) == 0)
+		input_background(scene, str);
 	else if (str[0] == 'A')
 		input_ambient(scene, str);
 	else if (str[0] == 'C')
@@ -65,10 +83,17 @@ void	id_check(t_scene *scene, char *str)
 }
 
 // read map from the rt.file and parse into map info
-void	readmap(t_scene *scene, int fd)
+void	readmap(t_scene *scene, char *filename)
 {
 	char	*str;
+	int		fd;
 
+	fd = open(filename, O_RDONLY);
+	if (fd == -1)
+		
+		{
+			perror(filename);
+		exit_error(ERROR_READFILE);}
 	str = get_next_line(fd);
 	if (!str)
 		exit_error(ERROR_NO_INPUT);
@@ -84,4 +109,5 @@ void	readmap(t_scene *scene, int fd)
 	if (!scene->camera)
 		exit_error(ERROR_NO_CAMERA_INPUT);
 	free(str);
+	close(fd);
 }

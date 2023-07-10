@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 23:09:23 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/15 15:25:40 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 20:54:25 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,12 @@ t_color	phong_lighting(t_scene *scene)
 	lights = scene->light;
 	while (lights)
 	{
-		if (lights->type == LIGHT_POINT)
-			light_color = vadd(light_color, \
-			point_light_get(scene, lights->element));
+		light_color = vadd(light_color, point_light_get(scene, lights->element));
 		lights = lights->next;
 	}
 	light_color = vadd(light_color, scene->ambient);
 	return (vmin(vmulv(light_color, scene->rec.albedo), vec(1, 1, 1)));
+	return(light_color);
 }
 
 void	light_sub(t_light_temp *temp, t_light *light, t_scene *scene)
@@ -56,7 +55,7 @@ void	light_sub(t_light_temp *temp, t_light *light, t_scene *scene)
 	temp->view_dir = vunit(vmuln(scene->ray.dir, -1));
 	temp->reflect_dir = reflect(vmuln(temp->light_dir, -1), scene->rec.normal);
 	temp->ksn = 64;
-	temp->ks = 0.5;
+	temp->ks = 0.7;
 	temp->spec = pow(fmax(vdot(temp->view_dir, temp->reflect_dir), 0.0), \
 	temp->ksn);
 	temp->specular = vmuln(vmuln(light->light_color, temp->ks), temp->spec);
@@ -76,8 +75,8 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 		free(temp);
 		return (vec(0, 0, 0));
 	}
-	color = vmuln(vadd(vadd(scene->ambient, temp->diffuse), \
-	temp->specular), temp->brightness);
+	// color = vmuln(vadd(vadd(scene->ambient, temp->diffuse),temp->specular), temp->brightness);
+	color = vmuln(vadd(temp->diffuse, temp->specular), temp->brightness);
 	free(temp);
 	return (color);
 }

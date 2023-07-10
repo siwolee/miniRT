@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/07 17:29:58 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:29:42 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void	check_rt(char *str)
 	}
 }
 
+//erase before submit
 void	eeee()
 {
 	system("leaks minirt");
@@ -33,12 +34,12 @@ void	eeee()
 int	main(int ac, char **av)
 {
 	t_vars	vars;
-	int		fd;
 
-	fd = file_check(ac, av);
+	file_check(ac, av);
 	check_rt(av[1]);
+	vars.filename = av[1];
 	vars.scene = scene_init();
-	readmap(&vars.scene, fd);
+	readmap(&vars.scene, av[1]);
 	ft_init_mlx(&vars, &vars.scene, &vars.image);
 	ft_draw(&vars.scene, &vars.image);
 	mlx_put_image_to_window(vars.mlx, vars.win, vars.image.img, 0, 0);

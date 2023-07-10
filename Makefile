@@ -6,14 +6,14 @@
 #    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/07/05 17:12:44 by siwolee          ###   ########.fr        #
+#    Updated: 2023/07/10 16:58:57 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = miniRT
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3 #-fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 RM = rm -f
 
 SRC = main.c \
@@ -54,7 +54,7 @@ LIBFT = ./libft/libft.a
 
 all : 		$(NAME)
 
-$(NAME) :	$(OBJ_DIR) $(OBJS) $(LIBFT) $(LMLX)
+$(NAME) :	$(LMLX) $(OBJ_DIR) $(OBJS) $(LIBFT) 
 			@$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX_FLAG) \
 			$(OBJS) -o $(NAME)
 			@echo "🌹ALL compiled"
@@ -64,7 +64,7 @@ $(OBJ_DIR) :
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c 
 			@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
-			@echo "obj compiling..."
+			@echo "$@ compiling..."
 
 $(LIBFT) :
 			@make -sC ./libft
@@ -82,7 +82,7 @@ clean :
 fclean :	clean
 			@rm -rf miniRT.dSYM
 			@$(RM) $(NAME)
-			@echo "💔cleaned everything"
+			@echo "💔fcleaned everything"
 
 re :		fclean all
 

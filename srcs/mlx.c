@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:22:02 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/05 16:40:59 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 17:34:15 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	exit_error(int code)
 	exit(1);
 }
 
-int	file_check(int ac, char **av)
+void	file_check(int ac, char **av)
 {
 	int	fd;
 
@@ -67,7 +67,7 @@ int	file_check(int ac, char **av)
 	{
 		exit_error(ERROR_READFILE);
 	}
-	return (fd);
+	close(fd);
 }
 
 int	key_destroy(t_vars *vars)
@@ -108,6 +108,16 @@ void	prev_cam(t_scene *sc)
 }
 
 
+/*
+	else if (keycode == 15)
+	{
+		mlx_destroy_window(vars->mlx, vars->win);
+		vars->scene = scene_init();
+		readmap(&vars->scene, vars->filename);
+		ft_init_mlx(vars, &vars->scene, &vars->image);
+		printf("redrawing map...\n");
+	}
+*/	
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == 53 || keycode == X_EVENT_KEY_EXIT)

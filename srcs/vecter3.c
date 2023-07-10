@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vecter3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:08:28 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 20:06:31 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 20:32:07 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@ t_vec	vmin(t_vec vec1, t_vec vec2)
 	return (vec1);
 }
 
+//v - 2 * dot(v, n) * n;
 t_vec	reflect(t_vec v, t_vec n)
 {
-	return (vsub(v, vmuln(n, vdot(v, n) * 2)));
+	return (vsub(v, vmuln(vmuln(n, vdot(v, n)), 2)));
 }
 
 void	print_vec(t_vec t)

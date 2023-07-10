@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/15 17:49:56 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/15 15:29:59 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 19:59:20 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,12 @@ typedef struct s_light_temp
 	t_vec	reflect_dir;
 	double	light_len;
 	t_ray	light_ray;
-	double	spec;
 	double	ksn;
+	double	spec;
 	double	ks;
 	double	brightness;
 }		t_light_temp;
+
 typedef struct s_sphere
 {
 	t_point	center;
@@ -149,6 +150,7 @@ typedef struct s_sphere_temp
 	double		sqrtd;
 	double		root;
 }		t_sphere_temp;
+
 typedef struct s_cylinder
 {
 	t_point				center;
@@ -215,7 +217,8 @@ typedef struct s_scene
 	t_object		*world;
 	t_object		*light;
 	t_color			ambient;
-	t_color			bg_color;
+	t_color			bgcolor_up;
+	t_color			bgcolor_down;
 	t_ray			ray;
 	t_hit_record	rec;
 	t_camera		*cam_now;
@@ -228,14 +231,15 @@ typedef struct s_vars
 	void	*win;
 	t_data	image;
 	t_scene	scene;
+	char	*filename;
 }	t_vars;
 
 //parse
-void		readmap(t_scene *scene, int fd);
+void		readmap(t_scene *scene, char *filename);
 t_vec		parse_point(char **split);
 t_vec		parse_vec(char **split);
 t_vec		parse_vec_normalize_color(char **split);
-int			file_check(int ac, char **av);
+void			file_check(int ac, char **av);
 t_scene		scene_init(void);
 double		ft_(const char *str);
 char		*valid_parse_vec(char *str);
@@ -244,6 +248,7 @@ void		input_cylinder(t_scene *scene, char *str);
 void		input_sphere(t_scene *scene, char *str);
 void		input_camera(t_scene *scene, char *str);
 void		input_ambient(t_scene *scene, char *str);
+void		input_background(t_scene *scene, char *str);
 void		input_plane(t_scene *scene, char *str);
 void		convert_space(char *c);
 double		ft_atod(const char *str);

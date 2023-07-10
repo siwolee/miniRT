@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:21:22 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/07 17:24:29 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 16:59:33 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ t_scene	scene_init(void)
 	scene.camera = NULL;
 	scene.world = NULL;
 	scene.light = NULL;
+	scene.bgcolor_up = vec(0, 0.7, 1.0);
+	scene.bgcolor_down = vec(1, 1, 1);
 	return (scene);
 }
 

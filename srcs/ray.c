@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:08:11 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/15 15:28:30 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 16:34:08 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ t_color	ray_color(t_scene *scene)
 	if (hit(scene->world, &scene->ray, &scene->rec) == TRUE)
 		return (phong_lighting(scene));
 	t = 0.5 * (scene->ray.dir.y + 1.0);
-	// t = 1;
 	// return (vadd(vmuln(vec(1, 1, 1), 1.0 - t), vmuln(vec(0.5, 0.7, 1.0), t)));
 	return (vadd(vmuln(vec(1, 1, 1), 1.0 - t), vmuln(vec(0, 0, 0), t)));
 }

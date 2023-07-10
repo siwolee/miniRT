@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:16:58 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/15 14:52:02 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/07 17:33:31 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,9 +45,12 @@ void	input_canvas(t_scene *scene, char *str)
 	free_split(split);
 }
 
+//check id infront of line
 void	id_check(t_scene *scene, char *str)
 {
-	if (str[0] == 'A')
+	if (ft_strncmp(str, "map", 3) == 0)
+		input_canvas(scene, str);
+	else if (str[0] == 'A')
 		input_ambient(scene, str);
 	else if (str[0] == 'C')
 		input_camera(scene, str);
@@ -59,10 +62,9 @@ void	id_check(t_scene *scene, char *str)
 		input_sphere(scene, str);
 	else if (ft_strncmp(str, "cy", 2) == 0)
 		input_cylinder(scene, str);
-	else if (ft_strncmp(str, "map", 3) == 0)
-		input_canvas(scene, str);
 }
 
+// read map from the rt.file and parse into map info
 void	readmap(t_scene *scene, int fd)
 {
 	char	*str;

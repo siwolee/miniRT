@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ray1.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:14:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/05/27 22:14:29 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/07/10 16:17:36 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+//???
 void	set_face_normal(t_ray *r, t_hit_record *rec)
 {
 	if (vdot(r->dir, rec->normal) < 0)

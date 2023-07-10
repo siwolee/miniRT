@@ -6,21 +6,22 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 21:48:19 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/07 17:29:58 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/miniRT.h"
 
-void	check_len(char *str)
+//check_if it's rt file
+void	check_rt(char *str)
 {
 	char	*retline;
 
 	retline = ft_strnstr(str + ft_strlen(str) - 3, ".rt", 3);
 	if (retline == NULL)
 	{
-		ft_printf("it's not .rt file");
-		exit(0);
+		perror("it's not .rt file");
+		exit(1);
 	}
 }
 
@@ -35,8 +36,8 @@ int	main(int ac, char **av)
 	int		fd;
 
 	fd = file_check(ac, av);
+	check_rt(av[1]);
 	vars.scene = scene_init();
-	check_len(av[1]);
 	readmap(&vars.scene, fd);
 	ft_init_mlx(&vars, &vars.scene, &vars.image);
 	ft_draw(&vars.scene, &vars.image);

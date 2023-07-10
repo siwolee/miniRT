@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:21:22 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/08 21:30:50 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/07 17:24:29 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	key_hook(int keycode, t_vars *vars)
 	return (0);
 }
 
+//initing mlx canvas values
 t_scene	scene_init(void)
 {
 	t_scene		scene;

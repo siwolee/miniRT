@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   object.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juhyulee <juhyulee@student.42.fr>          +#+  +:+       +#+        */
+/*   By: siwolee <siwolee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 22:10:22 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/03 19:10:30 by juhyulee         ###   ########.fr       */
+/*   Updated: 2023/07/07 17:37:08 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 
+// check if the light hits obj
+// if hit, hit_result become true
+// if hit, hit_record rec is renewed
 t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 {
 	t_bool	hit_result;
@@ -26,6 +29,7 @@ t_bool	hit_obj(t_object *world, t_ray *ray, t_hit_record *rec)
 	return (hit_result);
 }
 
+// add object into world
 t_object	*object(t_object_type type, void *element, t_color albedo)
 {
 	t_object	*new;
@@ -40,6 +44,7 @@ t_object	*object(t_object_type type, void *element, t_color albedo)
 	return (new);
 }
 
+// add object at the last of the list
 void	oadd(t_object **list, t_object *new)
 {
 	t_object	*cur;
@@ -55,6 +60,7 @@ void	oadd(t_object **list, t_object *new)
 	cur->next = new;
 }
 
+// get the last object
 t_object	*olast(t_object *list)
 {
 	if (list == NULL)

@@ -6,23 +6,11 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:22:02 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/10 17:34:15 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 22:03:28 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
-
-void	ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image)
-{
-	vars->mlx = mlx_init();
-	scene->cam_now = scene->camera;
-	vars->win = mlx_new_window(vars->mlx, scene->canvas.width, \
-	scene->canvas.height, "miniRT");
-	image->img = mlx_new_image(vars->mlx, scene->canvas.width, \
-	scene->canvas.height);
-	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, \
-	&image->line_length, &image->endian);
-}
 
 // ERROR_NO_INPUT,
 // ERROR_CANNOT_OPEN_FILE,
@@ -54,20 +42,6 @@ void	exit_error(int code)
 	else
 		printf("ERROR : error not specified yet : %d\n", code);
 	exit(1);
-}
-
-void	file_check(int ac, char **av)
-{
-	int	fd;
-
-	if (ac != 2)
-		exit_error(ERROR_NO_INPUT);
-	fd = open(av[1], O_RDONLY);
-	if (fd == -1)
-	{
-		exit_error(ERROR_READFILE);
-	}
-	close(fd);
 }
 
 int	key_destroy(t_vars *vars)
@@ -107,17 +81,6 @@ void	prev_cam(t_scene *sc)
 	printf("CAM : switched to cam %d\n", sc->cam_now->num);
 }
 
-
-/*
-	else if (keycode == 15)
-	{
-		mlx_destroy_window(vars->mlx, vars->win);
-		vars->scene = scene_init();
-		readmap(&vars->scene, vars->filename);
-		ft_init_mlx(vars, &vars->scene, &vars->image);
-		printf("redrawing map...\n");
-	}
-*/	
 int	key_press(int keycode, t_vars *vars)
 {
 	if (keycode == 53 || keycode == X_EVENT_KEY_EXIT)

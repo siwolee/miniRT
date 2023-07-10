@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:16:58 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/10 17:29:21 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 21:46:52 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	input_light(t_scene *scene, char *str)
 		exit_error(ERROR_PARSE);
 	origin = ft_split(split[1], ',');
 	color = ft_split(split[3], ',');
-	oadd(&scene->light, object(LIGHT_POINT, light_point(parse_vec(origin), \
+	oadd(&scene->light, object(LIGHT_POINT, light_point(parse_point(origin), \
 	vec(1, 1, 1), ft_atod(split[2])), parse_vec_normalize_color(color)));
 	free_split(origin);
 	free_split(color);

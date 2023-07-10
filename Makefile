@@ -6,7 +6,7 @@
 #    By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/15 17:53:40 by juhyulee          #+#    #+#              #
-#    Updated: 2023/07/10 16:58:57 by siwolee          ###   ########.fr        #
+#    Updated: 2023/07/10 21:59:51 by siwolee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,8 +37,6 @@ SRC = main.c \
 		parse2.c \
 		parse3.c \
 		free.c 
-		# camera_tilt.c
-		#  debug.c 
 
 HEADER = -I./header
 OBJ_DIR = objs

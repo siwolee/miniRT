@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Mon Jul 10 19:56:39 2023
+# Make data base, printed on Mon Jul 10 22:00:00 2023
 
 # Variables
 
@@ -19,12 +19,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # environment
 VSCODE_CRASH_REPORTER_PROCESS_TYPE = extensionHost
 # makefile (from `Makefile', line 19)
- 
 SRC = main.c mlx.c mlx1.c vecter.c vecter1.c vecter2.c vecter3.c camera.c ray.c ray1.c sphere.c object.c phong.c plane.c cylinder.c cylinder1.c parse.c parse1.c parse2.c parse3.c free.c 
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
 @D = $(patsubst %/,%,$(dir $@))
+ 
 # automatic
 @F = $(notdir $@)
 # makefile
@@ -35,7 +35,7 @@ SHELL = /bin/sh
 RM = rm -f
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-us","osLocale":"en","availableLanguages":{},"_languagePackSupport":true}
-# makefile (from `Makefile', line 49)
+# makefile (from `Makefile', line 47)
 LMLX = ./$(LMLX_DIR)/libmlx.a
 # environment
 _ = /usr/bin/make
@@ -43,9 +43,9 @@ _ = /usr/bin/make
 CFLAGS = -Wall -Wextra -Werror 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 44)
+# makefile (from `Makefile', line 42)
 OBJ_DIR = objs
-# makefile (from `Makefile', line 45)
+# makefile (from `Makefile', line 43)
 OBJS = $(patsubst %.o,$(OBJ_DIR)/%.o,$(SRC:.c=.o))
 # environment
 VSCODE_CWD = /
@@ -53,7 +53,7 @@ VSCODE_CWD = /
 PATH = /Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/Users/siwolee/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/siwolee/localBin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
-# makefile (from `Makefile', line 50)
+# makefile (from `Makefile', line 48)
 LMLX_FLAG = -L./$(LMLX_DIR) -lmlx -framework OpenGL -framework Appkit
 # environment
 LaunchInstanceID = 6B49E6E3-2B5D-4A86-A3E1-9321EC4256B6
@@ -75,7 +75,7 @@ ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/siwolee
-# makefile (from `Makefile', line 48)
+# makefile (from `Makefile', line 46)
 LMLX_DIR = mlx
 # default
 MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
@@ -95,11 +95,11 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 47)
+# makefile (from `Makefile', line 45)
 SRCS = $(patsubst %.o,$(SRC_DIR)/%.o,$(SRC:.c=.o))
 # environment
 SHLVL = 1
-# makefile (from `Makefile', line 52)
+# makefile (from `Makefile', line 50)
 LIBFT = ./libft/libft.a
 # makefile (from `Makefile', line 15)
 CC = cc
@@ -145,7 +145,7 @@ __CF_USER_TEXT_ENCODING = 0x19B11:0x0:0x0
 COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
-# makefile (from `Makefile', line 46)
+# makefile (from `Makefile', line 44)
 SRC_DIR = srcs
 # automatic
 <F = $(notdir $<)
@@ -155,7 +155,7 @@ EDITOR = /usr/bin/vim
 PAGER = less
 # environment
 LC_ALL = C
-# makefile (from `Makefile', line 43)
+# makefile (from `Makefile', line 41)
 HEADER = -I./header
 # environment
 SECURITYSESSIONID = 186a6
@@ -172,7 +172,7 @@ LANG = C
 # environment
 VSCODE_PID = 4302
 # variable set hash-table stats:
-# Load=79/1024=8%, Rehash=0, Collisions=7/123=6%
+# Load=79/1024=8%, Rehash=0, Collisions=7/118=6%
 
 # Pattern-specific Variable Values
 
@@ -181,14 +181,15 @@ VSCODE_PID = 4302
 # Directories
 
 # . (device 16777225, inode 1776659): 15 files, no impossibilities.
-# srcs (device 16777225, inode 1949580): 25 files, no impossibilities so far.
+# srcs (device 16777225, inode 1949580): 23 files, no impossibilities so far.
 
-# 40 files, no impossibilities in 2 directories.
+ 
+# 38 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 objs/%.o: srcs/%.c
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
@@ -197,41 +198,63 @@ objs/%.o: srcs/%.c
 
 # Files
 
-# Not a target:
-objs/sphere.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-objs/plane.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-objs/main.o: srcs/main.c
+objs/sphere.o: srcs/sphere.c
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `main'
-#  Last modified 2023-07-10 17:29:43
+#  Implicit/static pattern stem: `sphere'
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
+
+objs/plane.o: srcs/plane.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `plane'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
+
+objs/main.o: srcs/main.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `main'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
+
+# Not a target:
+srcs/parse2.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 16:44:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 all: miniRT
 #  Phony target (prerequisite of .PHONY).
 #  Command-line target.
 #  Implicit rule search has not been done.
- 
 #  File does not exist.
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 .PHONY: all clean fclean re bonus
 #  Implicit rule search has not been done.
@@ -241,30 +264,46 @@ all: miniRT
 # Not a target:
 srcs/camera.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-15 15:18:54
+#  Last modified 2023-07-10 21:57:20
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-objs/phong.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+objs/phong.o: srcs/phong.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `phong'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
 
 objs/vecter3.o: srcs/vecter3.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `vecter3'
-#  Last modified 2023-07-10 16:58:59
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
+
+# Not a target:
+srcs/sphere.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 16:44:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .SUFFIXES:
@@ -272,14 +311,23 @@ objs/vecter3.o: srcs/vecter3.c
 #  Modification time never checked.
 #  File has not been updated.
 
+# Not a target:
+srcs/plane.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-05-30 19:25:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 miniRT: mlx/libmlx.a objs objs/main.o objs/mlx.o objs/mlx1.o objs/vecter.o objs/vecter1.o objs/vecter2.o objs/vecter3.o objs/camera.o objs/ray.o objs/ray1.o objs/sphere.o objs/object.o objs/phong.o objs/plane.o objs/cylinder.o objs/cylinder1.o objs/parse.o objs/parse1.o objs/parse2.o objs/parse3.o objs/free.o libft/libft.a
 #  Implicit rule search has not been done.
-#  Last modified 2023-07-10 17:34:17
+#  Last modified 2023-07-10 21:57:23
 #  File has been updated.
-#  Needs to be updated (-q is set).
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/5=0%
-#  commands to execute (from `Makefile', line 58):
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 56):
 	@$(CC) $(HEADER) $(CFLAGS) $(LIBFT) $(LMLX_FLAG) \
 	$(OBJS) -o $(NAME)
 	@echo "🌹ALL compiled"
@@ -288,28 +336,12 @@ miniRT: mlx/libmlx.a objs objs/main.o objs/mlx.o objs/mlx1.o objs/vecter.o objs/
 objs/ray.o: srcs/ray.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `ray'
-#  Last modified 2023-07-10 16:59:19
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := objs/ray.o
-# automatic
-# % := 
-# automatic
-# * := ray
-# automatic
-# + := srcs/ray.c
-# automatic
-# | := 
-# automatic
-# < := srcs/ray.c
-# automatic
-# ^ := srcs/ray.c
-# automatic
-# ? := srcs/ray.c
+#  Successfully updated.
 # variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=2/16=12%
-#  commands to execute (from `Makefile', line 66):
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
@@ -317,7 +349,7 @@ objs/ray.o: srcs/ray.c
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2023-07-10 16:58:57
+#  Last modified 2023-07-10 21:59:51
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -326,63 +358,86 @@ Makefile:
 # Not a target:
 srcs/main.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-07-10 17:29:42
+#  Last modified 2023-07-10 21:41:56
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-objs/parse3.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-objs/vecter.o: srcs/vecter.c
+objs/parse3.o: srcs/parse3.c
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `vecter'
-#  Last modified 2023-07-10 16:58:59
+#  Implicit/static pattern stem: `parse3'
+#  Last modified 2023-07-10 21:49:11
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
 
-objs/mlx.o: srcs/mlx.c
+objs/vecter.o: srcs/vecter.c
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `mlx'
-#  Last modified 2023-07-10 17:34:17
+#  Implicit/static pattern stem: `vecter'
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
+
+# Not a target:
+srcs/phong.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 20:54:25
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/mlx.o: srcs/mlx.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `mlx'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
 
 objs:
 #  Implicit rule search has not been done.
-#  Last modified 2023-07-10 17:34:17
+#  Last modified 2023-07-10 21:57:22
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 63):
+#  commands to execute (from `Makefile', line 61):
 	@mkdir $(OBJ_DIR)
 	
 
-# Not a target:
-objs/free.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+objs/free.o: srcs/free.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `free'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
 
 # Not a target:
 srcs/vecter3.c:
 #  Implicit rule search has been done.
-#  Last modified 2023-06-15 14:46:15
+#  Last modified 2023-07-10 20:32:07
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -390,53 +445,92 @@ srcs/vecter3.c:
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 70):
+#  Last modified 2023-07-10 21:42:01
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 68):
 	@make -sC ./libft
 	@echo "💗LIBFT compiled"
 	
 
-# Not a target:
-objs/object.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+objs/object.o: srcs/object.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `object'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
 
 bonus:
 #  Phony target (prerequisite of .PHONY).
+ 
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
 
-# Not a target:
-objs/cylinder.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+objs/cylinder.o: srcs/cylinder.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `cylinder'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
 
 fclean: clean
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 83):
+#  commands to execute (from `Makefile', line 81):
 	@rm -rf miniRT.dSYM
 	@$(RM) $(NAME)
 	@echo "💔fcleaned everything"
 	
 
 # Not a target:
-objs/parse.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+srcs/parse3.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 21:46:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-objs/ray1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+objs/parse.o: srcs/parse.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parse'
+#  Last modified 2023-07-10 21:49:11
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
+
+objs/ray1.o: srcs/ray1.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `ray1'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
 
 # Not a target:
 srcs/vecter.c:
@@ -459,12 +553,12 @@ srcs/mlx.c:
 objs/vecter1.o: srcs/vecter1.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `vecter1'
-#  Last modified 2023-07-10 16:58:59
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
@@ -489,7 +583,7 @@ mlx/libmlx.a:
 #  Last modified 2023-07-10 16:44:55
 #  File has been updated.
 #  Successfully updated.
-#  commands to execute (from `Makefile', line 74):
+#  commands to execute (from `Makefile', line 72):
 	@make -sC ./$(LMLX_DIR)
 	@echo "💗MLX compiled"
 	
@@ -497,15 +591,33 @@ mlx/libmlx.a:
 objs/mlx1.o: srcs/mlx1.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `mlx1'
-#  Last modified 2023-07-10 16:59:35
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
+
+# Not a target:
+srcs/free.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-06-01 19:49:03
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+srcs/object.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 16:44:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -513,29 +625,69 @@ re: fclean all
 #  File does not exist.
 #  File has not been updated.
 
+# Not a target:
+srcs/cylinder.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-06-05 17:35:23
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
 clean:
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 78):
+#  commands to execute (from `Makefile', line 76):
 	@make -sC ./libft fclean
 	@$(RM) $(OBJS)
 	@echo "💔LIBFT and OBJS cleaned"
 	
 
-# Not a target:
-objs/parse1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+objs/parse1.o: srcs/parse1.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `parse1'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
 
 # Not a target:
-objs/cylinder1.o:
- 
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+srcs/parse.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 21:49:09
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/cylinder1.o: srcs/cylinder1.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `cylinder1'
+#  Last modified 2023-07-10 21:41:58
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
+
+# Not a target:
+srcs/ray1.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 16:44:41
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 srcs/vecter1.c:
@@ -549,12 +701,12 @@ srcs/vecter1.c:
 objs/vecter2.o: srcs/vecter2.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `vecter2'
-#  Last modified 2023-07-10 16:58:59
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
 	@echo "$@ compiling..."
 	
@@ -568,22 +720,48 @@ srcs/mlx1.c:
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
-# Not a target:
-objs/parse2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-objs/camera.o: srcs/camera.c
+objs/parse2.o: srcs/parse2.c
 #  Implicit rule search has been done.
-#  Implicit/static pattern stem: `camera'
-#  Last modified 2023-07-10 16:58:59
+#  Implicit/static pattern stem: `parse2'
+#  Last modified 2023-07-10 21:41:58
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 64):
 	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+	@echo "$@ compiling..."
+	
+
+# Not a target:
+srcs/parse1.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-06-01 19:50:51
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+srcs/cylinder1.c:
+#  Implicit rule search has been done.
+#  Last modified 2023-07-10 16:44:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+objs/camera.o: srcs/camera.c
+#  Implicit rule search has been done.
+#  Implicit/static pattern stem: `camera'
+#  Last modified 2023-07-10 21:57:22
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+#  commands to execute (from `Makefile', line 64):
+	@$(CC) $(HEADER) $(CFLAGS) -c $< -o $@
+ 
 	@echo "$@ compiling..."
 	
 
@@ -597,7 +775,7 @@ srcs/vecter2.c:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=43/1024=4%, Rehash=0, Collisions=4/116=3%
+# Load=55/1024=5%, Rehash=0, Collisions=4/164=2%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -609,6 +787,6 @@ srcs/vecter2.c:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Jul 10 19:56:39 2023
+# Finished Make data base on Mon Jul 10 22:00:00 2023
 
  

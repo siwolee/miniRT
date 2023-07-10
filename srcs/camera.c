@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 18:14:14 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/15 15:18:54 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 21:57:20 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,19 @@ t_canvas	canvas(int width, int height)
 //right (or left) is perpendicular to forward and parrel to the floor(x, 0, z) 
 // = it's cross to the (forward, normalized y-axis(0, 1, 0))
 //then vup = cross(forward, right);
-void	camera_sub(t_camera *cam, float theta, double fov, double aspect, t_vec forward)
+//val.x y z = theta, fov, aspect
+void	camera_sub(t_camera *cam, t_vec val, t_vec forward)
 {
 	t_vec	right;
 
-	cam->fov = fov;
-	cam->aspect = aspect;
+	cam->theta = val.x;
+	cam->fov = val.y;
+	cam->aspect = val.z;
 	right = vcross(forward, vec(0, -1, 0));
 	cam->vup = vcross(forward, right);
-	cam->viewport_h = (tan(theta / 2)) * 2;
-	cam->focal_len = 1 / tan(fov / 2);
-	cam->viewport_w = aspect * cam->viewport_h;
-	cam->theta = theta;
+	cam->viewport_h = (tan(val.x / 2)) * 2;
+	cam->focal_len = 1 / tan(val.y / 2);
+	cam->viewport_w = val.z * cam->viewport_h;
 }
 
 t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
@@ -52,7 +53,7 @@ t_camera	*camera(t_point lookfrom, t_vec lookat, double fov, double aspect)
 		exit_error(ERROR_NO_CAMERA);
 	theta = fov * M_PI / 180;
 	forward = vunit(vsub(lookfrom, lookat));
-	camera_sub(cam, theta, fov, aspect, forward);
+	camera_sub(cam, vec(theta, fov, aspect), forward);
 	cam->orig = lookfrom;
 	cam->dir = lookat;
 	u = vunit(vcross(cam->vup, forward));

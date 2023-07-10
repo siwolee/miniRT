@@ -6,11 +6,25 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 15:44:16 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/10 17:29:42 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 22:03:36 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/miniRT.h"
+
+void	file_check(int ac, char **av)
+{
+	int	fd;
+
+	if (ac != 2)
+		exit_error(ERROR_NO_INPUT);
+	fd = open(av[1], O_RDONLY);
+	if (fd == -1)
+	{
+		exit_error(ERROR_READFILE);
+	}
+	close(fd);
+}
 
 //check_if it's rt file
 void	check_rt(char *str)
@@ -26,7 +40,7 @@ void	check_rt(char *str)
 }
 
 //erase before submit
-void	eeee()
+void	eeee(void)
 {
 	system("leaks minirt");
 }
@@ -47,4 +61,16 @@ int	main(int ac, char **av)
 	mlx_hook(vars.win, X_EVENT_KEY_EXIT, 0, &key_destroy, &vars);
 	mlx_loop(vars.mlx);
 	return (0);
+}
+
+void	ft_init_mlx(t_vars *vars, t_scene *scene, t_data *image)
+{
+	vars->mlx = mlx_init();
+	scene->cam_now = scene->camera;
+	vars->win = mlx_new_window(vars->mlx, scene->canvas.width, \
+	scene->canvas.height, "miniRT");
+	image->img = mlx_new_image(vars->mlx, scene->canvas.width, \
+	scene->canvas.height);
+	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, \
+	&image->line_length, &image->endian);
 }

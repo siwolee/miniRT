@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 19:07:25 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/06/15 16:22:35 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/10 22:09:13 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,33 +57,31 @@ void	input_sphere(t_scene *scene, char *str)
 
 void	input_camera(t_scene *scene, char *str)
 {
-	char		**split;
+	char		**tp;
 	char		**orig;
 	char		**dir;
-	double		fov;
 	t_camera	*cam;
 
-	split = ft_split(str, ' ');
-	if (!split[0] || !split[1] || !split[2] || !split[3] || split[4])
+	tp = ft_split(str, ' ');
+	if (!tp[0] || !tp[1] || !tp[2] || !tp[3] || tp[4])
 		exit_error(ERROR_PARSE);
-	orig = ft_split(valid_parse_vec(split[1]), ',');
-	dir = ft_split(valid_parse_vec(split[2]), ',');
-	fov = ft_atod(split[3]);
+	orig = ft_split(valid_parse_vec(tp[1]), ',');
+	dir = ft_split(valid_parse_vec(tp[2]), ',');
 	if (!scene->camera)
-		scene->camera = camera(parse_point(orig), parse_point(dir), fov, \
+		scene->camera = camera(parse_point(orig), parse_vec(dir), ft_atod(tp[3]), \
 		(float)scene->canvas.width / (float) scene->canvas.height);
 	else
 	{
 		cam = scene->camera;
 		while (cam->next)
 			cam = cam->next;
-		cam->next = camera(parse_point(orig), parse_point(dir), fov, \
+		cam->next = camera(parse_point(orig), parse_vec(dir), ft_atod(tp[3]), \
 		(float)scene->canvas.width / (float) scene->canvas.height);
 		cam->next->num = cam->num + 1;
 	}
 	free_split(orig);
 	free_split(dir);
-	free_split(split);
+	free_split(tp);
 }
 
 void	input_ambient(t_scene *scene, char *str)

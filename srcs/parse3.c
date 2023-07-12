@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/27 22:16:58 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/10 21:46:52 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/12 15:47:57 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	input_background(t_scene *scene, char *str)
 void	input_canvas(t_scene *scene, char *str)
 {
 	int		width;
-	int 	height;
+	int		height;
 	char	**split;
 
 	split = ft_split(str, ' ');
@@ -90,10 +90,10 @@ void	readmap(t_scene *scene, char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		
-		{
-			perror(filename);
-		exit_error(ERROR_READFILE);}
+	{
+		perror(filename);
+		exit_error(ERROR_READFILE);
+	}
 	str = get_next_line(fd);
 	if (!str)
 		exit_error(ERROR_NO_INPUT);

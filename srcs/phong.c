@@ -6,7 +6,7 @@
 /*   By: siwolee <siwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/07 23:09:23 by juhyulee          #+#    #+#             */
-/*   Updated: 2023/07/10 20:54:25 by siwolee          ###   ########.fr       */
+/*   Updated: 2023/07/12 15:49:07 by siwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ t_color	phong_lighting(t_scene *scene)
 	lights = scene->light;
 	while (lights)
 	{
-		light_color = vadd(light_color, point_light_get(scene, lights->element));
+		light_color = vadd(light_color, \
+		point_light_get(scene, lights->element));
 		lights = lights->next;
 	}
 	light_color = vadd(light_color, scene->ambient);
 	return (vmin(vmulv(light_color, scene->rec.albedo), vec(1, 1, 1)));
-	return(light_color);
 }
 
 void	light_sub(t_light_temp *temp, t_light *light, t_scene *scene)
@@ -75,7 +75,6 @@ t_color	point_light_get(t_scene *scene, t_light *light)
 		free(temp);
 		return (vec(0, 0, 0));
 	}
-	// color = vmuln(vadd(vadd(scene->ambient, temp->diffuse),temp->specular), temp->brightness);
 	color = vmuln(vadd(temp->diffuse, temp->specular), temp->brightness);
 	free(temp);
 	return (color);

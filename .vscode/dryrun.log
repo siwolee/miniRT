@@ -1,5 +1,54 @@
-make --dry-run --keep-going --print-directory
+make --dry-run --always-make --keep-going --print-directory
 make: Entering directory `/Users/siwolee/minirt'
-make: Nothing to be done for `all'.
+make -sC ./mlx
+echo "💗MLX compiled"
+mkdir objs
+cc -I./header -Wall -Wextra -Werror  -c srcs/main.c -o objs/main.o
+echo "objs/main.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/mlx.c -o objs/mlx.o
+echo "objs/mlx.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/mlx1.c -o objs/mlx1.o
+echo "objs/mlx1.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/vecter.c -o objs/vecter.o
+echo "objs/vecter.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/vecter1.c -o objs/vecter1.o
+echo "objs/vecter1.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/vecter2.c -o objs/vecter2.o
+echo "objs/vecter2.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/vecter3.c -o objs/vecter3.o
+echo "objs/vecter3.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/camera.c -o objs/camera.o
+echo "objs/camera.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/ray.c -o objs/ray.o
+echo "objs/ray.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/ray1.c -o objs/ray1.o
+echo "objs/ray1.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/sphere.c -o objs/sphere.o
+echo "objs/sphere.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/object.c -o objs/object.o
+echo "objs/object.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/phong.c -o objs/phong.o
+echo "objs/phong.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/plane.c -o objs/plane.o
+echo "objs/plane.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/cylinder.c -o objs/cylinder.o
+echo "objs/cylinder.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/cylinder1.c -o objs/cylinder1.o
+echo "objs/cylinder1.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/parse.c -o objs/parse.o
+echo "objs/parse.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/parse1.c -o objs/parse1.o
+echo "objs/parse1.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/parse2.c -o objs/parse2.o
+echo "objs/parse2.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/parse3.c -o objs/parse3.o
+echo "objs/parse3.o compiling..."
+cc -I./header -Wall -Wextra -Werror  -c srcs/free.c -o objs/free.o
+echo "objs/free.o compiling..."
+make -sC ./libft
+echo "💗LIBFT compiled"
+cc -I./header -Wall -Wextra -Werror  ./libft/libft.a -L./mlx -lmlx -framework OpenGL -framework Appkit \
+			objs/main.o objs/mlx.o objs/mlx1.o objs/vecter.o objs/vecter1.o objs/vecter2.o objs/vecter3.o objs/camera.o objs/ray.o objs/ray1.o objs/sphere.o objs/object.o objs/phong.o objs/plane.o objs/cylinder.o objs/cylinder1.o objs/parse.o objs/parse1.o objs/parse2.o objs/parse3.o objs/free.o -o miniRT
+echo "🌹ALL compiled"
 make: Leaving directory `/Users/siwolee/minirt'
  
